@@ -88,7 +88,9 @@ input[type="file"]{
     right: 8px;
     pointer-events: none;
 }
-
+.pro{
+    margin: 0 auto 10px;
+}
 
 @media (max-width: 767px) {
     .control-fileupload {

@@ -1,0 +1,52 @@
+.pg-ul-list li .pg-item-img-hold .tooltiptext{
+    visibility: hidden;
+    width: 142px;
+    background-color: rgba(156, 154, 154,0.4);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    height: 139px;
+    padding-top: 55px;
+}
+
+.pg-ul-list li .pg-item-img-hold:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .pg-ul-list li .pg-item-img-hold .tooltiptext{
+    visibility: hidden;
+    width: 142px;
+    background-color: rgba(156, 154, 154,0.4);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    height: 139px;
+    padding-top: 55px;
+}
+
+  .imageUpload{
+    border: 1px dashed #C4C4C4;
+    /* background: url('../../assets/images/plus-big-icon.png') center no-repeat; */
+    background:url('../../assets/images/plus-icon.png') center no-repeat;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.delete{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 999;
+   }

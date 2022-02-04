@@ -23,7 +23,6 @@ export class ProviderFeedbackListComponent implements OnInit {
     private toast: ToastrService) { }
 
   ngOnInit(): void {
-   //this.getList();
    this.getFeedbackList();
   }
 
@@ -31,7 +30,6 @@ export class ProviderFeedbackListComponent implements OnInit {
   getFeedbackList(){
     this.service.getfeedbackList().subscribe((resp:any)=>{
       this.Feedbacklist=resp.data;
-      console.log('FeedbackList',this.Feedbacklist);
     })
   }
 

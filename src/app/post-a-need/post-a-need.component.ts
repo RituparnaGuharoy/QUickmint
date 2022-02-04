@@ -97,9 +97,9 @@ export class PostANeedComponent implements OnInit {
     //maps display
     this.geocoder = new google.maps.Geocoder();
     //maps
-    this.titleService.setTitle(
-      'Home | @angular-material-extensions/google-maps-autocomplete'
-    );
+    // this.titleService.setTitle(
+    //   'Home | @angular-material-extensions/google-maps-autocomplete'
+    // );
 
     this.zoom = 10;
     this.latitude = 52.520008;

@@ -1,0 +1,106 @@
+.Experties{
+    text-align: left;
+
+}
+.Experties .form-check.form-check-inline {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+.Experties .form-check.form-check-inline  label{
+    margin: 12px 12px 12px 0px;
+}
+.classtime checkbox{
+ width: 30%;
+ float: left;
+ clear: both;
+}
+
+.classtime input{
+    width: 50%;
+    
+   }
+.days_wk{
+    padding-left: 0;
+}
+.days_wk li{
+    display: inline-block;
+    padding: 7px;
+    font-size: 16px;
+}
+div.row label.radio-item,
+div.row .checkbox-item{
+    font-size: 15px;
+    margin-left: 0;
+    margin-right: 15px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-left: 26px;
+}
+div.row label.radio-item{
+    line-height: 30px;
+}
+div.row label.radio-item .checkmark,
+div.row .checkbox-item .checkmark{
+    border-color: #ced4da;
+}
+div.row label.radio-item .radio-label{
+    color: #22A6DE;
+    font-weight: 400;
+}
+div.row .checkbox-item label{
+    font-size: 15px;
+    color: #555555;
+    margin: 0;
+    font-weight: 400;
+}
+.frm-chek-now{
+    position: absolute;
+    left: 0;
+    height: 22px;
+    width: 100%;
+}
+.upload-file-field{
+    font-size: 12px;
+    padding-bottom: 30px;
+}
+/* .ageGrp input{
+    width: 48%;
+    display: inline-block;
+    margin: 5px;
+}
+div.row{
+    margin-bottom: 20px;
+    
+} */
+/* .payment_option .form-group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.payment_option .form-group .form-control{
+   width:calc(100% - 110px);
+} */
+img{
+    width: 300px;
+    margin-bottom: 20px;
+}
+.select_schedule {
+    display: inline-block;
+    margin: 0px 5px;
+}
+.select_schedule input{
+    margin-right: 5px;
+}
+.form-check-items checkbox{
+    display: inline-block;
+}
+.payment_option .checkbox-item .checkbox-label{
+    color: #22A6DE;
+    font-weight: 400;
+}
+.form-group > label,
+.payment_option > label{
+    font-weight: 500;
+    font-size: 15px;
+}

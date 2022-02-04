@@ -12,13 +12,10 @@
 <section class="common-inner-bg-wrap">
     <div class="container">
         <div class="row">
-            <!-- <div class="col-sm-3" *ngIf='service.classAdult'>
-                <app-filter-class ></app-filter-class>
-            </div>  -->
             <div class="col-sm-3">
                 <app-filter-classA></app-filter-classA>
             </div> 
-            
+          
             <!--------------------sub category list------------------------------------------------------>
             <div class="col-sm-9" *ngIf='service.showList'>
             <div class="subcategory-item-row">
@@ -46,9 +43,7 @@
                 </div>
                 <div class="trainer-item-row" *ngFor="let class of service.classesList">
                     <div class="trainer-item">
-                        <!-- <div class="trainer-img" style="background-image:url('assets/images/trainer-img-1.png')">
-                        </div> -->
-
+                  
                         <div class="trainer-img" [ngStyle]="{'background-image':'url('+ photoUrl + class.picture + ')'}">
                         </div>
                         <div class="flex-right-box">
@@ -58,27 +53,25 @@
                                     <p><span class="lab">Provider :</span> <span class="cont">{{class.provider_id.UserFullName}}</span></p>
                                     <p><span class="lab">Expertise :</span>   <span class="cont">{{displayExpertise(class)}} </span></p>
                                     
-                                    <p><span class="lab">Total Strenght :</span> <span class="cont">{{class.total_strenght}}</span></p>
-                                    <!-- <p><span class="lab">Current Strenght :</span> <span class="cont">{{class.booked_students.length}}</span></p> -->
-                                    <!-- <p><span class="lab">Start Date :</span> <span class="cont">{{class.startDate ? class.startDate : 'NA'}}</span></p> -->
+                                    <p><span class="lab">Total Seats :</span> <span class="cont">{{class.total_strenght}}</span></p>
                                     <p><span class="lab">Cost :</span> <span class="cont">{{class.price}}</span></p>
                                 </div>
 
-                                <!--join meeting for provider-->
-                                <div class="flx-inner-btn flx-inner-btn text-right" *ngIf="userType=='1'">
-                                <button [disabled]="meetingEnable(class.start_tiem,class.end_time)" (click)="joinMeeting(class)" class="btn details-btn"><i class="fa fa-video-camera" aria-hidden="true"></i>Join Meeting</button>
-                                </div>
-                                <!--join meeting for user-->
-                                <div class="flx-inner-btn flx-inner-btn text-right" *ngIf="userType=='2'">
-                                    <!-- <button (click)="doaction(class)" class="btn details-btn"><i class="fa fa-video-camera" aria-hidden="true"></i> {{setButtonText(class)}}</button> -->
+                                <div class="flx-inner-btn flx-inner-btn text-right" >
+                                    
                                     <div>
                                     <div *ngIf="bookinglist.includes(class._id)">
                                     <button #meeting  [disabled]="meetingEnable(class.start_tiem,class.end_time)" (click)="joinMeeting(class)" class="btn details-btn"><i class="fa fa-video-camera" aria-hidden="true"></i>Join Meeting</button>
                                     </div>
-                                    <button *ngIf="!bookinglist.includes(class._id)" (click)="makePayment(class)" class="btn details-btn"><i class="fa fa-video-camera" aria-hidden="true"></i> Book Now</button>
+                                    <div>
+                                    <button *ngIf="!bookinglist.includes(class._id) && token !=null" (click)="makePayment(class)" class="btn details-btn"><i class="fa fa-video-camera" aria-hidden="true"></i> Book Now</button>
+                                   </div>
+                            
+                                    <button *ngIf="token ==null" (click)="openLoginDialog()" class="btn details-btn"><i class="fa fa-video-camera" aria-hidden="true"></i> Book Now</button>
                                     </div>
-                                    <!-- <button (click)="openDialog(class)"  class="btn details-btn mt-3"><i class="fa fa-info-circle" aria-hidden="true"></i> Details</button> -->
-                                    <button (click)="gotoDetails()"  class="btn details-btn mt-3"><i class="fa fa-info-circle" aria-hidden="true"></i> Details</button>
+                                   
+                                    <button (click)="gotoDetails(class)"  class="btn details-btn mt-3"><i class="fa fa-info-circle" aria-hidden="true"></i> Service Details</button>
+                                    <button *ngIf="userType=='2'" (click)="gotoClassDetails(class)"  class="btn details-btn mt-3"><i class="fa fa-info-circle" aria-hidden="true"></i> Class Details</button>
                                 </div>
                             </div>
                         </div>
@@ -92,15 +85,5 @@
         </div>
     </div>
 </section>
-
-
-<section class="container">
-  
-</section>
-
-<!-- <section>
-    <app-service-provider-list [provList]=providersList></app-service-provider-list>
-</section> -->
-
 
 

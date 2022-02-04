@@ -2,13 +2,45 @@
 <section class="inner-banner">
     <div class="container">
         <h1>Service Provider <strong>List</strong></h1>
+
     </div>
   </section>
   <!-- Banner end -->
   <!-- Body content start -->
   <section class="common-inner-bg-wrap">
     <div class="container">
-        <!-- Tab panes -->
+       <div class="row">
+        <!-- <div class="col-sm-12">
+            <mat-form-field >
+                <mat-label>Status</mat-label>
+                <mat-select>
+                  <mat-option  value="true" >
+                   Online
+                  </mat-option>
+                  <mat-option value="false">
+                    Offline
+                   </mat-option>
+                   
+                </mat-select>
+              </mat-form-field>
+        </div> -->
+        <div class="col-md-3 offset-md-3"></div>
+        <div class="col-md-3 offset-md-3">
+            <mat-form-field >
+                <mat-label>Price</mat-label>
+                <mat-select>
+                  <mat-option  value="true" >
+                   Low to High
+                  </mat-option>
+                  <mat-option value="false">
+                    High to Low
+                   </mat-option>
+                   
+                </mat-select>
+              </mat-form-field>
+        </div>
+       </div>
+       
         <div class="row">
             <div class="col-sm-3">
                 <app-filter (onValueChanged)=onValueChanged($event)></app-filter>
@@ -18,33 +50,37 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade show active" id="PrivateJob">
                 <div class="trainer-item-row">
-                    <div class="trainer-item" *ngFor="let provider of service.FilteredData">
-                        <!-- <div class="trainer-img" [ngStyle]="{'background-image':'url(' + provider.imgeUrl + provider.UserPhoto + ')'}">
-                        </div> -->
+                    <div class="trainer-item" *ngFor="let provider of providersList">
+                       
 
-                        <!-- <div class="trainer-img" [ngStyle]="{'background-image':'url(https://nodeserver.mydevfactory.com:4290/16098485545870.09849552389696581.jpg)'}">
-                        </div> -->
-                        <!-- <div class="trainer-img" [ngStyle]="{'background-image':'url('+ photoUrl + provider.provider_id.UserPhoto + ')'}">
-                        </div> -->
-
-                        <div class="trainer-img" [ngStyle]="{'background-image':'url('+ photoUrl + provider.image + ')'}">
+                        <div class="trainer-img" [ngStyle]="{'background-image':'url('+ photoUrl+provider.UserPhoto + ')'}" (click)="gotoDetails(provider._id)">
                         </div>
                       
                         <div class="flex-right-box">
                             <div class="flex-inner-bx">
                                 <div class="trainer-item-info">
-                                    <h2>{{provider.title}}</h2>
-                                    <!-- {{provider.category_details}} -->
-                                    <p>Job provider: <span>{{provider.provider_id.UserName}}</span></p>
-                                    <p>Job description: <span>{{provider.description}}</span></p>
-                                    <!-- <p class="pin-txt m-time-icon">Job start & end time: <span>1:00AM -4:00AM </span></p> -->
-  
-                                    <p class="pin-txt m-price-icon">Price: <span class="price-bold">{{provider.Price}}</span></p>
+                                    
+                                    <h6 (click)="gotoDetails(provider._id)">{{provider.UserFullName}}</h6>
+                                    
+                                    
+                                    <div class="ratings">
+                                        
+                                        <star-rating value={{provider.averageRating}} totalstars={{provider.averageRating}} checkedcolor="orange" uncheckedcolor="black" size="24px" readonly="true" ></star-rating>
+                                        <span>({{provider.averageRating}})
+                                        </span>
+                                      </div>
+                                      <ul>
+                                        <li *ngFor="let item of provider.ProvidedService">
+                                            {{item.name}}
+                                        </li>
+                                    </ul>
+                                <p class="location">{{provider.UserLocation.Address}}</p>
+                                <p class="about_me">{{provider.about_me}}</p>
                                 </div>
                                 <div class="call-acpt text-right">
                                     <!-- <a href="javascript:void(0);" class="btn details-btn">Details</a> -->
-                                <button (click)="goToPostANeed(provider)" class="btn details-btn mb-2" style="display: block;" mat-raised-button>Book</button>
-                                <button (click)="gotoDetails()" class="btn details-btn" style="display: block;" mat-raised-button>Details</button>
+                                <button (click)="goToPostANeed(provider._id)" class="btn details-btn mb-2" style="display: block;" mat-raised-button>Book</button>
+                                <!-- <button (click)="gotoDetails()" class="btn details-btn" style="display: block;" mat-raised-button>Details</button> -->
                                 </div>
                                 
                             </div>

@@ -44,7 +44,6 @@ export class FooterComponent implements OnInit {
         this.otherLinks = data.data.otherlinks;
         this.yourAccounts = data.data.youraccount;
         this.helpLinks = data.data.helplinks;
-        console.log('CMSlist',this.cmslist);
       },
       (err) => {
         console.log(err);
@@ -55,6 +54,7 @@ export class FooterComponent implements OnInit {
       (data:any) => {
         this.contactList = data.data;
         for(let i=0;i<=this.contactList.length;i++){
+        if(this.contactList[i]){
         if(this.contactList[i].pageSlug==='address'){
           this.address = this.contactList[i].content;
         }
@@ -73,10 +73,10 @@ export class FooterComponent implements OnInit {
         else if(this.contactList[i].pageSlug==='instagram'){
           this.insta = this.contactList[i].url;
         }
+      }
         
       }
-      console.log('contact',this.contactList);
-      console.log('address',this.address,this.email,this.phone);
+  
     },
       (err) => {
         console.log(err);  

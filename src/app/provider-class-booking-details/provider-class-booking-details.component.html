@@ -1,0 +1,140 @@
+<!-- Banner start -->
+<section class="inner-banner">
+    <div class="container">
+        <h1>Booking
+            <strong>Class Details</strong>
+        </h1>
+    </div>
+</section>
+<!-- Banner end -->
+
+<!-- Body content start -->
+<!-- <section class="common-inner-bg-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 sd-left-panel">
+                <h3 class="ssc-title">Class Details</h3>
+                <div class="ssc-item-box">
+                   
+                    <div class="ssc-img" [ngStyle]="{'background-image': 'url(' +photoUrl+ classDetails.bookedService.class_image + ')'}"></div>
+                    <div class="ssc-item-info">
+                        <h4>{{classDetails.bookedService.class_title}}</h4>
+                       
+                        <p>
+                            <span class="lab">Class Type: </span>
+                            <span class="cont">{{classDetails.bookedService.class_type}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Size: </span>
+                            <span class="cont">{{classDetails.bookedService.total_strenght}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Availabe Seat: </span>
+                            <span class="cont">{{classDetails.bookedService.available_set}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Start Date: </span>
+                            <span class="cont">{{classDetails.bookedService.strat_date |  date:'EEEE, MMMM d'}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Time: </span>
+                            <span class="cont">{{classDetails.bookedService.start_tiem | date:'shortTime' }} To {{classDetails.bookedService.end_time |  date:'shortTime'}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Cost: </span>
+                            <span class="cont">${{classDetails.bookedService.class_fees}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Description: </span>
+                        </p>
+                        <p>{{classDetails.bookedService.class_description}}</p>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 sd-right-panel">
+                <h3 class="ssc-title">Student Details</h3>
+                <div class="ssc-item-info">
+                    
+                    <p>
+                        <span class="lab">Student Full Name: </span>
+                        <span class="cont">{{classDetails.student_name}}</span>
+                    </p>
+                    <p>
+                        <span class="lab">Student Email id: </span>
+                        <span class="cont">{{classDetails.student_email}}</span>
+                    </p>
+                    <p>
+                        <span class="lab">Student Contact Number: </span>
+                        <span class="cont">{{classDetails.student_ph_number}}</span>
+                    </p>
+                    <p *ngIf="classDetails.bookedService.overview =='KIDS'">
+                        <span class="lab">Student Age: </span>
+                        <span class="cont">{{classDetails.bookedService.strat_date |  date:'EEEE, MMMM d'}}</span>
+                    </p>
+                    <p *ngIf="classDetails.bookedService.overview =='KIDS'">
+                        <span class="lab">Parent's Name: </span>
+                        <span class="cont">{{classDetails.parent_name}}</span>
+                    </p>
+                    <p *ngIf="classDetails.bookedService.overview =='KIDS'">
+                        <span class="lab">Parent's Contact Number: </span>
+                        <span class="cont">${{classDetails.parent_ph_number}}</span>
+                    </p>
+
+                    <div class="ssc-buttons-bx custom-input-field" *ngIf="classDetails.payment_type =='cash' && classDetails.booking_status=='pending' ">
+                        <button type="submit" class="btn btn-submit" (click)="Approve_class()">Approve</button>
+                        
+                    </div>
+
+                    <div class="ssc-buttons-bx custom-input-field" *ngIf="classDetails.booking_status=='accept' ">
+                        <button type="submit" class="btn btn-submit">Confirmed</button>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="container">
+    <div class="pcbd-item-row" *ngFor="let item of classDetails">
+        
+        <div class="pcbd-item-col-50" *ngFor="let class of item.studentdetails">
+           <div class="trainer-item">
+
+            <div class="trainer-img" *ngIf="class.user_id.UserPhoto ==null" style="background-image:url('assets/images/no_profile_pic.png')">
+            </div>
+            <div class="trainer-img" *ngIf="class.user_id.UserPhoto !=null" [ngStyle]="{'background-image': 'url(' +photoUrl+ class.user_id.UserPhoto + ')'}">
+            </div>
+            <div class="trainer-item-info">
+                <h4>{{class.student_name}}</h4>
+                <p *ngIf="class.overview"><b>Partent's name : </b>{{class.parent_name}}</p>
+                <p><b>Student's contact number : </b>{{class.student_ph_number}}</p>
+                <p *ngIf="class.overview"><b>Student's Age : </b>{{class.student_age}}</p>
+                <p><b>Mail id : </b>{{class.student_email}}</p>
+                <p><b>Class name : </b>{{item.class_title}}</p>
+                <p *ngIf="class.overview"><b>Parent's contacr : </b>{{class.student_email}}</p>
+                <p><b>Payable amount : </b> $ {{item.class_fees}}</p>
+                <p><b>Payment Mode : </b>{{class.payment_type}}</p>
+                <p><b>Class Date : </b>{{item.strat_date | date:'mediumDate': '+0000': 'en-ZA'}} PST</p>
+                <div class="ssc-buttons-bx">
+                    <span class="pcdd-txt pcdd-color-green" *ngIf="class.booking_status=='accept'">Confirm</span>
+                    <span class="pcdd-txt pcdd-color-yl" *ngIf="class.booking_status=='pending'">Processing...</span>
+                    <div class="" *ngIf="class.payment_type =='cash' && class.booking_status=='pending' ">
+                        <button type="submit" class="btn btn-submit" (click)="Approve_class(class._id)">Approve</button>
+                    </div>
+                </div>
+            </div>
+            
+           
+            </div>
+            
+            
+        </div>
+       
+    </div>
+    </section>
+<!-- Body content end -->

@@ -1,0 +1,142 @@
+.login-modal-bx .modal-content{
+    margin:0 auto 35px auto;
+    max-width: 422px;
+  }
+  .login-modal-bx{
+    /* min-height: 82vh; */
+  }
+  .radio-item {
+    font-size: 14px!important;
+  }
+  .login-social-icons{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-social-icons button{
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    min-width: inherit;
+    font-size: 20px;
+    color: #ffffff;
+    border-radius:50%;
+    margin: 0 8px;
+    padding: 0;
+    line-height: 0;
+    border: 0;
+    text-align: center;
+  }
+  .login-social-icons button.facebook{
+    background-color: #004AAD;
+  }
+  .login-social-icons button.googleplus{
+    background-color: #db4a39;
+  }
+  .login-social-icons button.apple{
+    background-color: #9b9b9b;
+  }
+  .login-social-icons button:focus{
+    outline: 0;
+  }
+  .separate-bx{
+    margin: 4px 0;
+    text-align: center;
+    position: relative;
+  }
+  .separate-bx:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 1px;
+    background-color: #D7D7D7;
+  }
+  .separate-bx span{
+    display: inline-block;
+    background-color: #fff;
+    padding: 0 16px;
+    color: #787E83;
+    font-size: 12px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+  .text-btm{
+    font-weight: 400;
+    color: #818181;
+    font-size: 16px;
+    text-align: center;
+  }
+  .text-btm a{
+    color: #000000;
+  }
+  .radio-item.form-check-label .checkmark {
+    top: 1px;
+  }
+  .form-check-label{
+    font-size: 16px;
+    font-weight: 400;
+    color: #818181;
+  }
+  .modal-bottom-links{
+    margin-top: 15px;
+  }
+  .login-modal-bx .modal-content h1{
+    margin-bottom: 12px;
+  }
+  .radio-item-bx {
+    margin-bottom: 16px;
+  }
+  .login-modal-bx .modal-content .btn-submit{
+    margin-top: 12px;
+  }
+  .hdings{
+    text-align: right;
+  }
+  .closeBtn{
+    
+    background: url(../../assets/images/x-mark-medium-icon.png);
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    background-size: contain;
+    width: 25px;
+    height: 25px;
+  }
+  @media(max-width:1024px){
+      
+  }
+  @media(max-width:767px){
+      .login-modal-bx .modal-content{
+        margin-bottom: 24px;
+        padding: 0px 15px;
+      }
+      .form-check-label,
+      .text-btm{
+        font-size: 15px;
+      }
+      .radio-item {
+        font-size: 11px;
+        line-height: 25px;
+    }
+      mat-dialog-content {
+        margin: 0 0px;
+        max-height: 95vh;
+        padding: 0px;
+    }
+    mat-dialog-container {
+      padding: 24px 0px;
+  }
+  .forgot-txt, .modal-bottom-links {
+    font-size: 11px;
+    line-height: 25px;
+  }
+  .input-group input {
+    padding-right: 40px;
+  }
+  }
+  

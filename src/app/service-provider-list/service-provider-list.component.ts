@@ -5,7 +5,10 @@ import { data } from 'jquery';
 import { PopupDetailsComponent } from '../popup-details/popup-details.component';
 import { ServiceDetailsComponent } from '../service-details/service-details.component';
 import { WebserviceService } from '../services/webservice.service';
-
+import { ToastrService } from 'ngx-toastr';
+import { StarRatingComponent } from 'ng-starrating';
+import { environment } from 'src/environments/environment.prod';
+var url = environment.api;
 @Component({
   selector: 'app-service-provider-list',
   templateUrl: 'service-provider-list.component.html',
@@ -22,26 +25,61 @@ export class ServiceProviderListComponent implements OnInit {
   id:any;
   filteredData:any;
   category:any;
-  photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
-
+  //photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  photoUrl:string = url;
+  ProviderList:any;
+  category_id:any;
+  Latitute:any;
+  Longitude:any;
+  distance:any;
+  origina_serachId:any
   constructor(
     private route: ActivatedRoute,
     public service: WebserviceService,
     public router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastr : ToastrService
   ) {
   //  console.log(this.router.getCurrentNavigation());
+    // this.route.queryParams.subscribe((params) => {
+    //   if (this.router.getCurrentNavigation()!.extras.state) {
+    //     this.data = this.router.getCurrentNavigation()!.extras.state!.data;
+    //     console.log('this.data: ', this.data);
+    //     this.type = this.router.getCurrentNavigation()!.extras.state!.type;
+    //     this.id = router.getCurrentNavigation()!.extras.state!.id;
+    //   }
+    // });
     this.route.queryParams.subscribe((params) => {
-      if (this.router.getCurrentNavigation()!.extras.state) {
-        this.data = this.router.getCurrentNavigation()!.extras.state!.data;
-        console.log('this.data: ', this.data);
-        this.type = this.router.getCurrentNavigation()!.extras.state!.type;
-        this.id = router.getCurrentNavigation()!.extras.state!.id;
+     
+      this.category_id = params.id,
+      this.origina_serachId = params.id,
+      this.Latitute = params.Latitude,
+      this.Longitude = params.Longitude
+      console.log('pass data', this.Latitute)
+    })
+
+    this.service.getObservableSerach().subscribe((resp:any) => {
+      console.log(resp)
+      //this.profile_image = resp['Profile_image']
+      if(resp.type=='distance'){
+        this.distance= resp.serach_data;
+        this.get_provider();
       }
-    });
+      if(resp.type=='category'){
+        this.category_id= resp.serach_data;
+        this.get_provider();
+      }
+      if(resp.type=='clear'){
+        this.category_id= this.origina_serachId;
+        this.get_provider();
+      }
+    })
+
+    
   }
 
   ngOnInit(): void {
+    this.get_provider();
     //console.log('this.type: ', this.type);
 
     // if (this.type === 'none') {
@@ -65,12 +103,20 @@ export class ServiceProviderListComponent implements OnInit {
     //   });
     // } else {
     //   console.log('ye mai kaha aa gaya');
-  this.serviceList();
+  //this.serviceList();
   }
 
-  gotoDetails(){
-    this.router.navigate(['/view-details'])
+  
+
+  gotoDetails(id:any){
+    this.router.navigate(['/service-details'],{ queryParams: {id: id} })
   }
+
+  getNumber(num:any) {
+    console.log(num)
+    return new Array(num);   
+    
+}
 
    serviceList(){
     if(this.data[0])
@@ -195,16 +241,17 @@ console.log('no category id')
 
  
 
-  goToPostANeed(d: any) {
-    let nav: NavigationExtras = {
-      state: {
-        ...this.data,
-        ...d,
-        subcat_id: this.data._id,
-        provider_id: d._id,
-      },
-    };
-    this.router.navigate(['post-a-need'], nav);
+  goToPostANeed(id: any) {
+    // let nav: NavigationExtras = {
+    //   state: {
+    //     ...this.data,
+    //     ...d,
+    //     subcat_id: this.data._id,
+    //     provider_id: d._id,
+    //   },
+    // };
+    // this.router.navigate(['post-a-need'], nav);
+    this.router.navigate(['/provider-service-list'],{ queryParams: {id: id} })
   }
 
   showEducationProviders() {
@@ -230,5 +277,25 @@ console.log('no category id')
     console.log('data: ', this.data);
 
     this.getProviders(this.data);
+  }
+
+
+  get_provider(){
+    let data={
+      'category_id': this.category_id,
+      'Latitute': this.Latitute,
+      'Longitude': this.Longitude,
+      'distance':this.distance
+    }
+   this.service.getAllProvidersList(data).subscribe((response:any)=>{
+     console.log('location provider',response)
+     if(response['count']==0){
+      this.providersList =response['data'];
+      this.toastr.warning('No Service provider found.');
+     }else{
+      this.providersList = response['data']
+     }
+     
+   })
   }
 }

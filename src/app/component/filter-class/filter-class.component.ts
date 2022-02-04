@@ -3,6 +3,7 @@ import { WebserviceService } from 'src/app/services/webservice.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router,NavigationExtras } from '@angular/router';
 
+
 @Component({
   selector: 'app-filter-class',
   templateUrl: './filter-class.component.html',
@@ -16,13 +17,9 @@ export class FilterClassComponent implements OnInit {
   filterQuery: any = {};
   higherPrice:number=0;
   lowerPrice:number=1;
-  // distancemax:number;
-  // distancemini:number;
-  // distance:any;
   ClassesFor:string = 'kids';
   Id = localStorage.getItem('userId');
   userType1 = localStorage.getItem('userType');
-
   categorylisting: any;
   categorySubcategory:any;
   subcategorylisting:any;
@@ -32,61 +29,72 @@ export class FilterClassComponent implements OnInit {
   searchQuery: any = '';
   list: never[];
   pageCategory:any;
-  //Radios0:any;
-  //Radios1:any;
-
+  classcategory:any;
+  format_type:any=[];
+  dates_check:any;
+  customdate:any;
+  custom_date_check:boolean=false
+  age_select:any=[]
+  price_select:any=[]
+  priceRangeArr: any = [
+    { "id": '0-25', name: '0-25' },
+    { "id": '26-100', name: '26-100' },
+    { "id": '101-300', name: '101-300' },
+    { "id": '301-300000000', name: '301 Above' }
+  ]
+  gradeRangeArr:any =['1-5','6-8','9-12']
+  ChildageRangeArr:any =['2-8','9-13','14-17']
+  AdultageRangeArr:any =[
+    { "id": '18-35', age: '18-35' },
+    { "id": '36-55', age: '36-55' },
+    { "id": '56-130', age: '55+' },
+  
+  ]
+  distance:any ;
+  //=['5','10','15','20','25','30','35']
+  Student_type:any;
+  classType:any;
+  categories:any=[];
+  activity_type:any;
+  overview:any;
+  category:any;
+  price_range:any;
   constructor(private service: WebserviceService,
     private toastr: ToastrService,
     public router: Router,
-    )  {}
+    )  {
+      this.service.getObservable_type().subscribe((resp:any)=>{
+        
+        this.overview = resp.type
+        console.log('filter',this.overview)
+      })
+
+
+    }
 
   ngOnInit(): void {
-    //this.Radios0.checked =true;
+    this.getCategory();
+    this.getdistancelist();
     this.service.lowerPrice = this.lowerPrice;
     let data = {
       allcategory:this.service.allcategory,
       lowerPrice:this.lowerPrice
      }
      this.service.getServiceList(data).subscribe((data: any) => {
-      //this.providersList = data.data;
       this.service.FilteredData = data.data;
-      console.log('serviceList: in higher filter ', data.data);
-      
-    });
-    //this.onItemChange1(1);
-
-    // this.service.categorylisting().subscribe(
-    //   (data) => {
-    //     console.log('category',data);
-    //     this.categorylisting = (<any>data)['data'];
-    //     // this.toastr.success((<any>data)["message"]);
-
-    //     // this.router.navigate(['/login'])
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
-
-    // this.service.categorySubcategory().subscribe(
-    //   (data) => {
-    //     console.log('category subcategory',data);
-    //     this.categorySubcategory = (<any>data)['data'];
-    //     // this.toastr.success((<any>data)["message"]);
-
-    //     // this.router.navigate(['/login'])
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
-    
+    }); 
   }
 
+  
+  getdistancelist(){
+    this.service.distanceList().subscribe((response:any)=>{
+      console.log('distance list',response)
+      this.distance = response['data']
+    })
+  }
 
   onItemChange1(value:any){
     this.service.lowerPrice = this.lowerPrice;
-   // console.log(" Value is : ", value );
     this.lowerPrice = value;
     this.higherPrice = 0;
     this.serviceList();
@@ -94,14 +102,12 @@ export class FilterClassComponent implements OnInit {
 
  onItemChange2(value:any){
   this.service.higherPrice = this.higherPrice;
- // console.log(" Value is : ", value );
   this.higherPrice = value;
   this.lowerPrice = 0;
   this.serviceList();
 }
 
 openDropdown() {
- // console.log('on focus: ', this.open);
   this.open = true;
 }
 
@@ -114,55 +120,156 @@ closeDropdown() {
 
 listingDetails(id:any){
   this.router.navigate(['/sub-category/'+id]);
-  // const found = this.categorylisting.some((data:any) => data._id === id);
-  // if(found){
-
-  // console.log('data is present in categoryListing',found);
-  // this.router.navigate(['/sub-category/'+id]);
-  // }
-  // else{
-  //   this.service.subcategorylisting(id).subscribe(
-  //     (data: any) => {
-  //       console.log('reached here',data);
-  //         let nav: NavigationExtras = {
-  //           state: {
-  //             data: data.data,
-  //             type: 'level 0'
-  //           }
-  //         }
-  //         this.router.navigate(['service-provider-list'], nav)
-        
-  //       },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
 }
 
 onTypeChange(value:any){
-  this.service.classType = value;
-  this.service.showList = true;
-if(this.service.classType =='kids')
-{
-this.service.categoryId = this.service.kidCategoryId;
-this.getSubcategory();
-}
-else if(this.service.classType =='adults'){
-  this.service.categoryId = this.service.adultCategoryId;
-  this.getSubcategory();
+  
+  console.log(value)
+  this.Student_type = value;
+ this.search_classlist(value,'UserType')
 }
 
-//this.service.classType = value;
-//console.log('service classtype',this.service.classType);
+onTypeChange1(value:any){
+  
+  console.log(value)
+  this.Student_type = value;
+ this.search_classlist(value,'UserType')
+}
+PriceSearch(event:any){
+  console.log(this.price_range)
+  //this.search_classlist(this.price_range,'Price')
+  if (event.target.checked) {
+    var price = event.target.value.split('-')
+    this.price_select.push(price[0],price[1])
+    console.log(this.price_select)
+    this.search_classlist(this.price_select,'Price')
+  }else {
+    var price = event.target.value.split('-')
+    var index = this.price_select.indexOf(price[0]);
+    console.log(index)
+    if (index !== -1){
+      this.price_select.splice(index,2);
+      console.log(this.price_select)
+      this.search_classlist(this.price_select,'Price')
+    }
+  }
+}
+onTypeChange_class(value:any){
+  console.log(value)
+  this.classType = value
+  this.search_classlist(value,'Class')
+}
 
-if(this.userType1 == '1'){
-this.getMyClasses(this.service.classType);
-}else{
-  this.getRelatedClasses(this.service.classType,this.service.subCategoryId);
- // this.getAllClassesList(this.service.classType);
+onTypeChange_class1(value:any){
+  console.log(value)
+  this.classType = value
+  this.search_classlist(value,'Class')
+} 
+GradeSearch(item:any){
+  console.log(item)
+  this.search_classlist(item,'Grade')
 }
+
+ondates_checkChange(value:any){
+  console.log(value)
+
+  if(value =='Today'){
+    this.custom_date_check = false
+    var currentDate = new Date();
+    var day = (currentDate.getDate() < 10) ? "0" + currentDate.getDate().toString() : currentDate.getDate();
+    var month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    var year = currentDate.getFullYear();
+    var date = year + '-' + month + '-' + day +'T00:00:00.000Z';
+    console.log(value,date);
+    this.search_classlist(date,'dates');
+  }
+  if(value =='Tomorrow'){
+    this.custom_date_check = false
+    var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    var day = (currentDate.getDate() < 10) ? "0" + currentDate.getDate().toString() : currentDate.getDate();
+    var month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    var year = currentDate.getFullYear();
+    var date = year + '-' + month + '-' + day +'T00:00:00.000Z';
+    console.log(value,date);
+    this.search_classlist(date,'dates');
+  }
+  if(value =='Customdate'){
+    this.custom_date_check = true
+  }
 }
+
+
+
+addToKeywords(){
+  console.log(this.customdate)
+  var date = this.customdate +'T00:00:00.000Z';
+  this.search_classlist(date,'dates');
+}
+
+FormatSerach(event:any){
+  console.log(event)
+  //this.search_classlist(item,'Format')
+  if (event.target.checked) {
+    this.format_type.push(event.target.value)
+    console.log(this.categories)
+    this.search_classlist(this.format_type,'Format')
+  }else {
+    var index = this.format_type.indexOf(event.target.value); 
+    if (index !== -1){
+      this.format_type.splice(index, 1);
+      console.log(this.format_type)
+      this.search_classlist(this.format_type,'Format')
+    }
+  }
+}
+
+serachbyid(event:any,id:any,i:any){
+  console.log(id)
+  console.log(event.target.checked)
+    if (event.target.checked) {
+      this.categories.push(event.target.value)
+      console.log(this.categories)
+      this.search_classlist(this.categories,'Category')
+    }else {
+      var index = this.categories.indexOf(event.target.value); 
+      if (index !== -1){
+        this.categories.splice(index, 1);
+        console.log(this.categories)
+        this.search_classlist(this.categories,'Category')
+      }
+    }
+  //this.search_classlist(id,'Category')
+}
+
+ageSerach(event:any){
+  console.log(event.target.checked)
+  //this.age_select.push(age[0],age[1])
+  
+  if (event.target.checked) {
+    var age = event.target.value.split('-')
+    this.age_select.push(age[0],age[1])
+    console.log(this.age_select)
+    this.search_classlist(this.age_select,'Age')
+  }else {
+    var age = event.target.value.split('-')
+    var index = this.age_select.indexOf(age[0]);
+    console.log(index)
+    if (index !== -1){
+      this.age_select.splice(index,2);
+      console.log(this.age_select)
+      this.search_classlist(this.age_select,'Age')
+    }
+  }
+  
+}
+
+
+distanceSerach(item:any){
+  this.search_classlist(item,'Distance')
+}
+
+
+
 
 getSubcategory(){
   console.log('getsubcategory id',this.service.categoryId);
@@ -179,12 +286,7 @@ getSubcategory(){
 }
 
 onSearch(ev: any) {
- // console.log('evevevevevevev', ev);
-
- // this.categorylisting = { ...this.categorylisting };
- 
   this.categorySubcategory = {...this.categorySubcategory};
-  //console.log('list after search', this.list);
 }
 
 onSearchChange(arg: any) {}
@@ -192,23 +294,16 @@ onSearchChange(arg: any) {}
 
  serviceList(){
    if(this.higherPrice === 0){
-    //  console.log('latitude',this.service.Latitude);
-    //  console.log('longitude',this.service.Longitude);
    let data = {
      allcategory:this.service.allcategory,
      lowerPrice: this.lowerPrice,
      Latitude:this.service.Latitude,
      Longitude:this.service.Longitude,
-    // distancemax: this.distancemax,
      distancemini:0
    }
-
-  // console.log('lat,long data1', data);
    this.service.getServiceList(data).subscribe((data: any) => {
-    //this.providersList = data.data;
-    
+   
     this.service.FilteredData = data.data;
-  //  console.log('serviceList: in lower filter ', data.data);
   });
   }else if(this.lowerPrice === 0){
     let data = {
@@ -216,49 +311,34 @@ onSearchChange(arg: any) {}
     higherPrice:this.higherPrice,
     Latitude:this.service.Latitude,
     Longitude:this.service.Longitude,
-   // distancemax: this.distancemax,
     distancemini:0
    }
-  // console.log('lat,long data2', data);
    this.service.getServiceList(data).subscribe((data: any) => {
-    //this.providersList = data.data;
     this.service.FilteredData = data.data;
-   // console.log('serviceList: in higher filter ', data.data);
-    
   });
   }
 }
 
 getRelatedClasses(value:any,subCategoryId:any){
- //var Id = '609157fbc1bef37b9230887b'; // Maths id
- //var Id = this.service.subCategoryId;
- //console.log('classId',Id);
   this.service.getRelatedClassList(value,subCategoryId).subscribe((resp: any) => {
-    console.log('ClassesList: in service', resp.data);
-     //this.classesList = resp.data;
- this.service.classesList = resp.data;
+    this.service.classesList = resp.data;
    });
 }
 
 
 getAllClassesList(value:any) {
   this.service.getClassesList(value).subscribe((resp: any) => {
-   // console.log('ClassesList: in service', resp.data);
-    //this.classesList = resp.data;
-this.service.classesList = resp.data;
+    this.service.classesList = resp.data;
   });
 }
 
 getMyClasses(value:any) {
   this.service.getClassesListProvider(this.Id,value).subscribe((resp: any) => {
-  //  console.log('getMyClasses: in service ', resp);
     this.service.classesList = resp.data;
   });
 }
 
   filter() {
-   // console.log('filterQuery: ', this.filterQuery);
-
     this.price !== '' && this.price !== null && this.price !== undefined
       ? (this.filterQuery.price = this.price)
       : (this.filterQuery.price = 0);
@@ -270,10 +350,60 @@ getMyClasses(value:any) {
     this.maxAge !== '' && this.maxAge !== null && this.maxAge !== undefined
       ? (this.filterQuery.maxAge = this.maxAge)
       : (this.filterQuery.maxAge = 12);
-
-   // console.log('filterQuery 2: ', this.filterQuery);
-
+      
     this.onValueChanged.emit(this.filterQuery);
+  }
+
+  getCategory(){
+    var that = this;
+    let data={
+      'page':1,
+      'limit':200,
+    }
+    this.service.gerclasscategory(data).subscribe((resp:any)=>{
+      console.log( 'adult response',resp);
+      this.classcategory= resp.data;
+    })
+    
+
+  }
+
+ 
+
+
+  search_classlist(data:any,type:any){
+    console.log(data,type)
+    this.service.publishClassserach({
+      serach_data: data,
+      type:type
+      });
+  }
+
+  clear_serach(type:any){
+    console.log(type)
+    if(type=='Category'){
+      this.search_classlist(undefined,'Category');
+      this.category = null;
+    }
+    if(type=='Class'){
+      this.search_classlist(undefined,'Class');
+      this.activity_type =null;
+      
+    }
+
+    if(type=='UserType'){
+      this.search_classlist(undefined,'UserType');
+      this.overview = null;
+    }
+
+    if(type=='Price'){
+      this.search_classlist(undefined,'Price');
+      this.price_range = null;
+    }
+
+    if(type=='Format'){
+      this.search_classlist(undefined,'Format');
+    }
   }
 }
 

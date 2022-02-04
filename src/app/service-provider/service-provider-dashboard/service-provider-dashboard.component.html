@@ -1,73 +1,185 @@
 <section class="inner-banner">
     <div class="container">
-        <h1>Service Provider <strong>Dashboard</strong></h1>
+        <h1><strong>Dashboard</strong></h1>
     </div>
 </section>
 <section class="common-inner-bg-wrap">
     <div class="container">
+        <!-- <div class="dasahboard-header-top">
+            <h3></h3>
+            <div class="row">
+                <div class="col-sm-6 "></div>
+                <div class="col-sm-6 ">
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate placeholder="Start date" [matDatepicker]="startDate"   (dateChange)="startDate('change', $event)">
+                        <input matEndDate placeholder="End date" [matDatepicker]="endDate" (dateChange)="endDate('change', $event)">
+                      </mat-date-range-input>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
+                </div>
+            </div>
+            
+            
+         
+        </div> -->
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-md-6"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <mat-form-field appearance="fill" class="example-form-field">
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate placeholder="Start date" [matDatepicker]="startDate"   (dateChange)="startDate('change', $event)">
+                    <input matEndDate placeholder="End date" [matDatepicker]="endDate" (dateChange)="endDate('change', $event)">
+                  </mat-date-range-input>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="row sp-short mb-4">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6 col-md-4 col-lg-2">
                         <div class="card">
-                            <h5>300</h5>
-                            <p>
-                                Satisfy customer
-                            </p>
+                            <p>Views</p>
+                            <h5>{{view_count}}</h5>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6 col-md-4 col-lg-2">
                         <div class="card">
-                            <h5>150</h5>
-                            <p>
-                                Booking List
-                            </p> 
+                            <p>Services Booked</p>
+                            <h5>{{service_booked}}</h5>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6 col-md-4 col-lg-2">
                         <div class="card">
-                            <h5>50</h5>
-                            <p>
-                                Accepted booking
-                            </p> 
+                            <p>Appointments Booked</p>
+                            <h5>{{Appointment_booked}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card" (click)="goToBooking()">
+                            <p>Classes Booked</p>
+                            <h5>{{class_count}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-2">
+                        <div class="card">
+                            <p>Revenue</p>
+                            <h5>${{current_revenue}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card">
+                            <p>Total Revenue YTD</p>
+                            <h5>${{total_Revenue}}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div class="row">
+                    <div class="col-sm-5 mt-4">
+                        <div class="dasahboard-mh">
+                            <h3>Monthly summary</h3>
+                            <select class="browser-default custom-select"  [(ngModel)]="selectmonth" (change)="select_month()">
+                                <option value="3" selected>Last 3 Months</option>
+                                <option value="6">Last 6 Months</option>
+                                <option value="9">Last 9 Months</option>
+                                <option value="12">Last 12 Months</option>
+                            </select>
+                        </div>
+                        <div class="dasahboard-ms-list">
+                            <div class="d-ms-list-item">
+                                <div class="d-ms-left">
+                                    <strong>Month</strong>
+                                </div>
+                                <div class="d-ms-left">
+                                   <strong>Earnings</strong>
+                                </div>
+                            </div> 
+                            <div class="d-ms-list-item" *ngFor="let item of monthly_revenue">
+                                <div class="d-ms-left" >
+                                        {{getMonth(item._id.month)}}  {{item._id.year}}
+                                </div>
+                                <div class="d-ms-left">
+                                        ${{item.total}}
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="dasahboard-mh mt-4">
+                            <h3>Yearly summary</h3>
+                        </div>
+                        <div class="dasahboard-ms-list">
+                            <div class="d-ms-list-item">
+                                <div class="d-ms-left">
+                                    <strong>Year</strong>
+                                </div>
+                                <div class="d-ms-left">
+                                    <strong>Earnings</strong>
+                                </div>
+                            </div> 
+                            <div class="d-ms-list-item" *ngFor="let item of yearly_revenue">
+                                <div class="d-ms-left">
+                                        {{item._id.year}}
+                                </div>
+                                <div class="d-ms-left">
+                                        ${{item.total}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 mt-4">
+                        <!-- <h3>Revenue graph</h3>
+                        <div class="job-cat-list">
+                            <img src="assets/images/grapgh.png" alt="" />
+                        </div> -->
+                        <!-- <div id="chartContainer" style="height: 150px; width: 100%;"></div> -->
+                    </div>
+                </div>
+                <!-- <div class="row mb-3">
                     <div class="col-sm-12">
                         <h3>
-                            Job Category List
+                            General services List
                         </h3>
                         <hr>
                     </div>
                     <div class="col-sm-12">
                         <div class="job-cat-list">
-                            <div class="jb-cat">
-                                <img src="assets/images/propular2.png" alt="">
-                                <h4>Grooming</h4>
+                            <div class="jb-cat" *ngFor="let item of Service_categoryList">
+                                <img class="pro" src="{{baseurl}}{{item.image}}" alt="">
+                                <h4>{{item.title}}</h4>
                             </div>
-                            <div class="jb-cat">
-                                <img src="assets/images/pg-img-1.png" alt="">
-                                <h4>Grooming</h4>
-                            </div>
-                            <div class="jb-cat">
-                                <img src="assets/images/pg-img-3.png" alt="">
-                                <h4>Grooming</h4>
-                            </div>
-                            <div class="jb-cat">
-                                <img src="assets/images/pg-img-4.png" alt="">
-                                <h4>Grooming</h4>
-                            </div>
-                            <div class="jb-cat">
-                                <img src="assets/images/pg-img-5.png" alt="">
-                                <h4>Grooming</h4>
-                            </div>
+                            <p *ngIf="classtagP ==true">
+                                No general service added.
+                            </p>
+                            
                         </div>
                     </div>
-                </div>
-                <div class="row Analysis">
+                </div> -->
+
+                <!-- <div class="row mb-3">
                     <div class="col-sm-12">
-                        <h3>Analysis</h3>
+                        <h3>
+                            Class services List
+                        </h3>
+                        <hr>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="job-cat-list">
+                            <div class="jb-cat" *ngFor="let item of class_categoryList">
+                                <img class="pro" src="{{baseurl}}{{item.image}}" alt="">
+                                <h4>{{item.name}}</h4>
+                            </div>
+                            <p *ngIf="classtagC ==true">
+                                No class added.
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="row Analysis">
+                    <div class="col-sm-12">
+                        <h3>Analytics</h3>
                         <hr>
                     </div>
                     <div class="col-sm-12">
@@ -153,7 +265,7 @@
                             <img src="assets/images/servises.jpg" alt="" style="width: 100%;">
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- <div class="row">
                     <div class="col-sm-12 mb-4">
                         <form>

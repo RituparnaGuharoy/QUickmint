@@ -1,0 +1,498 @@
+<!-- Banner start -->
+<section class="inner-banner">
+    <div class="container">
+      <h1>Duplicate a
+        <strong>Class</strong>
+      </h1>
+    </div>
+  </section>
+  <!-- Banner end -->
+  <!-- Body content start -->
+  <section class="common-inner-bg-wrap">
+    <div class="container">
+      <div class="">
+  
+        <!-- <div class="row">
+                  
+                     
+  
+                       <div class="form-group custom-input-field col-md-12">
+                        <label class="d-block">Activity name </label>
+                        <input type="text" [(ngModel)]="create_class.class_title" class="form-control" 
+                          required="required">
+                      </div>
+                      <div class="form-group custom-input-field col-md-12">
+                        <label class="d-block">What kind of activity is it? </label>
+                        <div class="col-sm-12 mb-3">
+                          <label class="radio-item">
+                            <input type="radio" name="activity_type" value="ONLINE" [(ngModel)]="create_class.class_type" (change)="activityChange()">
+                            <span class="checkmark"></span>
+                            <span class="radio-label">Online</span>
+                          </label>
+                          <label class="radio-item">
+                            <input type="radio" name="activity_type" value="INPERSON" [(ngModel)]="create_class.class_type" (change)="activityChange()">
+                            <span class="checkmark"></span>
+                            <span class="radio-label">In-Person</span>
+                          </label>
+                        </div>
+                      </div>
+  
+                     
+  
+                      <div class="form-group custom-input-field col-md-12">
+                        <label class="d-block">Meeting Details </label>
+                        <textarea rows="3" [(ngModel)]="create_class.class_description" class="form-control"
+                        placeholder="Overview"></textarea>
+                      </div>
+                      <div class="form-group custom-input-field col-md-12">
+                        <label class="d-block"> </label>
+                        <div class="col-sm-12 mb-3">
+                          <label class="radio-item">
+                            <input type="radio"  value="SINGELDAY" [(ngModel)]="create_class.crash_course" (change)="activityChange()">
+                            <span class="checkmark"></span>
+                            <span class="radio-label">Single Day</span>
+                          </label>
+                          <label class="radio-item">
+                            <input type="radio"  value="MONTHLY" [(ngModel)]="create_class.crash_course" (change)="activityChange()">
+                            <span class="checkmark"></span>
+                            <span class="radio-label">Monthly Recuring</span>
+                          </label>
+                          <label class="radio-item">
+                            <input type="radio"  value="SEMESTER" [(ngModel)]="create_class.crash_course" (change)="activityChange()">
+                            <span class="checkmark"></span>
+                            <span class="radio-label">Semester</span>
+                          </label>
+                        </div>
+                      </div>
+  
+  
+                       <div class="col-sm-12 mb-3">
+                      <label class="radio-item">
+                        <input type="radio" name = "create_class.overview" value="KIDS" [(ngModel)]="create_class.overview" (change)="radioChange()">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Kids</span>
+                      </label>
+                      <label class="radio-item">
+                        <input type="radio"  name = "create_class.overview" value="ADULTS" [(ngModel)]="create_class.overview" (change)="radioChange()">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Adults</span>
+                      </label>
+                    </div>
+                    <div class="form-group custom-input-field col-md-12">
+                      <label class="d-block">Age range </label>
+                      <div class="form-group custom-input-field col-sm-3">
+                        <label class="d-block">From </label>
+                        <input type="number" [(ngModel)]="age_start" class="form-control"  (change)="ageCheck_start()"
+                        required="required">
+                    </div>
+  
+                    <div class="form-group custom-input-field col-sm-3">
+                      <label class="d-block">To </label>
+                        <input type="number" [(ngModel)]="age_end" class="form-control" (change)="ageCheck_end()"
+                        required="required">
+                    </div>
+                    </div>
+                    <div class="form-group custom-input-field col-md-6" *ngIf="create_class.overview=='KIDS'">
+                      <label class="d-block">Grade From </label>
+                      <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="select_grade" (change)="select_gardes()">
+                        <option value="" [disabled]="true" [selected]="true">Choose grade</option>
+                       
+                        <option *ngFor="let data of gradelist_1"  [value]="data"  >{{data}}</option>
+                      </select>
+                      
+                    
+                      <label class="d-block">Grade To </label>
+                     
+                      <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="select_grade" (change)="select_gardes()">
+                        <option value="" [disabled]="true" [selected]="true">Choose grade</option>
+                       
+                        <option *ngFor="let data of gradelist_2"  [value]="data"  >{{data}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group custom-input-field col-sm-6">
+                     
+                    </div>
+  
+                    <div class="form-group custom-input-field col-sm-6">
+                      <label class="d-block">Session Price </label>
+                      <input type="number" [(ngModel)]="create_class.tota_fees" class="form-control" (change)="ageCheck_end()"
+                      required="required">
+                    </div>
+                    <div class="form-group custom-input-field col-sm-6">
+                      <label class="d-block">Session Strength </label>
+                      <input type="number" [(ngModel)]="create_class.total_strenght" class="form-control" (change)="ageCheck_end()"
+                      required="required">
+                    </div>
+  
+                    <div class="form-group custom-input-field col-sm-12" *ngIf="create_class.crash_course =='SEMESTER'">
+                      <label class="d-block">Option for payment </label>
+                      <label class="radio-item">
+                        <input type="radio" name = "create_class.able_to" value="PERCLASS" [(ngModel)]="create_class.able_to" (change)="radioChange()">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Per Class</span>
+                      </label>
+                      <label class="radio-item">
+                        <input type="radio" name = "create_class.able_to" value="WEEKLY" [(ngModel)]="create_class.able_to" (change)="radioChange()">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Weekly</span>
+                      </label>
+                      <label class="radio-item">
+                        <input type="radio" name = "create_class.able_to" value="MONTHLY" [(ngModel)]="create_class.able_to" (change)="radioChange()">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Monthly</span>
+                      </label>
+                      <input type="number" [(ngModel)]="create_class.able_to_fees" class="form-control" 
+                      required="required">
+                    </div>
+  
+  
+  
+                    
+  
+  
+                        <div class="form-group custom-input-field col-sm-6 text-left time-field">
+                          <label>Session dates :</label>
+                          <input type="text" [(ngModel)]="startDate" onfocus="(this.type='date')" class="form-control" onblur="(this.type='text')" placeholder="Start Date" (change)="serach_Date()">
+                        </div>
+                        <div class="form-group custom-input-field col-sm-6 text-left time-field" >
+                          <label *ngIf="create_class.crash_course =='SEMESTER'">Session dates :</label>
+                          <input type="text" [(ngModel)]="startDate" onfocus="(this.type='date')" class="form-control" onblur="(this.type='text')" placeholder="End Date" (change)="serach_Date()" *ngIf="create_class.crash_course =='SEMESTER'">
+                        </div>
+  
+                        <div class="form-group custom-input-field col-sm-3 text-left time-field" *ngIf="end_time" >
+                          <label>End Date :</label>
+                          <input type="text" [(ngModel)]="endDate"  class="form-control"  placeholder="End Date">
+                        </div>
+  
+                        <div class="form-group custom-input-field col-sm-6 text-left time-field">
+                          <label> From :</label>
+                          <ngx-timepicker-field [defaultTime]="'10:11 am'" [(ngModel)]="startTime" timeChanged="consolee()"></ngx-timepicker-field>
+                        </div>
+              
+                        <div class="form-group custom-input-field col-sm-6 text-left time-field">
+                          <label>To :</label>
+                          <ngx-timepicker-field [defaultTime]="'11:11 am'" [(ngModel)]="endTime" timeChanged="consolee()"></ngx-timepicker-field>
+                        </div>
+                        
+                        <div class="form-group custom-input-field col-sm-12 text-left">
+                          <label class="d-block">Days of the week :</label>
+  
+                          <checkbox-group [(ngModel)]="selectedDays">
+                          <div class="form-check form-check-inline">
+                              <checkbox value="Sunday"><label class="days">Sunday</label></checkbox>
+                              <span class="checkmark"></span>
+                           
+                              <checkbox value="Monday"><label class="days">Monday</label></checkbox>
+                              <span class="checkmark"></span>
+                           
+                              <checkbox value="Tuesday"><label class="days">Tuesday</label></checkbox>
+                              <span class="checkmark"></span>
+                           
+                              <checkbox value="Wednesday"><label class="days">Wednesday</label></checkbox>
+                              <span class="checkmark"></span>
+  
+                              <checkbox value="Thrusday"><label class="days">Thrusday</label></checkbox>
+                              <span class="checkmark"></span>
+                           
+                              <checkbox value="Friday"><label class="days">Friday</label></checkbox>
+                              <span class="checkmark"></span>
+  
+                              <checkbox value="Saturday"><label class="days">Saturday</label></checkbox>
+                              <span class="checkmark"></span>
+                           </div>
+                           </checkbox-group>
+                          
+                       </div> 
+  
+                      <div class="form-group col-sm-12">
+                              <label class="radio-item">
+                                  <input type="checkbox" [(ngModel)]="policy">
+                                  <span class="checkmark"></span>
+                                  <span class="radio-label">Agree with the <a href="#"><b>Cancellation Policy</b></a></span>
+                              </label>
+  
+                      <div class="custom-input-field text-center col-md-12">
+                          <button (click)="registerClass()" class="btn btn-submit">Register</button>
+                        </div>
+                      </div>
+                  </div> -->
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="d-block">Activity name </label>
+              <input type="text" [(ngModel)]="create_class.class_title" class="form-control" required="required">
+            </div>
+            <div class="form-group">
+              <label class="d-block">What kind of activity is it? </label>
+              <div class="form-radio-items">
+                <label class="radio-item">
+                  <input type="radio" name="activity_type" value="ONLINE" [(ngModel)]="create_class.class_type" (change)="activityChange()">
+                  <span class="checkmark"></span>
+                  <span class="radio-label">Online</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="activity_type" value="INPERSON" [(ngModel)]="create_class.class_type" (change)="activityChange()">
+                  <span class="checkmark"></span>
+                  <span class="radio-label">In-Person</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="d-block">Activity Details </label>
+              <textarea rows="3" [(ngModel)]="create_class.class_description" class="form-control" placeholder="Overview"></textarea>
+            </div>
+            <div class="form-group" *ngIf="create_class.class_type == 'INPERSON'">
+              <label class="d-block">Class Location</label>
+              <input id="pac-input" type="text" class="form-control" placeholder="Your Location" (focus)="autocompleteFocus()" [(ngModel)]="create_class.class_location" autofocus>
+            </div>
+            <div class="form-group">
+              <label *ngIf="create_class.class_type == 'ONLINE'">Online class link</label>
+              <input type="url" class="form-control" placeholder="class link" (focus)="autocompleteFocus()" autofocus *ngIf="create_class.class_type == 'ONLINE'"
+                [(ngModel)]="create_class.vidoe_class_link">
+            </div>
+            <div class="form-group">
+              <label class="d-block">Upload Image </label>
+              <img src="{{baseurl}}{{create_class.class_image}}"  />
+              <input type="text" class="form-control upload-file-field" [(ngModel)]="image" (change)="readUrl($event)" type="file" accept="image/*"
+                placeholder="Upload Pictures">
+            </div>
+            <div class="form-group">
+              <label class="radio-item">
+                <input type="radio" value="SINGELDAY" [(ngModel)]="create_class.crash_course" (change)="activityChange()">
+                <span class="checkmark"></span>
+                <span class="radio-label">Single Day</span>
+              </label>
+              <label class="radio-item">
+                <input type="radio" value="MONTHLY" [(ngModel)]="create_class.crash_course" (change)="activityChange()">
+                <span class="checkmark"></span>
+                <span class="radio-label">Monthly Recuring</span>
+              </label>
+              <label class="radio-item">
+                <input type="radio" value="SEMESTER" [(ngModel)]="create_class.crash_course" (change)="activityChange()">
+                <span class="checkmark"></span>
+                <span class="radio-label">Semester</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="d-block">Class category</label>
+              <!-- <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="select_cat" (change)="select_category()">
+                <option value="" [disabled]="true" [selected]="true">Choose Category</option>
+                <option *ngFor="let data of AdultsCategory1" [value]="data._id">{{data.name}}</option>
+              </select> -->
+              <input type="text" [(ngModel)]="category_name.name" class="form-control" readonly>
+            </div>
+            
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="d-block">Class For</label>
+              <div class="radio-group-items">
+                <label class="radio-item">
+                  <input type="radio" name="create_class.overview" value="KIDS" [(ngModel)]="create_class.overview" (change)="radioChange()">
+                  <span class="checkmark"></span>
+                  <span class="radio-label">Kids</span>
+                </label>
+                <label class="radio-item">
+                  <input type="radio" name="create_class.overview" value="ADULTS" [(ngModel)]="create_class.overview" (change)="radioChange()">
+                  <span class="checkmark"></span>
+                  <span class="radio-label">Adults</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 ageGrp">
+            <div class="form-group">
+              <label class="d-block">Age Range </label>
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="number" [(ngModel)]="create_class.age_range.age_from" class="form-control" (change)="ageCheck_start()" placeholder="From"
+                    required="required">
+                </div>
+                <div class="col-md-6">
+                  <input type="number" [(ngModel)]="create_class.age_range.age_to" class="form-control" (change)="ageCheck_end()" placeholder="To" required="required">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row" *ngIf="create_class.overview=='KIDS'">
+          <div class="col-md-2"></div>
+          <div class="col-md-8" *ngIf="create_class.age_range.age_from == null">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label class="d-block">Grade From </label>
+                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="create_class.grade_range.grade_from" (change)="select_gardes()">
+                  <option value="" [disabled]="true" [selected]="true">Choose grade</option>
+                  <option *ngFor="let data of gradelist_1" [value]="data">{{data}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="d-block">Grade To </label>
+                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="create_class.grade_range.grade_to" (change)="select_gardes()">
+                  <option value="" [disabled]="true" [selected]="true">Choose grade</option>
+                  <option *ngFor="let data of gradelist_2" [value]="data">{{data}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+  
+        </div>
+  
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="d-block">Session Price($) </label>
+              <input type="number" [(ngModel)]="create_class.class_fees" class="form-control" required="required">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="d-block">Session Strength </label>
+              <input type="number" [(ngModel)]="create_class.total_strenght" class="form-control" (change)="ageCheck_end()" required="required">
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="row" *ngIf="create_class.crash_course =='SEMESTER'">
+          <div class="col-md-2"></div>
+          <div class="col-md-8 payment_option">
+           
+              <label class="d-block">Option for payment </label>
+              <div class="form-group">
+              <label class="radio-item">
+                <input type="checkbox" value="PERCLASS" (change)="radioChange_able($event)">
+                <span class="checkmark"></span>
+                <span class="radio-label">Per Class</span>
+              </label>
+              <input type="number" [(ngModel)]="create_class.able_to_fees_perclass" class="form-control" required="required" *ngIf="create_class.able_to_perclass== 'PERCLASS'">
+            </div>
+  
+  
+            <div class="form-group">
+              <label class="radio-item">
+                <input type="checkbox" value="WEEKLY" (change)="radioChange_able($event)">
+                <span class="checkmark"></span>
+                <span class="radio-label">Weekly</span>
+              </label>
+              <input type="number" [(ngModel)]="create_class.able_to_fees_weekly" class="form-control" required="required">
+            </div>
+            <div class="form-group">
+              <label class="radio-item">
+                <input type="checkbox" value="MONTHLY" (change)="radioChange_able($event)">
+                <span class="checkmark"></span>
+                <span class="radio-label">Monthly</span>
+              </label>
+              <input type="number" [(ngModel)]="create_class.able_to_fees_monthly" class="form-control" required="required">
+            </div>
+            <!-- <checkbox-group  [(ngModel)]="select_paymmnet">
+              <div class="form-check classtime">
+                <checkbox value="PERCLASS" (change)="radioChange_able($event)"><label class="days"  >Per Class</label>
+                 
+                </checkbox>
+                <span class="checkmark"></span>
+                <input type="number" [(ngModel)]="create_class.able_to_fees" class="form-control" 
+                  required="required" *ngIf="create_class.able_to=='PERCLASS'">
+  
+  
+                <checkbox value="WEEKLY" (change)="radioChange_able($event)"><label class="days"  >Weekly</label></checkbox>
+                <span class="checkmark"></span>
+                <input type="number" [(ngModel)]="create_class.able_to_fees" class="form-control" 
+                required="required" *ngIf="create_class.able_to=='WEEKLY'">
+  
+                
+                <checkbox value="MONTHLY" (change)="radioChange_able($event)"><label class="days"  >Monthly</label></checkbox>
+                <span class="checkmark"></span>
+                <input type="number" [(ngModel)]="create_class.able_to_fees" class="form-control" 
+                  required="required" *ngIf="create_class.able_to=='MONTHLY'">
+               </div>
+               </checkbox-group> -->
+  
+  
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Start Date :</label>
+              <input type="text" [(ngModel)]="create_class.strat_date" onfocus="(this.type='date')" class="form-control" onblur="(this.type='text')"
+                (change)="serach_Date()">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group" *ngIf="create_class.crash_course !='SINGELDAY'">
+              <label>End Date :</label>
+              <input type="text" [(ngModel)]="create_class.end_date" class="form-control" onfocus="(this.type='date')" class="form-control"
+                onblur="(this.type='text')">
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4 form-group">
+            <label class="d-block"> From :</label>
+            <ngx-timepicker-field  [(ngModel)]="create_class.start_tiem" timeChanged="consolee()"></ngx-timepicker-field>
+          </div>
+          <div class="col-md-4 form-group">
+            <label class="d-block">To :</label>
+            <ngx-timepicker-field  [(ngModel)]="create_class.end_time" timeChanged="consolee()"></ngx-timepicker-field>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+  
+        <div class="row" *ngIf="create_class.crash_course !='SINGELDAY'">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="form-group">
+              <label class="d-block">Days of the week : <span (click)="toggleShow()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></label>
+              <ul class="days_wk">
+                <li *ngFor="let item of schedule_date">
+                  {{item}},
+              </li></ul>
+              <!-- <checkbox-group >
+                <div class="form-check-items">
+                  <checkbox class="checkbox-item" value={{item.day_index}} *ngFor="let item of dateArray" (change)="select_day_in($event)" >
+                    <span class="checkmark"></span>
+                    <label class="checkbox-label">{{item.day}}</label>
+                  </checkbox>
+                </div>
+              </checkbox-group> -->
+            </div>
+            <div *ngIf="isShown">
+              <div *ngFor="let item of dateArray; let j = index;" class="select_schedule " >
+                <input type="checkbox" value={{item.day_index}} (change)="select_day_in(item.day_index,$event)" >{{item.day}}
+                </div>
+            </div>
+            
+            <div class="col-md-2"></div>
+          </div>
+  
+        </div>
+        <div class="custom-input-field text-center col-md-12">
+          <button (click)="EditClass_validation()" class="btn btn-submit">Duplicate</button>
+        </div>
+      </div>
+    </div>
+  </section>

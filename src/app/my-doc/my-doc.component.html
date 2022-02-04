@@ -1,0 +1,59 @@
+<section class="inner-banner">
+    <div class="container">
+        <h1>My<strong> Documents</strong></h1>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="col-sm-12 min-height-50">
+            <div  class="row">
+                <div class="col-md-8 form-group custom-input-field2">
+                    <input type="text" class="form-control" [(ngModel)]="photo_type" placeholder="Document Name"
+                        required="required">
+                 
+                </div>
+    
+                <div class="col-md-4 form-group custom-input-field2">
+                    
+                        <input  type="file" #fileInput3 accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" (change)="onDocumentFileSelected($event)" style="display:none;"/>
+                        <div class="imageUpload" (click)=" fileInput3.click()">
+                        </div>
+                      
+                        
+                </div>
+           
+                
+                </div>
+            <ul class="pg-ul-list">
+                <!-- <li *ngFor="let img of DocumentImages">
+                    <div class="pg-item-img-hold"
+                        [ngStyle]="{'background-image' : img.file_path ? 'url(' + baseurl+img.file_path + ')' : 'url(assets/images/trainer-img-3.png' + ')'}">
+                        <span class="tooltiptext">{{img.file_name}}</span>
+                        
+                    </div>
+                
+                    
+                </li> -->
+                <li *ngFor="let img of DocumentImages">
+                    <div class="pg-item-img-hold" 
+                        [ngStyle]="{'background-image' : img.file_path ? 'url(' + baseurl+img.file_path + ')' : 'url(assets/images/trainer-img-3.png' + ')'}" *ngIf="img.imageType==false">
+                        <span class="tooltiptext">{{img.file_name}}</span>
+                        <span class="delete" (click)="deleteicon(img._id)">X</span>
+                        
+                    </div>
+                    <div *ngIf="img.imageType==true" class="pg-item-img-hold">
+                        <iframe width="142" height="139" [src]="img.file_path" type="application/pdf" >
+                        
+                        </iframe>
+                        <span class="tooltiptext">{{img.file_name}}</span>
+                        <span class="delete" (click)="deleteicon(img._id)">X</span>
+                        
+                    </div>
+                    </li>
+                <li>
+            </ul>
+        </div>
+    </div>
+
+</section>

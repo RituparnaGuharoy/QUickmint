@@ -1,9 +1,12 @@
 .flx-inner-cont h2{
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    color: #2257de;
+    font-size: 18px;
  }
  .flx-inner-cont  p{
-     margin-bottom: 8px;
-     font-size: 16px;
+     margin-bottom: 3px;
+     font-size: 14px;
  }
  .flx-inner-cont  p .lab{
      font-weight: 600;
@@ -13,47 +16,83 @@
      display: flex;
      justify-content: space-between;
  }
+ .right-btn-flex-box{
+     display: flex;
+     align-items: center;
+ }
+ .flx-inner-btn{
+     width: 190px;
+ }
  button.btn.details-btn {
-     min-width: 220px;
+    min-width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    padding: 0;
+    margin-left: 15px;
+}
+ button.btn.details-btn i{
+     margin: 0 5px;
  }
  button.btn.details-btn.reg-new{
      background: linear-gradient(
  180deg
  , #22A6DE 0%, #2257DE 75.52%);
-     font-size: 16px;
-     font-weight: 700;
-     text-transform: uppercase;
+     font-size: 18px;
+     font-weight: 600;
      color: #fff;
      text-align: center;
-     border-radius: 30px;
+     border-radius: 10px;
      line-height: 60px;
      display: inline-block;
      border: 0;
-     width: 250px;
+     width: 200px;
+     height: 60px;
      padding-top: 0;
      padding-bottom: 0;
- }
- .flex-right-box{
-    width: 100%;
+}
+.trainer-item .flex-right-box{
+    width: calc(100% - 180px);
 }
 .flex-inner-bx{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
-.trainer-item .trainer-item-info{
-    width: calc(100% - 260px);
-    padding-left: 0;
+.trainer-item .trainer-item-info {
+    width: 100%;
+    padding-left: 20px;
 }
- @media(max-width:767px){
-     .trainer-item {
-         flex-wrap: wrap;
-     }
-     .flx-inner-cont {
-         width: 100%;
-         text-align: left;
-     }
-     .flex-right-box{
+.trainer-item .trainer-img{
+    width: 180px;
+    height: 190px;
+}
+.topTab{
+    text-align: left;
+    height: inherit;
+}
+.flex-top-btns-row{
+    display: flex;
+    justify-content: space-between;
+}
+@media(max-width:991px){
+    .mrt-lg-20{
+        margin-top: 20px;
+    }
+    button.btn.details-btn{
+        margin-left: 7px;
+    }
+}
+@media(max-width:767px){
+    .trainer-item {
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+    .flx-inner-cont {
+        width: 100%;
+        text-align: left;
+    }
+    .flex-right-box{
         width: inherit;
         padding-left: 0;
     }
@@ -71,14 +110,50 @@
         padding-left: 0;
         word-break: break-word;
     }
- }
- .trainer-item .trainer-img {
-    margin-right: 16px;
-    min-width: 138px;
+    button.btn.details-btn{
+        min-width: 42px;
+        height: 42px;
+        line-height: 42px;
+        padding: 0;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+    button.btn.details-btn img{
+        width: 28px;
+    }
+    .trainer-item .flex-right-box{
+        width: calc(100% - 100px);
+    }
+    .trainer-item .trainer-item-info {
+        padding-left: 10px;
+        padding-top: 0;
+    }
+    .trainer-item .trainer-img{
+        width: 100px;
+        height: 100px;
+    }
+    .flex-top-btns-row{
+        display: block;
+    }
+    .topTab li {
+        display: flex;
+    }
+    .topTab li span {
+        width: 50%;
+    }
+    .flx-inner-btn{
+        text-align: left!important;
+    }
 }
-@media(max-width:767.99px){
-    button.btn.details-btn {
-        min-width: 130px;
-        margin: 0px 4px !important;
+@media (max-width: 575px) {
+    .trainer-item .flex-right-box{
+        width: calc(100% - 60px);
+    }
+    .trainer-item .trainer-img{
+        width: 60px;
+        height: 60px;
+    }
+    .flx-inner-cont h2 {
+        font-size: 16px;
     }
 }

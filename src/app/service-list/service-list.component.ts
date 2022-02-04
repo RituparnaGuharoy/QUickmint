@@ -16,6 +16,7 @@ export class ServiceListComponent implements OnInit {
   constructor( private router: Router, private service: WebserviceService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
    this.getList();
   }
 
@@ -46,6 +47,10 @@ export class ServiceListComponent implements OnInit {
       console.log('error',err);
     });
    this.ngOnInit();
+  }
+
+  tabClick(tab:any) {
+    console.log(tab);
   }
 
 }

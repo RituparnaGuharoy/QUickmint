@@ -21,8 +21,6 @@ export class CredentialsComponent implements OnInit {
   mycontent: string;
   log: string = '';
 
-  //BACK_END_MAPPING_URL_FOR_SAVE_IMG:string = 'https://nodeserver.mydevfactory.com:4290/admin/upload?status=1';
-  //name = "CK_EDITOR_IMG_UPLOAD_TO_SERVER";
   public Editor = ClassicEditor;
   public config = {
     ckfinder: {
@@ -34,7 +32,6 @@ export class CredentialsComponent implements OnInit {
     placeholder: 'Type the content here!'
  }
 
-  //contactForm: FormGroup;
   first = new FormControl('');
   credentialsForm = new FormGroup({
     credentials: new FormControl('', Validators.required),
@@ -86,7 +83,7 @@ export class CredentialsComponent implements OnInit {
   
   }
 
-  Submit() {
+  onSubmit() {
     let credentialsdata = {
      credentials: this.mycontent
     }
@@ -108,30 +105,7 @@ export class CredentialsComponent implements OnInit {
 
   public onChange( { editor }: ChangeEvent ) {
     const data = editor.getData();
-    //if(data!='')
-      //this.addServiceForm.get("content").setValue(data)
-    //else
-      //this.addServiceForm.get("content").setValue('')
     console.log('editor data ===', data );
 }
 
-  onSubmit() {
-    let credentialsdata = {
-     credentials: this.credentialsForm.controls.credentials.value
-    }
-    console.log('credentials', credentialsdata);
-    this.service.addCredentials(credentialsdata).subscribe(
-      (data:any) => {
-        console.log('cred data: ', data);
-        if(data.status == true){
-        this.toastr.success('Your credential has been saved');
-        }
-        this.credentialsForm.reset();
-      },
-      (err) => {
-        console.log(err);
-        this.toastr.success('Your credential has not been saved');
-      }
-    );
-  }
 }

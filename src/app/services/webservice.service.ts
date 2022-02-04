@@ -11,6 +11,10 @@ var url = environment.api;
 export class WebserviceService {
   private logoutData = new Subject<any>();
   private fooSubject = new Subject<any>();
+  private profileimage = new Subject<any>();
+  private SearchData = new Subject<any>();
+  private Class_SearchData = new Subject<any>();
+  private Type_search = new Subject<any>();
   subscriptions: Subscription[]=[];
   FilteredData:any[] = [];
   allcategory:string;
@@ -35,6 +39,7 @@ export class WebserviceService {
   public slugdata:string;
   public UserBaseURL = url + 'user/';
   public ServiceBaseURL = url + 'service/';
+  public adminurl = url +'admin/'
   // public DeliveryBaseURL = url + "commercialPartner/";
 
   // cartCount = localStorage.getItem("cartCount");
@@ -124,7 +129,7 @@ export class WebserviceService {
     return this.http.put(url, body, options);
   }
   public providerEditDetails(body: any) {
-    let url = this.UserBaseURL + 'editDetails';
+    let url = this.ServiceBaseURL + 'editDetails';
 
     let httpHeaders = new HttpHeaders();
     httpHeaders.set('Content-Type', 'application/json');
@@ -155,6 +160,74 @@ export class WebserviceService {
     console.log(input);
     return this.http.post(url, input, options);
   }
+
+  public workersgallery_video(video: any) {
+    //Sending contact details
+    // /service/workersgallery
+    let url = this.ServiceBaseURL + 'workersvideo';
+    console.log(video);
+    let input = new FormData();
+    input.append('video', video);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    httpHeaders.set('Content-Type', 'application/json');
+    console.log(input);
+    return this.http.post(url, input, options);
+  }
+
+  public serviceimage(UserPhoto: any,id:any) {
+    //Sending contact details
+    // /service/workersgallery
+    let url = this.ServiceBaseURL + 'addservice-image-upload/'+id;
+    console.log(UserPhoto);
+    let input = new FormData();
+    input.append('addImage', UserPhoto);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    httpHeaders.set('Content-Type', 'application/json');
+    console.log(input);
+    return this.http.post(url, input, options);
+  }
+  public documentupload(UserPhoto: any,photo_type:any) {
+    //Sending contact details
+    // /service/workersgallery
+    let url = this.ServiceBaseURL + 'providerdocument';
+    console.log(UserPhoto);
+    let input = new FormData();
+    input.append('document_upload', UserPhoto);
+    input.append('file_name', photo_type);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    httpHeaders.set('Content-Type', 'application/json');
+    console.log(input);
+    return this.http.post(url, input, options);
+  }
+
+  public detlete_gallery(documenid:any){
+    let url = this.ServiceBaseURL + 'removegallery';
+    let input = new FormData();
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    httpHeaders.set('Content-Type', 'application/json');
+    console.log(input);
+    return this.http.post(url, documenid, options);
+  }
+
+  public detletedoc(documenid:any){
+    let url = this.ServiceBaseURL + 'removedocument';
+    let input = new FormData();
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    httpHeaders.set('Content-Type', 'application/json');
+    console.log(input);
+    return this.http.post(url, documenid, options);
+  }
+
   public editDetailsWithImage(UserPhoto: any) {
     //Sending contact details
     let url = this.UserBaseURL + 'editDetailsWithImage';
@@ -246,6 +319,8 @@ export class WebserviceService {
     let options = { headers: httpHeaders };
     return this.http.get(url, options);
   }
+
+  
 
   // /user/subcategorylisting/ObjectID()
   public subcategorylisting(id: any) {
@@ -506,7 +581,7 @@ export class WebserviceService {
 
   public editService(data:any,id:any) {
    // console.log('addService: ', f);
-    let url = this.ServiceBaseURL + 'servicedetails/'+ id;
+    let url = this.ServiceBaseURL + 'editservice/'+ id;
 
     let httpHeaders = new HttpHeaders();
     httpHeaders.set('Content-Type', 'multipart/form-data');
@@ -557,7 +632,49 @@ export class WebserviceService {
   }
 
   public getClassesList(value:any) {
-    let url = this.UserBaseURL + `allTrainingServices?${this.classType}=true`;
+    let url = this.UserBaseURL + `allTrainingServices`;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  public getClasList() {
+    
+    let url = this.ServiceBaseURL + `TrainingService`;
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  public getUserClasList(data:any) {
+    console.log(data)
+    //let url = this.UserBaseURL + `allTrainingServices`;
+    let url = `${this.UserBaseURL}allTrainingServices/?Usertype=${data.UserType}&price_range=${data.price_range}&age_range=${data.age_range}&grade_from=${data.grade_from}&grade_to=${data.grade_to}
+    &class=${data.class}&category=${data.category}&Latitude=${data.Latitude}&Longitude=${data.Longitude}&distancemax=${data.distancemax}&strat_date=${data.strat_date}&class_type=${data.class_type}&sorting_date=${data.sorting_date}&page=${data.page}&limit=${data.limit}`;
+    // if(data.SerachType=='UserType'){
+    //   url = `${this.UserBaseURL}allTrainingServices/?Usertype=${data.UserType}`;
+    // }else if(data.SerachType=='Price'){
+    //   url = `${this.UserBaseURL}allTrainingServices/?Usertype=${data.UserType}&priceMax=${data.priceMax}&priceMini=${data.priceMini}`;
+    // }
+    // else{
+    //   url = `${this.UserBaseURL}allTrainingServices`;
+    // }
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  gerclasscategory(data:any){
+    
+    let url = this.ServiceBaseURL + `classcategory?page=${data.page}&limit=${data.limit}`;
 
     let httpHeaders = new HttpHeaders();
     httpHeaders.set('Content-Type', 'application/json');
@@ -577,6 +694,8 @@ export class WebserviceService {
   }
 
 
+
+
   public getClassDetail(id: any) {
     let url = this.UserBaseURL + 'TrainingDetails/' + id;
 
@@ -587,6 +706,136 @@ export class WebserviceService {
     return this.http.get(url, options);
   }
 
+  public getClassDetail_provider(id: any) {
+    let url = this.ServiceBaseURL + 'TrainingServiceFinddetails/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  public edit_class(data:any,id: any) {
+    let url = this.ServiceBaseURL + 'teacherConferenceupdate/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data, options);
+  }
+
+
+  public askquestion(data:any){
+    let url = this.UserBaseURL + 'askquestion/';
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data, options);
+  }
+
+  public all_askquestion(id:any,page:any,limit:any){
+   
+    let url = `${this.UserBaseURL}providerallquestionlist/`+id+`?page=${page}&limit=${limit}/`;
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  public give_answer(data:any){
+    let url = this.UserBaseURL + 'givenanswe/';
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data, options);
+  }
+
+  public ask_question_list(id:any){
+    let url = this.UserBaseURL + 'questionanserlist/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public ask_question_list_provider(id:any){
+    let url = this.ServiceBaseURL + 'providerclassquestionlist/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public class_rating_list_user(id:any){
+    let url = this.UserBaseURL + 'getreviewratingclass/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public class_rating_list_provider(id:any){
+    let url = this.UserBaseURL + 'getreviewratingclass/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public rating_list_user(id:any,page:any,limit:any){
+    let url = this.UserBaseURL + 'getreviewratingprovider/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public classfeedback(data:any){
+    let url = this.UserBaseURL + 'SubmitReviewRating/';
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url, data, options);
+  }
+
+  public delete_class(id: any) {
+    let url = this.ServiceBaseURL + 'deleteclass/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.delete(url, options);
+  }
+
+  public getclasslistbycategory(data:any){
+    let url = this.UserBaseURL + `providercategoryclass?provider_id=${data.provider_id}&category_id=${data.category_id}`;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
   public bookClass(id: any, body: any) {
     let url = this.UserBaseURL + 'BookTraining/' + id;
     console.log(id, body);
@@ -654,6 +903,17 @@ export class WebserviceService {
     return this.http.get(url, options);
   }
 
+  public Approve_class(id: any) {
+    let data
+    let url = this.ServiceBaseURL + 'bookstudentpaymentupdate/' + id;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data, options);
+  }
+
   getbookedTraining(id: any) {
     let url = this.UserBaseURL + 'usertrainingdetails/' + id;
 
@@ -664,8 +924,28 @@ export class WebserviceService {
     return this.http.get(url, options);
   }
 
-  getUserBookedList() {
-    let url = this.UserBaseURL + 'usertraininglist/';
+  getUserBookedList(data:any) {
+    let url = this.UserBaseURL + 'usertraininglist/'+'?page=' + data.page+ '&limit='+data.limit;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  getprovider_classBookedList() {
+    let url = this.ServiceBaseURL + 'bookstudentlist/';
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  bookingDetails_provider(id:any){
+    let url = this.ServiceBaseURL + 'bookindetails/' + id;
 
     let httpHeaders = new HttpHeaders();
     httpHeaders.set('Content-Type', 'application/json');
@@ -835,6 +1115,16 @@ export class WebserviceService {
     return this.http.post(url, data, options);
   }
 
+  post_additionalSchedule(data:any){
+    let url = this.ServiceBaseURL + "dateoverride";
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+
+    return this.http.post(url, data, options);
+  }
+
   provideFeedback(data:any){
     let url = this.UserBaseURL + 'SubmitReviewRating'
     let httpHeaders = new HttpHeaders();
@@ -845,6 +1135,459 @@ export class WebserviceService {
     return this.http.post(url, data, options);
   }
 
+  public servicelist(){
+    let url = this.ServiceBaseURL + 'categorylist/';
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url, options);
+  }
+
+  public Addservice_provider(data:any){
+    let url = this.ServiceBaseURL + 'addproviderservice/';
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url, data,options);
+  }
+
+  public Addservice_list(type:any){
+    let url = this.ServiceBaseURL + `providerservicecategory?category_for=${type}`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public addTax(body:any){
+    let url = this.ServiceBaseURL + `addprovidertax`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,body,options);
+  }
+
+
+  public taxList(){
+    let url = this.ServiceBaseURL + `providertaxlisting`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public service_list(id:any){
+    let url = this.ServiceBaseURL + `servicecategory?sub_category_id=${id}`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public add_servicelist(body:any){
+    let url = this.ServiceBaseURL + `addservicecategory`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,body,options);
+  }
+
+  public plannerList(start_date:any,end_date:any){
+    let url = this.ServiceBaseURL + `planner?start_date=${start_date}&end_date=${end_date}`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public faq_list(userType:any,page:any,limit:any){
+    let url = this.UserBaseURL + `faqquestion?userType=${userType}&page=${page}&limit=${limit}`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+  public videolink(body:any){
+    let url = this.ServiceBaseURL + `workersvideolink`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,body,options);
+  }
+
+  public address_list(){
+    let url = this.ServiceBaseURL + `createUseraddresslist`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public addadress(data:any){
+    let url = this.ServiceBaseURL + `createUseraddress`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data,options);
+  }
+
+  public select_servicelist(){
+    let url = this.ServiceBaseURL + `providerservicelist`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public delete_addadress(id:any){
+    let url = this.ServiceBaseURL + `deleteuseraddress/`+id;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  getAllProvidersList(data: any) {
+    console.log('da 1', data);
+    let url
+    if(data.distance==undefined){
+      url = `${this.UserBaseURL}allproviderlist/?category_id=${data.category_id}&Latitude=${data.Latitute}&Longitude=${data.Longitude}`;
+    }
+    else{
+      console.log('da 2', data);
+      url = `${this.UserBaseURL}allproviderlist/?category_id=${data.category_id}&Latitude=${data.Latitute}&Longitude=${data.Longitude}&distance=${data.distance}`;
+    }
+    
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders, body: data };
+    return this.http.get(url, options);
+  }
+
+  getAllservice(){
+    let url = this.UserBaseURL + `allproviderlist/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+
+  allCategories(){
+    let url = this.UserBaseURL + `allcategorylisting/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  distanceList() {
+    //console.log('da ', data);
+    
+    let url = `${this.adminurl}distancelist/`;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+  
+  allServicecategory(){
+    let url = `${this.adminurl}allservicelist/`;
+
+    // console.log('age: ', data);
+     let httpHeaders = new HttpHeaders();
+     httpHeaders.set('Content-Type', 'application/json');
+     httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+     let options = { headers: httpHeaders};
+     return this.http.get(url, options);
+  }
+
+  allService_class(){
+    let url = `${this.UserBaseURL}allservicelist/`;
+
+    // console.log('age: ', data);
+     let httpHeaders = new HttpHeaders();
+     httpHeaders.set('Content-Type', 'application/json');
+     httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+     let options = { headers: httpHeaders};
+     return this.http.get(url, options);
+  }
+
+  get_prover_servicelist(id:any,page:any,limit:any) {
+    //console.log('da ', data);
+    
+    let url = `${this.UserBaseURL}providerServiceList/`+id+`?page=${page}&limit=${limit}/`;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+
+  public check_availibility(start_date:any,end_date:any,providerid:any){
+    let url = this.UserBaseURL + `planner/`+providerid+`?start_date=${start_date}&end_date=${end_date}`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public get_prover_classlist(id:any,page:any,limit:any) {
+    //console.log('da ', data);
+    
+    let url = `${this.UserBaseURL}providerclasslist/`+id+`?page=${page}&limit=${limit}`;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+
+  
+
+  public user_transaction_list(page:any,limit:any) {
+    //console.log('da ', data);
+    
+    let url = `${this.UserBaseURL}usertransuction/`+`?page=${page}&limit=${limit}/`;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+
+  public provider_transaction_list(page:any,limit:any) {
+    //console.log('da ', data);
+    
+    let url = `${this.ServiceBaseURL}usertransuction/`+`?page=${page}&limit=${limit}/`;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+
+  public user_transaction_details(id:any) {
+    //console.log('da ', data);
+    
+    let url = `${this.UserBaseURL}usertransuctiondetails/`+id;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+
+  public provider_transaction_details(id:any) {
+    //console.log('da ', data);
+    
+    let url = `${this.ServiceBaseURL}usertransuctiondetails/`+id;
+
+   // console.log('age: ', data);
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders};
+    return this.http.get(url, options);
+  }
+
+
+  public book_appointment(data:any){
+    let url = this.UserBaseURL + `bookappointment/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data,options);
+  }
+
+  public getActive_bookinglist(){
+    let url = this.ServiceBaseURL + `bookclassactive/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public getInActive_bookinglist(){
+    let url = this.ServiceBaseURL + `bookclassinactive/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public class_bookingDetails(id:any){
+    let url = this.ServiceBaseURL + `bookstudentdetails/` +id ;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public get_gradelist(){
+    let url = this.ServiceBaseURL + `gredlist/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public postclassImage(data:any,id:any){
+    let url = this.ServiceBaseURL + `TeacherConferenceUploadimage/`+id;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data,options);
+  }
+
+  public provider_viewCount(){
+    let url = this.ServiceBaseURL + `showviewcount/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public provider_classbookcount(){
+    let url = this.ServiceBaseURL + `bookclasscount/`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public get_classwise_booking(data:any){
+    let url = this.ServiceBaseURL + `classwithTeacher/`+ '?page='+data.page+ '&limit='+ data.limit;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public sendcallback(data:any){
+    let url = this.UserBaseURL + `callbackrequest`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.post(url,data,options);
+  }
+
+  public request_list(){
+    let url = this.ServiceBaseURL + `callbacklist`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public monthlyrevenue_list(data:any){
+    let url = this.ServiceBaseURL + `monthlytransactionhistory` +  '?last_month='+data.month+ '&page='+data.page+ '&limit='+ data.limit;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public yearlyrevenue_list(data:any){
+    let url = this.ServiceBaseURL + `yearltransactionhistory` +   '?page='+data.page+ '&limit='+ data.limit;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+
+  public currentRevenue(data:any){
+    let url = this.ServiceBaseURL + `currentrevenue` +   '?start_date='+data.start_date+ '&end_date='+ data.end_date;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
+  public totalRevenue(){
+    let url = this.ServiceBaseURL + `totalrevenueytd`;
+    
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.append('x-access-token', this.get_token());
+    let options = { headers: httpHeaders };
+    return this.http.get(url,options);
+  }
 
   dispose(){
     this.subscriptions.forEach(subscription =>subscription.unsubscribe())
@@ -864,4 +1607,36 @@ export class WebserviceService {
 publishSomeData(data: any) {
   this.fooSubject.next(data);
 }
+
+
+getObservableProfileimage(): Subject<any> {
+  return this.profileimage;
+}
+publishprofileImage(data: any) {
+this.profileimage.next(data);
+}
+
+getObservableSerach(): Subject<any> {
+  return this.SearchData;
+}
+publishserach(data: any) {
+this.SearchData.next(data);
+}
+
+getObservableClassSerach(): Subject<any> {
+  return this.Class_SearchData;
+}
+publishClassserach(data: any) {
+this.Class_SearchData.next(data);
+}
+
+
+getObservable_type(): Subject<any> {
+  return this.Type_search;
+}
+publish_type(data: any) {
+this.Type_search.next(data);
+}
+
+
 }

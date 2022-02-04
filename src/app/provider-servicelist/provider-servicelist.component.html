@@ -1,0 +1,67 @@
+
+<!-- Banner start -->
+<section class="inner-banner">
+
+    <div class="container">
+        <h1><strong>Services</strong></h1>
+    </div>
+
+</section>
+<!-- Banner end -->
+<!-- Body content start -->
+
+<section class="common-inner-bg-wrap">
+    
+    <div class="container">
+
+          <!-- <ul class="topTab">
+              <li>
+                  <span class="active text-center">General Services</span>
+                <span class="text-center">Class Services</span>
+                
+            </li>
+            <button [routerLink]="['/provider-add']" class="text-center Add-Genral ">
+                Add General Service <img src="../../assets/images/plus-big-icon.png" alt="">
+            </button>
+              
+          </ul> -->
+        <div class="">
+            <div class="table-responsive-md transaction-table">
+                <table class="table Service-lit-tab-det">
+                    <thead>
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Service</th>
+                        <th scope="col">Duration(Min) </th>
+                        
+                        <th scope="col">Price ($)</th>
+                       
+                        <th scope="col" style="text-align: center;">Action</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of serviceList;let i=index">
+                            <td><img class="pro" src="{{photourl}}{{item.image}}" alt=""></td>
+                            <td>{{item.title}}</td>
+                            <td>{{item.service_category.name}}</td>
+                            <td>30 min</td>
+                           
+                            <td>{{item.Price}}</td>
+                          
+                            <td class="act-td" style="text-align: center;">
+                                
+                               <span><img src="./assets/images/calendar.png" (click)="checkavilabity(item._id)" alt=""></span>
+                                <!--<span><img src="./assets/images/delete.png" (click)="deleteService(item._id)" alt=""></span> -->
+                            </td>
+                            
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Body content end -->

@@ -1,0 +1,83 @@
+.schedule_slot{
+    text-align: left;
+    padding-left: 20px;
+    width: 100%;
+}
+.schedule_slot h6{
+    width: 100%;
+}
+.slot_sec input{
+    width: 25%;
+    margin-right: 20px;
+}
+
+.Addi_slot_sec input{
+  width: 22%;
+  margin-right: 20px;
+}
+
+  .select_schedule{
+    width: 100%;
+    margin: 10px 0;
+  }
+  .select_schedule p{
+     
+  }
+  .slot_sec{
+      margin: 10px 0px;
+  }
+  .Addi_slot_sec{
+    margin: 10px 0px;
+  }
+  .addOn{
+    float: right;
+    margin-top: -25px;
+    cursor: pointer;
+
+  }
+  .addOn:hover{
+    opacity: 0.5;
+    
+  }
+
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.schedule_slot h6{
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+}
+.select_schedule > input{
+  margin-right: 12px;
+}
+.Addi_slot_sec input,
+.slot_sec input {
+  border-color: #D7D7D7;
+  border: 1px solid #d7d7d7;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+img.cl-delit {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0px 0px 8px #ccc;
+  padding: 7px;
+  cursor: pointer;
+}
+.Select-Date {
+  padding: 16px;
+  box-shadow: 0px 4px 12px rgb(0 0 0 / 15%);
+  border-radius: 8px;
+}

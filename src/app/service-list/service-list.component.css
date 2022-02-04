@@ -20,6 +20,12 @@
 .transaction-table .table tr:first-child td{
     border-top: 0;
 }
+.transaction-table .table tbody{
+    border:20px solid #2294de;
+}
+.transaction-table .table tbody tr{
+    background: #fff;
+}
 .transaction-table .table td{
     padding: 15px;
     font-size: 16px;
@@ -54,4 +60,116 @@
 }
 .Service-lit-tab-det tr td.act-td span img{
     width:15px;
+}
+
+.topTab{
+    text-align: left;
+}
+button.text-center.Add-Genral {
+    /* border: none;
+    padding: 18px 16px;
+    position: absolute;
+    top: 0;
+    min-width: 220px;
+    right: 0;
+    width: 24px;
+    color: #22A6DE;
+    border: 1px dashed #C4C4C4;
+    background: transparent;
+    border-radius: 10px; */
+
+
+    background: linear-gradient( 
+180deg , #22A6DE 0%, #2257DE 75.52%);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    line-height: 60px;
+    display: inline-block;
+    border: 0;
+    width: 200px;
+    height: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: absolute;
+    top: 0;
+    min-width: 200px;
+    right: 0;
+    
+}
+button.text-center.Add-Genral img{
+    width:24px;
+}
+.toggleswitch {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    width: 40px;
+    height: 22px;
+}
+.toggleswitch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggleswitch .slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ddd;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.toggleswitch .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #fff;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+.toggleswitch input:checked + .slider {
+    background-color: #2294de;
+}
+.toggleswitch input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+}
+.toggleswitch input:checked+ .slider .on{display: block;}
+.toggleswitch .slider .on{
+    position: absolute;
+    left: 44px;
+    display: none;
+    font-size: 11px;
+    top: 4px;
+}
+/* Rounded sliders */
+.toggleswitch .slider.round {
+    border-radius: 34px;
+}
+.toggleswitch .slider.round:before {
+    border-radius: 50%;
+}
+@media(max-width:767px){
+    .topTab {
+        height: auto;
+    }
+    .topTab li span {
+        width: 150px;
+        margin: 5px 5px;
+    }
+    button.text-center.Add-Genral{
+        position: relative;
+        margin-left: calc(100% - 230px);
+        margin-bottom: 10px;
+    }
 }

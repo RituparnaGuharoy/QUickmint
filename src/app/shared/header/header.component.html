@@ -8,124 +8,82 @@
     <div class="container">
         <div class="header_inner">
             <div class="logo_section">
-                <a href="#"><img src="assets/images/logo.png" alt="" /></a>
+                <a [routerLink]="['/home']">
+                    <img src="assets/images/logo.png" alt="" />
+                </a>
             </div>
             <!-- Searchbar when no login -->
             <div class="header_right_section">
                 <div class="header_right_section_top">
-                    <div class="for-location">
-
-                        <input placeholder="Address " matInput matGoogleMapsAutocomplete
-                            (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                            (onLocationSelected)="onLocationSelected($event)"
-                            (onGermanAddressMapped)="onGermanAddressMapped($event)">
-                    </div>
-                    <!-------------------------------------------------------------------------------------------------->
-
-
-                    <div class="category_search dropdown">
-                        <div class="all_category dropdown-toggle" data-toggle="dropdown">
-                            All Category
-                        </div>
-                        <div class="all_category_search" data-toggle="dropdown">
-                            <form action="onSearch()">
-                                <input (focus)="openDropdown()" autocomplete="off" (blur)="closeDropdown()" type="text"
-                                    placeholder="What you are looking for" [(ngModel)]="searchQuery" name="searchQuery"
-                                    (onChange)="onSearchChange($event)" />
-                            </form>
-                        </div>
-
-                        <div class="search-dropdown categorie-dropdown"
-                            *ngIf="categorySubcategory && searchQuery !='' && open == true">
-                            <a (click)="listingDetails(item._id)" class="dropdown-item"
-                                *ngFor="let item of categorySubcategory | searchFilter: {title: searchQuery}">{{item.name}}</a>
-                        </div>
-
-                         <!-- <div class="search-dropdown categorie-dropdown"
-                            *ngIf="categorylisting && searchQuery !='' && open == true">
-                            <a [routerLink]="['/sub-category/'+item._id]" class="dropdown-item"
-                                *ngFor="let item of categorySubcategory | searchFilter: {title: searchQuery}">{{item.name}}</a>
-                        </div> -->
-
-
-                        <div class="dropdown-menu categorie-dropdown">
-                            <a class="dropdown-item" (click)="gotoSubcategory(data._id)"
-                                *ngFor="let data of categorylisting">{{data.name}}</a>
-                        </div>
-                    </div>
-
-
-                    <!------------------------------------------------------------------------------------------------>
-
-                    <div class="login_country_select">
-
-                        <!-- <div class="login_section"> -->
-                        <!-- <a href="javascript:void(0);" (click)="openLoginDialog()"
-                                *ngIf="!service.isLoggedIn">Login</a> -->
-                        <!-- <a href="javascript:void(0);" (click)="gotoProfile()" *ngIf="service.isLoggedIn">Profile</a> -->
-                        <!-- <a href="javascript:void(0);" (click)="logout()" *ngIf="service.isLoggedIn">Log out</a> -->
-                        <!-- </div> -->
-                        <div class="login_section">
-                            <a href="javascript:void(0);" (click)="openLoginDialog()"
-                                *ngIf="!service.isLoggedIn">Login</a>
-                            <!-- <a href="javascript:void(0);" (click)="gotoProfile()" *ngIf="service.isLoggedIn">Profile</a> -->
-                            <!-- <a href="javascript:void(0);" (click)="logout()" *ngIf="service.isLoggedIn">Log out</a> -->
-                        </div>
-
-                        <!-- TO PUT BACK -->
-                        <!-- <div class="country_select">
-                            <div class="country_flag">
-                                <img src="assets/images/flag.png" alt="" /> EN
+                    <div class="search-left-hold-bx">
+                        
+                        <div class="category_search dropdown" >
+                            <div class="all_category dropdown-toggle" data-toggle="dropdown">
+                                <!-- All Classes -->
                             </div>
-                        </div> -->
+                            <div class="all_category_search" data-toggle="dropdown">
+                                <form action="onSearch()">
+                                    <input (focus)="openDropdown()" autocomplete="off" (blur)="closeDropdown()" type="text" placeholder="Find Classes"
+                                        [(ngModel)]="searchQuery" name="searchQuery" (onChange)="onSearchChange($event)" />
+                                </form>
+                            </div>
+                            <div class="search-dropdown categorie-dropdown" *ngIf="categorylisting && searchQuery !='' && open == true">
+                                <a (click)="listingDetails(item._id,item.name)" class="dropdown-item" *ngFor="let item of categorylisting | searchFilter: {title: searchQuery}">{{item.name}}</a>
+                            </div>
+                            <div class="dropdown-menu categorie-dropdown">
+                                <div *ngFor="let data of categorylisting">
+                                    <a class="dropdown-item" (click)="listingDetails(data._id,data.name)">{{data.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="for-location">
+                            <input placeholder="Address " matInput matGoogleMapsAutocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                (onLocationSelected)="onLocationSelected($event)" (onGermanAddressMapped)="onGermanAddressMapped($event)">
+                        </div>
+                        <div class="tp-search-button">
+                            <button type="submit" class="btn tp-btn-search"></button>
+                        </div>
+                    </div>
+                    <div class="login_country_select">
+                        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="login_section">
+                            <a class="tp-btn-login" href="javascript:void(0);" (click)="openLoginDialog()" *ngIf="!service.isLoggedIn">Sign In</a>
+                            <a class="tp-btn-register" href="javascript:void(0);" (click)="openRegisterDialog()">Sign Up</a>
+                        </div>
                     </div>
                 </div>
                 <div class="header_right_section_bottom">
                     <div class="navigation">
                         <nav class="navbar navbar-expand-lg navbar-light">
 
-                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav">
 
                                     <!-- LOGOUT HEADER -->
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                        [routerLink]="['/home']">Home</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link home-icon" href="javascript:void(0);" [routerLink]="['/home']" routerLinkActive="active">
+                                            <i class="fa fa-home" aria-hidden="true"></i>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                            >About Us</a>
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/about-us']" routerLinkActive="active">About Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                            [routerLink]="['/contact-us']">Contact Us</a>
+                                        <a class="nav-link" routerLinkActive="active">Services</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/post-a-need']"
-                                            routerLinkActive="active">Post a need</a>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/sub-category']"
-                                            routerLinkActive="active">Category</a>
-                                    </li> -->
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/sub-category-class']"
-                                            routerLinkActive="active">Classes</a>
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/sub-category-class']" routerLinkActive="active">Classes</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/create-event']"
-                                            routerLinkActive="active">Event</a>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="#">Hire me</a>
-                                    </li> -->
-
+                                    <li class="nav-item">
+                                        <a class="nav-link"  routerLinkActive="active" href="https://documents.quickmints.com/" target="_blank">Free Worksheets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/contact-us']">Contact Us</a>
+                                    </li>
                                 </ul>
 
                             </div>
@@ -133,12 +91,6 @@
                     </div>
                     <!-- TO PUT BACK -->
 
-                    <!-- <div class="cart_price">
-                        <div class="cart_icon">
-                            <span class="cart_count">02</span>
-                        </div>
-                        $156.00
-                    </div> -->
                 </div>
             </div>
 
@@ -151,91 +103,103 @@
 <header class="header" *ngIf="service.isLoggedIn">
     <div class="container">
         <div class="header_inner">
-            <div class="logo_section">
-                <a href="#"><img src="assets/images/logo.png" alt="" /></a>
+            <!-- <div class="logo_section" *ngIf="UserData.UserType=='1'">
+                <a [routerLink]="['/provider-dashboard']">
+                    <img src="assets/images/logo.png" alt="" />
+                </a>
+            </div> -->
+            <div class="logo_section" >
+                <a (click)="gotologo()">
+                    <img src="assets/images/logo.png" alt="" />
+                </a>
             </div>
+            
             <div class="header_right_section">
                 <div class="header_right_section_top">
-                    <div class="for-location" *ngIf="UserData.UserType=='2'">
-                        <input placeholder="Address " matInput matGoogleMapsAutocomplete
-                            (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                            (onLocationSelected)="onLocationSelected($event)"
-                            (onGermanAddressMapped)="onGermanAddressMapped($event)">
+                    <div class="search-left-hold-bx">
+                        <div class="for-location_1" *ngIf="UserData.UserType=='1'">
+                            <mat-form-field>
+                                <mat-label>Status</mat-label>
+                                <mat-select>
+                                    <mat-option value="true">
+                                        Online
+                                    </mat-option>
+                                    <mat-option value="false">
+                                        Offline
+                                    </mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="category_search dropdown" *ngIf="UserData.UserType=='2'">
+                            <div class="all_category dropdown-toggle" data-toggle="dropdown">
+                                <!-- All Classes -->
+                            </div>
+                            <div class="all_category_search" data-toggle="dropdown">
+                                <form action="onSearch()">
+                                    <input (focus)="openDropdown()" autocomplete="off" (blur)="closeDropdown()" type="text" placeholder="Find Classes"
+                                        [(ngModel)]="searchQuery" name="searchQuery" (onChange)="onSearchChange($event)" />
+                                </form>
+                            </div>
+                            <div class="search-dropdown categorie-dropdown" *ngIf="categorylisting && searchQuery !='' && open == true">
+                                <a (click)="listingDetails(item._id,item.name)" class="dropdown-item" *ngFor="let item of categorylisting | searchFilter: {title: searchQuery}">{{item.name}}</a>
+                            </div>
+                            <div class="dropdown-menu categorie-dropdown">
+                                <div *ngFor="let data of categorylisting">
+                                    <a class="dropdown-item" (click)="listingDetails(data._id,data.name)">{{data.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="for-location" *ngIf="UserData.UserType=='2'">
+                            <input placeholder="Address " matInput matGoogleMapsAutocomplete (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                (onLocationSelected)="onLocationSelected($event)" (onGermanAddressMapped)="onGermanAddressMapped($event)">
+                        </div>
+                        <div class="tp-search-button" *ngIf="UserData.UserType=='2'">
+                            <button type="submit" class="btn tp-btn-search"></button>
+                        </div>
                     </div>
-
-
-
-<!---------------------------------------------------------------------------------------------------------------------------->
-
-            <div class="category_search dropdown" *ngIf="UserData.UserType=='2'">
-            <div class="all_category dropdown-toggle" data-toggle="dropdown">
-                All Category
-             </div>
-            <div class="all_category_search" data-toggle="dropdown">
-                <form action="onSearch()">
-                    <input (focus)="openDropdown()" autocomplete="off" (blur)="closeDropdown()" type="text"
-                     placeholder="What you are looking for" [(ngModel)]="searchQuery" name="searchQuery"
-                    (onChange)="onSearchChange($event)" />
-                </form>
-            </div>
-
-            <div class="search-dropdown categorie-dropdown"
-                *ngIf="categorySubcategory && searchQuery !='' && open == true">
-                <a (click)="listingDetails(item._id)" class="dropdown-item"
-                *ngFor="let item of categorySubcategory | searchFilter: {title: searchQuery}">{{item.name}}</a>
-             </div>
-
-            <!-- <div class="search-dropdown categorie-dropdown"
-             *ngIf="categorylisting && searchQuery !='' && open == true">
-            <a [routerLink]="['/sub-category/'+item._id]" class="dropdown-item"
-            *ngFor="let item of categorySubcategory | searchFilter: {title: searchQuery}">{{item.name}}</a>
-            </div> -->
-
-
-            <div class="dropdown-menu categorie-dropdown">
-            <!-- <a [routerLink]="['/sub-category/'+data._id]" class="dropdown-item"
-            *ngFor="let data of categorylisting">{{data.name}}</a> -->
-
-            <div *ngFor="let data of categorylisting">
-            <a class="dropdown-item" (click)="gotoSubcategory(data._id)"
-            >{{data.name}}</a>
-            </div>
-
-            </div>
-
-        </div>
-
-
-
-<!---------------------------------------------------------------------------------------------------------------------------->
-
-
-
                     <div class="login_country_select">
+                        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                         <div class="profile-right-nav" *ngIf="service.isLoggedIn">
                             <div class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle profile-btn" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false" >
-                                    
-                                    <i class="profile-icon"></i><span >{{UserData.UserFullName}}</span> 
-                                </a>
-                                
-                                <!-- <a href="#" class="btn-bell">
-                                    <span class="badge">02</span>
-                                </a> -->
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='2'"
-                                        (click)="gotoProfile()">My
-                                        Profile</a>
-                                       
-                                   
-                                    <a class="dropdown-item" href="javascript:void(0);" (click)="goToJobList()"
-                                        *ngIf="UserData.UserType=='2'">Jobs List</a>
-                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'"
-                                        (click)="gotoProviderProfile()">Provider
-                                        Profile</a>
+                                <a href="javascript:void(0);" class="dropdown-toggle profile-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    *ngIf="!profile_image">
 
-                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'"
+                                    <i class="profile-icon"></i>
+                                    <span>{{UserData.UserFullName}}</span>
+                                </a>
+
+                                <a href="javascript:void(0);" class="dropdown-toggle profile-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    *ngIf="profile_image">
+
+                                    <i class="profile-icons" [ngStyle]="{'background-image': 'url(' + baseurl +profile_image + ')'}"></i>
+                                    <span>{{UserData.UserFullName}}</span>
+                                </a>
+
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='2'" (click)="gotoProfile()">My Profile
+                                    </a>
+
+
+                                    <!-- <a class="dropdown-item" href="javascript:void(0);" (click)="goToJobList()"
+                                        *ngIf="UserData.UserType=='2'">Jobs List</a> -->
+
+                                    <a class="dropdown-item" href="javascript:void(0);" (click)="goToBooking()" *ngIf="UserData.UserType=='2'">Booking List</a>
+
+                                    <a class="dropdown-item" href="javascript:void(0);" (click)="goToTransaction_user()" *ngIf="UserData.UserType=='2'">Transaction History</a>
+
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'" (click)="gotoProviderProfile()">My Profile
+                                    </a>
+
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'" (click)="goToTransaction_provider()">Transaction History</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'" (click)="gotocallback()">Call back list</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'">Change Password</a>
+
+                                    <!-- <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'"
                                         (click)="addStripeAccount()">Add Stripe Account</a>
                                         <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'"
                                         (click)="verifyStripeAccount()">Verify Stripe Account</a>
@@ -246,131 +210,97 @@
                                         (click)="gotoQuestions()">Customer's Feedback</a>
 
                                     <a class="dropdown-item" href="javascript:void(0);" (click)="goToBookingList()"
-                                        *ngIf="UserData.UserType=='1'">Bookings List</a>
+                                        *ngIf="UserData.UserType=='1'">Bookings List</a> -->
 
 
                                     <a class="dropdown-item" href="javascript:void(0);" (click)="logout()">Logout</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="login_section"> -->
-                        <!-- <a href="javascript:void(0);" (click)="openLoginDialog()"
-                                *ngIf="!service.isLoggedIn">Login</a> -->
-                        <!-- <a href="javascript:void(0);" (click)="gotoProfile()" *ngIf="service.isLoggedIn">Profile</a> -->
-                        <!-- <a href="javascript:void(0);" (click)="logout()" *ngIf="service.isLoggedIn">Log out</a> -->
-                        <!-- </div> -->
 
-
-                        <!-- TO PUT BACK -->
-                        <!-- <div class="country_select">
-                            <div class="country_flag">
-                                <img src="assets/images/flag.png" alt="" /> EN
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <div class="header_right_section_bottom inner-nav-2">
                     <div class="navigation">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
-                            </button>
-
-
+                            </button> -->
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="userType=='2'">
                                 <ul class="navbar-nav">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                        [routerLink]="['/home']">Home</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link home-icon" href="javascript:void(0);" [routerLink]="['/home']" routerLinkActive="active">
+                                            <i class="fa fa-home" aria-hidden="true"></i>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                            [routerLink]="['/about-us']">About Us</a>
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/about-us']" routerLinkActive="active">About Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                            [routerLink]="['/contact-us']">Contact Us</a>
+                                        <a class="nav-link" routerLinkActive="active">Services</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/post-a-need']"
-                                            routerLinkActive="active">Post a need</a>
-                                    </li> -->
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/sub-category-class']"
-                                            routerLinkActive="active">Classes</a>
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/sub-category-class']" routerLinkActive="active">Classes</a>
                                     </li>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                            [routerLink]="['/register-class-list']"
-                                            routerLinkActive="active">Classes1</a>
-                                    </li> -->
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/create-event']"
-                                            routerLinkActive="active">Event</a>
-                                    </li> -->
+                                    <li class="nav-item">
+                                        <a class="nav-link"  routerLinkActive="active" href="https://documents.quickmints.com/" target="_blank">Free Worksheets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/contact-us']" routerLinkActive="active">Contact Us</a>
+                                    </li>
                                 </ul>
                             </div>
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent" *ngIf="userType=='1'">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/provider-dashboard']">Dashboard</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="javascript:void(0);"
-                                        [routerLink]="['/provider-dashboard']">Dashboard</a>
+                                            [routerLink]="['/about-me']">About Me</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="javascript:void(0);"
-                                            [routerLink]="['/about-us']">About Us</a>
+                                            [routerLink]="['/my-doc']">My Documents</a>
+                                    </li> -->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/provider-my-profile']">My Profile</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/service-calander']">Service Calendar</a>
+                                    </li> -->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/register-class-list']" routerLinkActive="active">Service list</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);"
-                                            [routerLink]="['/contact-us']">Contact Us</a>
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/service-booking-list']" routerLinkActive="active">Bookings List</a>
                                     </li>
                                     <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" routerLinkActive="active">Payments</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="javascript:void(0);"
                                             [routerLink]="['/register-class-list']"
                                             routerLinkActive="active">Classes</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="javascript:void(0);" [routerLink]="['/provider-add']"
                                             routerLinkActive="active">Add a service</a>
-                                    </li>
-                                    <li class="nav-item">
+                                    </li> -->
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="javascript:void(0);" [routerLink]="['/service-list']"
                                         routerLinkActive="active">My Service list</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/provider-faq-list']"
-                                        routerLinkActive="active">FAQs</a>
-                                    </li>
+                                    </li> -->
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" href="javascript:void(0);" [routerLink]="['/provider-faq-list']" routerLinkActive="active">FAQs</a>
+                                    </li> -->
                                 </ul>
                             </div>
                         </nav>
                     </div>
-                    <!-- <div class="profile-right-nav" *ngIf="service.isLoggedIn">
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle profile-btn" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="profile-icon"></i><span>{{service.UserFullName}}</span>
-                            </a>
-                             <a href="#" class="btn-bell">
-                                <span class="badge">02</span>
-                            </a> 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='2'" (click)="gotoProfile()">My
-                                    Profile</a>
-                                    <a class="dropdown-item" href="javascript:void(0);" (click)="goToJobList()" *ngIf="UserData.UserType=='2'">Jobs List</a>
-                                <a class="dropdown-item" href="javascript:void(0);" *ngIf="UserData.UserType=='1'"
-                                    (click)="gotoProviderProfile()">Provider
-                                    Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0);" (click)="goToBookingList()"  *ngIf="UserData.UserType=='1'">Bookings List</a>
 
-
-                                <a class="dropdown-item" href="javascript:void(0);" (click)="logout()">Logout</a>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 

@@ -14,7 +14,7 @@ import { FilterClassAModule } from '../component/filter-classA/filter-classA.mod
     CommonModule,
     SubCategoryClassARoutingModule,
     FilterClassAModule,
-    FilterClassAModule
+    //FilterClassAModule
   ]
 })
 export class SubCategoryClassAModule { }

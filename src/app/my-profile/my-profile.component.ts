@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { WebserviceService } from '../services/webservice.service';
 
 // import { CustomerService } from '../services/customer.service';
+import { environment } from 'src/environments/environment.prod';
+var url = environment.api;
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
@@ -18,7 +20,7 @@ export class MyProfileComponent implements OnInit {
 
   passwordForm: any;
   passwordFormSubmitted: boolean = false;
-
+  photoUrl:string = url;
   userForm: any;
   userFormSubmitted: boolean = false;
   userData: any;
@@ -90,8 +92,9 @@ export class MyProfileComponent implements OnInit {
       UserFullName: ["", [Validators.required, Validators.pattern("^[A-Za-z]+$")],],
       UserEmail: ["", [Validators.required, Validators.email]],
       UserPhone: ["", [Validators.required]],
+      //user_date_of_birth :[""],
       // UserAddress: ["", [Validators.required]],
-      UserType: ["user"],
+      UserType: [2],
     });
     this.service.userOwnDetails().subscribe(
       (data) => {
@@ -105,8 +108,9 @@ export class MyProfileComponent implements OnInit {
           // UserLastName: [this.userData.UserLastName, [Validators.required, Validators.pattern("^[A-Za-z ]+$")],],
           UserEmail: [this.userData.UserEmail, [Validators.required, Validators.email]],
           UserPhone: [this.userData.UserPhone, [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+          //user_date_of_birth :[this.userData.UserPhone.user_date_of_birth],
           // Address: [this.userData.UserAddress, [Validators.required]],
-          UserType: ["user"],
+          UserType: [2],
         });
       },
       (err) => {

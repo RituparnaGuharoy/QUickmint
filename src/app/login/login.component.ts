@@ -1,14 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output,Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
 import { FormBuilder, Validators, FormsModule } from '@angular/forms';
 
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { WebserviceService } from '../services/webservice.service';
 
 import { ToastrService } from 'ngx-toastr';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { CommonService } from '../common.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -25,9 +26,16 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: WebserviceService,
     private toastr: ToastrService,
+    private route :ActivatedRoute,
     private router: Router,
-    public commonService: CommonService
-  ) {}
+    public commonService: CommonService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+
+      console.log('class id',this.data);
+     
+
+  }
 
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
@@ -66,6 +74,7 @@ export class LoginComponent implements OnInit {
   signInWithApple() {}
 
   onSubmit(){
+    console.log('hi',this.userForm)
     if (!this.userForm.valid) {
       this.userFormSubmitted = true;
       this.toastr.warning('Please fill all required data');
@@ -106,21 +115,39 @@ export class LoginComponent implements OnInit {
             this.service.isLoggedIn = true;
             
             
-            this.commonService.publishSomeData('login');
-            this.service.publishSomeData({
-              token: (<any>data)['token'],
-              userType: (<any>data)['data'].UserType
-          });
+          // this.commonService.publishSomeData('login');
+          //   this.service.publishSomeData({
+          //     token: (<any>data)['token'],
+          //     userType: (<any>data)['data'].UserType
+          // });
             this.dialog.closeAll();
           
-             
-             if((<any>data)['data'].UserType =='1')
-             {
-              this.router.navigate(['/provider-dashboard']);
-            }
-            else if((<any>data)['data'].UserType =='2') {
-              this.router.navigate(['/home']);
-            }
+             if(this.data !=null){
+              this.commonService.publishSomeData('login');
+              this.service.publishSomeData({
+                token: (<any>data)['token'],
+                userType: (<any>data)['data'].UserType,
+                route:true
+            });
+              if((<any>data)['data'].UserType =='2'){
+                this.router.navigate(['/class-details'],{queryParams : {classId: this.data.classId}});
+              }
+              
+             }else{
+              this.commonService.publishSomeData('login');
+              this.service.publishSomeData({
+                token: (<any>data)['token'],
+                userType: (<any>data)['data'].UserType
+            });
+              if((<any>data)['data'].UserType =='1')
+              {
+               this.router.navigate(['/provider-dashboard']);
+             }
+             else if((<any>data)['data'].UserType =='2') {
+               this.router.navigate(['/home']);
+             }
+             }
+           
           
 
           }
@@ -134,7 +161,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
+  onSubmitE(){
+    console.log('hi',this.userForm)
+  }
 
 }
 

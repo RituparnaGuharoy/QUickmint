@@ -28,14 +28,28 @@ import { RoutingCheckModule } from './routing-check/routing-check.module';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { JitsiComponent } from './jitsi/jitsi.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClassDetailsPopupComponent } from './class-details-popup/class-details-popup.component';
 import { CallPopupComponent } from './call-popup/call-popup.component';
 import { AgmCoreModule } from '@agm/core';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CmsPagesComponent } from './cms-pages/cms-pages.component';
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { ClassDetailsComponent } from './class-details/class-details.component';
+import { ServiceCalenderComponent } from './service-calender/service-calender.component';
+import { ServicePlannerComponent } from './service-planner/service-planner.component';
+import { AboutNewComponent } from './about-new/about-new.component';
+import { TermConditionsComponent } from './term-conditions/term-conditions.component';
+import { ImageGalleryComponent } from './image-gallery/image-gallery.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { AvailibityCalenderComponent } from './availibity-calender/availibity-calender.component';
+//import { NgChartsModule } from 'ng2-charts';
+// import { UserTransactionComponent } from './user-transaction/user-transaction.component';
+// import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 
 @NgModule({
   declarations: [
@@ -47,10 +61,14 @@ import { ClassDetailsComponent } from './class-details/class-details.component';
     RoutingCheckComponent,
     SearchFilterPipe,
     JitsiComponent,
-    
     ClassDetailsPopupComponent,
     CallPopupComponent,
     ClassDetailsComponent,
+    ServiceCalenderComponent,
+    ServicePlannerComponent,
+    AboutNewComponent,
+    TermConditionsComponent,
+    ImageGalleryComponent,AvailibityCalenderComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -59,15 +77,19 @@ import { ClassDetailsComponent } from './class-details/class-details.component';
     }),
     MatGoogleMapsAutocompleteModule,
     BrowserModule,
-    OwlModule,
+    OwlModule,MatSelectModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule,
-    
+    CommonModule,MatDatepickerModule,
+    MatNativeDateModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
     // MatDialogModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
@@ -75,7 +97,7 @@ import { ClassDetailsComponent } from './class-details/class-details.component';
     ServiceBookingListModule,
     ServiceProviderDashboardModule,
     RoutingCheckModule,
-    MatDialogModule,
+    MatDialogModule,MatPaginatorModule,
     MatFormFieldModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],

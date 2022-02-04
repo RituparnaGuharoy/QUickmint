@@ -32,7 +32,7 @@ export class FilterComponent implements OnInit {
   searchQuery: any = '';
   list: never[];
   pageCategory:any;
-
+  distanceList:any;
   constructor(private service: WebserviceService,
     private toastr: ToastrService,
     public router: Router,
@@ -40,6 +40,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.lowerPrice = this.lowerPrice;
+    this. getdistancelist();
     let data = {
       allcategory:this.service.allcategory,
       lowerPrice:this.lowerPrice
@@ -50,15 +51,11 @@ export class FilterComponent implements OnInit {
       console.log('serviceList: in higher filter ', data.data);
       
     });
-    //this.onItemChange1(1);
 
     this.service.categorylisting().subscribe(
       (data) => {
         console.log('category',data);
         this.categorylisting = (<any>data)['data'];
-        // this.toastr.success((<any>data)["message"]);
-
-        // this.router.navigate(['/login'])
       },
       (err) => {
         console.log(err);
@@ -69,9 +66,6 @@ export class FilterComponent implements OnInit {
       (data) => {
         console.log('category subcategory',data);
         this.categorySubcategory = (<any>data)['data'];
-        // this.toastr.success((<any>data)["message"]);
-
-        // this.router.navigate(['/login'])
       },
       (err) => {
         console.log(err);
@@ -86,7 +80,7 @@ export class FilterComponent implements OnInit {
     console.log(" Value is : ", value );
     this.lowerPrice = value;
     this.higherPrice = 0;
-    this.serviceList();
+    //this.serviceList();
  }
 
  onItemChange2(value:any){
@@ -94,20 +88,27 @@ export class FilterComponent implements OnInit {
   console.log(" Value is : ", value );
   this.higherPrice = value;
   this.lowerPrice = 0;
-  this.serviceList();
+  //this.serviceList();
 }
 
 onDisChange(value:any){
-if(this.service.Latitude == undefined)
-{
-  this.toastr.success('Please Select your Address in address search bar');
-  this.distance=null;
-}else{
+  console.log(this.distance)
+// if(this.service.Latitude == undefined)
+// {
+//   this.toastr.success('Please Select your Address in address search bar');
+//   this.distance=null;
+// }else{
 this.distancemax = value;
  console.log(" Value is : ", value );
- this.serviceList();
- console.log('fil data in distance',this.service.FilteredData);
+ this.serviceList(this.distance,'distance');
+ 
+//}
 }
+
+serachbyid(id:any){
+  console.log(id)
+
+  this.serviceList(id,'category');
 }
 
 openDropdown() {
@@ -124,30 +125,6 @@ closeDropdown() {
 
 listingDetails(id:any){
   this.router.navigate(['/sub-category/'+id]);
-  // const found = this.categorylisting.some((data:any) => data._id === id);
-  // if(found){
-
-  // console.log('data is present in categoryListing',found);
-  // this.router.navigate(['/sub-category/'+id]);
-  // }
-  // else{
-  //   this.service.subcategorylisting(id).subscribe(
-  //     (data: any) => {
-  //       console.log('reached here',data);
-  //         let nav: NavigationExtras = {
-  //           state: {
-  //             data: data.data,
-  //             type: 'level 0'
-  //           }
-  //         }
-  //         this.router.navigate(['service-provider-list'], nav)
-        
-  //       },
-  //     (err) => {
-  //       console.log(err);
-  //     }
-  //   );
-  // }
 }
 
 onTypeChange(value:any){
@@ -161,68 +138,60 @@ this.getMyClasses(this.service.classType);
 }
 
 onSearch(ev: any) {
-  console.log('evevevevevevev', ev);
-
- // this.categorylisting = { ...this.categorylisting };
- 
   this.categorySubcategory = {...this.categorySubcategory};
-  console.log('list after search', this.list);
 }
 
 onSearchChange(arg: any) {}
+clear_serach(){
+let data
+  this.serviceList(data,'clear')
+}
 
+ serviceList(data:any,type:any){
+  //  if(this.higherPrice === 0){
+  //  let data = {
+  //    allcategory:this.service.allcategory,
+  //    lowerPrice: this.lowerPrice,
+  //    Latitude:this.service.Latitude,
+  //    Longitude:this.service.Longitude,
+  //    distancemax: this.distancemax,
+  //    distancemini:0
+  //  }
 
- serviceList(){
-   if(this.higherPrice === 0){
-    //  console.log('latitude',this.service.Latitude);
-    //  console.log('longitude',this.service.Longitude);
-   let data = {
-     allcategory:this.service.allcategory,
-     lowerPrice: this.lowerPrice,
-     Latitude:this.service.Latitude,
-     Longitude:this.service.Longitude,
-     distancemax: this.distancemax,
-     distancemini:0
-   }
+   
+  //  this.service.getServiceList(data).subscribe((data: any) => {
+  //   this.service.FilteredData = data.data;
+  // });
+  // }else if(this.lowerPrice === 0){
+  //   let data = {
+  //   allcategory:this.service.allcategory,
+  //   higherPrice:this.higherPrice,
+  //   Latitude:this.service.Latitude,
+  //   Longitude:this.service.Longitude,
+  //   distancemax: this.distancemax,
+  //   distancemini:0
+  //  }
+  //  this.service.getServiceList(data).subscribe((data: any) => {
+  //   this.service.FilteredData = data.data;
+  // });
+  // }
 
-   console.log('lat,long data1', data);
-   this.service.getServiceList(data).subscribe((data: any) => {
-    //this.providersList = data.data;
-    
-    this.service.FilteredData = data.data;
-    console.log('serviceList: in lower filter ', data.data);
-  });
-  }else if(this.lowerPrice === 0){
-    let data = {
-    allcategory:this.service.allcategory,
-    higherPrice:this.higherPrice,
-    Latitude:this.service.Latitude,
-    Longitude:this.service.Longitude,
-    distancemax: this.distancemax,
-    distancemini:0
-   }
-   console.log('lat,long data2', data);
-   this.service.getServiceList(data).subscribe((data: any) => {
-    //this.providersList = data.data;
-    this.service.FilteredData = data.data;
-    console.log('serviceList: in higher filter ', data.data);
-    
-  });
-  }
+  this.service.publishserach({
+    serach_data: data,
+    type:type
+    });
+
 }
 
 
 getAllClassesList(value:any) {
   this.service.getClassesList(value).subscribe((resp: any) => {
-    console.log('ClassesList: in service', resp.data);
-    //this.classesList = resp.data;
-this.service.classesList = resp.data;
+    this.service.classesList = resp.data;
   });
 }
 
 getMyClasses(value:any) {
   this.service.getClassesListProvider(this.Id,value).subscribe((resp: any) => {
-    console.log('getMyClasses: in service ', resp);
     this.service.classesList = resp.data;
   });
 }
@@ -245,6 +214,14 @@ getMyClasses(value:any) {
     console.log('filterQuery 2: ', this.filterQuery);
 
     this.onValueChanged.emit(this.filterQuery);
+  }
+
+
+  getdistancelist(){
+    this.service.distanceList().subscribe((response:any)=>{
+      console.log('distance list',response)
+      this.distanceList = response['data']
+    })
   }
 }
 

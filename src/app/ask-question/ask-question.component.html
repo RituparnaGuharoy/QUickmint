@@ -1,0 +1,33 @@
+
+
+
+<!-- <a class="btn btn-subscribe" (click)="submit()">Submit</a> -->
+
+<!-- <div class="login-modal-header">
+  <button type="button" class="close" mat-dialog-close>
+    <i class="x-icon-medium" aria-hidden="true"></i>
+  </button>
+</div> -->
+<mat-dialog-content class="login-modal-bx">
+    <div class="modal-content" *ngIf="data.type =='question'">
+      <h1>Ask Question</h1>
+     
+      <textarea [(ngModel)]="askquestion">
+
+    </textarea>
+        
+        <a class="register-link" (click)="submit()">Ask</a>
+      
+    </div>
+
+    <div class="modal-content" *ngIf="data.type =='answer'">
+        <h1>Give your Answer</h1>
+       
+        <textarea [(ngModel)]="giveAnser">
+  
+      </textarea>
+          
+          <a class="register-link" (click)="answer()">Submit</a>
+        
+      </div>
+  </mat-dialog-content>

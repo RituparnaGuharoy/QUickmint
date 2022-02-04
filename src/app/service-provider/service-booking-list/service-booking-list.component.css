@@ -1,4 +1,4 @@
-.nav-tabs {
+/* .nav-tabs {
     border-bottom: 0;
     margin-bottom: 30px;
 }
@@ -25,7 +25,7 @@
 .nav-tabs li a.active,
 .nav-tabs li a:hover{
     background: linear-gradient(180deg, #22A6DE 0%, #2257DE 75.52%);
-    /* background-color: #22A6DE; */
+
     color:#fff;
 }
 
@@ -84,20 +84,18 @@
     font-weight: bold;
 }
 .pin-txt.m-time-icon:before{
-    /* background-image: url('../../assets/images/carbon_time-icon.svg'); */
+    
     background-size: 15px;
 }
 .pin-txt.m-date-icon:before{
-    /* background-image: url('../../assets/images/carbon_calendar-icon.svg'); */
+   
     background-size: 15px;
 }
 .pin-txt.m-price-icon:before{
-    /* background-image: url('../../assets/images/price-tag-icon.svg'); */
+    
     background-size: 15px;
 }
-/* .details-btn{
-    min-width: 220px;
-} */
+
 
 @media (max-width: 991px) {
     .flex-inner-bx{
@@ -217,4 +215,66 @@
     .transaction-table .table td{
         font-size: 14px;
     }
+} */
+
+.price-txt{
+    font-size: 20px;
+}
+
+.price-txt.textstyle{
+    font-style: italic;
+    font-size: 14px;
+}
+
+button.btn.details-btn{
+    min-width: 48px;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    margin-left: 15px;
+}
+
+.sbl-item{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.sbl-item h3{
+    font-size: 24px;
+    font-weight:600;
+    color: #000;
+    margin-bottom: 15px;
+}
+.sbl-item .table{
+    margin-bottom: 0;
+}
+.sbl-item .table tr th{
+    white-space: nowrap;
+}
+.view-more-btn{
+    font-weight: 600;
+}
+.view-more-btn:hover{
+    color: #333;
+}
+
+@media (max-width: 991px) {
+
+}
+@media (max-width: 767px) {
+    .sbl-item .table tr th,
+    .sbl-item .table tr td{
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .sbl-item h3{
+        font-size: 18px;
+    }
+}
+@media (max-width: 575px) {
+
 }

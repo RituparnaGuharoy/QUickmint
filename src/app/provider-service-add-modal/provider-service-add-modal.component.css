@@ -2,6 +2,26 @@
     margin:0 auto 55px auto;
     max-width: 422px;
 }
+.juct-centr {
+    text-align: center;
+}
+.juct-centr .login-modal-bx .modal-content .btn-submit, .custom-input-field .btn-submit{
+    background: linear-gradient(
+    180deg
+    , #22A6DE 0%, #2257DE 75.52%);
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    border-radius: 30px;
+    height: 50px;
+    min-width: 125px;
+    display: inline-block;
+    margin-top: 15px;
+    border: 0;
+}
+
 @media(max-width:1024px){
     
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProviderFaqRoutingModule } from './provider-faq-routing.module';
 import { ProviderFaqComponent } from './provider-faq.component';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
@@ -16,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProviderFaqRoutingModule,
     MatDatepickerModule,
     MatNativeDateModule, 
-    FormsModule, 
+    FormsModule, MatPaginatorModule,
     ReactiveFormsModule,
     NgxMaterialTimepickerModule
   ]

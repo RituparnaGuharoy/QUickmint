@@ -5,6 +5,9 @@
 .login-modal-bx{
   min-height: 82vh;
 }
+.radio-item {
+  font-size: 14px!important;
+}
 .login-social-icons{
   margin-top: 20px;
   display: flex;

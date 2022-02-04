@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog,  } from '@angular/material/dialog';
 import { JitsiComponent } from 'src/app/jitsi/jitsi.component';
 import { WebserviceService } from 'src/app/services/webservice.service';
+import {ActivatedRoute , Router,NavigationExtras } from '@angular/router';
 
+import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.prod';
+var url = environment.api;
 @Component({
   selector: 'app-service-booking-list',
   templateUrl: './service-booking-list.component.html',
@@ -12,14 +16,27 @@ export class ServiceBookingListComponent implements OnInit {
   privateJobList: any = [];
   acceptedJobList: any = [];
   animal: any;
-
+  classBookingList:any;
+  Inactiveclass_list:any;
+   bookingList:any;
+  //photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  photoUrl:string = url;
+  page=1;
+  limit=25;
+  count:any;
   constructor(
     public service: WebserviceService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router,
+    private route: ActivatedRoute,
+    private toastr : ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.getprivateJobsList()
+    //this.getprivateJobsList();
+    // this.getBookingList();
+    // this.getInactiveBookingList();
+    this.classwise_booking();
   }
 
   openDialog(job:any): void {
@@ -108,6 +125,61 @@ export class ServiceBookingListComponent implements OnInit {
     this.service.changePrivateJobStatus(data).subscribe(resp => {
       console.log("changePrivateJobStatus resp: ", resp)
     })
+  }
+
+
+  getBookingList(){
+    this.service.getActive_bookinglist().subscribe((response:any)=>{
+      console.log(response)
+      if(response.data.length ==0){
+        this.toastr.success('No active class found');
+      }else{
+        this.classBookingList= response.data
+      }
+      
+    })
+  }
+
+  getInactiveBookingList(){
+    this.service.getInActive_bookinglist().subscribe((response:any)=>{
+      console.log(response)
+      this.Inactiveclass_list= response.data
+    })
+  }
+
+  gotoClassDetails(c:any){
+    this.router.navigate(['/booked_class_details'],{queryParams : {classId: c._id}});
+  }
+
+  classwise_booking(){
+    let data={
+      page:this.page,
+      limit : this.limit
+    }
+    this.service.get_classwise_booking(data).subscribe((response:any)=>{
+      console.log(response)
+
+      if(response['success']){
+        this.classBookingList= response.data;
+        this.count = response['count'];
+        // this.bookingList = response.data.
+       for(var i =0; i<response.data.length;i++){
+        console.log(response.data[i].studentdetails.length)
+        this.bookingList = response.data[i].studentdetails.length
+
+       }
+      }
+      
+    })
+  }
+  paginationChange(event:any) {
+    this.page = event.pageIndex + 1;
+    this.limit = event.pageSize;
+    this.classwise_booking()
+   // this.router.navigate(['/service-list'], { queryParams: { page: this.page, limit: this.limit } });
+  }
+  showbooking(id:any){
+    
   }
 
 }

@@ -29,8 +29,6 @@ ngOnInit(): void {
     console.log('in terms and condition page');
     this.service.GetCms(this.slug).subscribe(
       (data) => {
-        console.log('about: ', data);
-        // this.page = (<any>data)["data"].pageContent;
         this.title = (<any>data)["data"].pageTitle;
         this.yaGetBanner((data as any).data.pageContent);
       },
@@ -43,8 +41,7 @@ ngOnInit(): void {
   // tslint:disable-next-line:typedef
   yaGetBanner(pageContent: string)
 {
-  //  const el = document.getElementById("yabanner");
-  //  el.innerHTML = pageContent;
+  
   console.log(pageContent);
   const el: any  = document.getElementById("yabanner")
   el.innerHTML = pageContent;

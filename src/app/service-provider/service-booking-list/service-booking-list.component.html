@@ -1,24 +1,24 @@
 <!-- Banner start -->
 <section class="inner-banner">
     <div class="container">
-        <h1>Customer <strong>Booking List</strong></h1>
+        <h1>Booking <strong> List</strong></h1>
     </div>
 </section>
 <!-- Banner end -->
 <!-- Body content start -->
-<section class="common-inner-bg-wrap">
-    <div class="container">
+<!-- <section class="common-inner-bg-wrap">
+    <div class="container"> -->
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
+        <!-- <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" href="#Customer-List" role="tab" data-toggle="tab">Customer List</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#Accepted-Customer-List" role="tab" data-toggle="tab">Accepted Customer List</a>
             </li>
-        </ul>
+        </ul> -->
         <!-- Tab panes -->
-        <div class="tab-content">
+        <!-- <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade show active" id="Customer-List">
                 <div class="trainer-item-row">
                     <div class="trainer-item">
@@ -82,7 +82,88 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+
+       
+    <!-- </div>
+</section> -->
+
+<section class="container">
+    <!-- <div class="trainer-item-row">
+        <h4>Active Classes</h4>
+        <div class="trainer-item" *ngFor="let class of classBookingList">
+           
+            <div class="trainer-img" *ngIf="class.user_id.UserPhoto ==null" style="background-image:url('assets/images/no_profile_pic.png')">
+            </div>
+            <div class="trainer-img" *ngIf="class.user_id.UserPhoto !=null" [ngStyle]="{'background-image': 'url(' +photoUrl+ class.user_id.UserPhoto + ')'}">
+            </div>
+            <div class="trainer-item-info">
+                <h4>{{class.student_name}}</h4>
+                <p *ngIf="class.bookedService.overview"><b>Parent's name : </b>{{class.parent_name}}</p>
+                <p><b>Student's contact number : </b>{{class.student_ph_number}}</p>
+                <p *ngIf="class.bookedService.overview"><b>Student's Age : </b>{{class.student_age}}</p>
+                <p><b>Mail id : </b>{{class.student_email}}</p>
+                <p><b>Class name : </b>{{class.bookedService.class_title}}</p>
+                <p *ngIf="class.bookedService.overview"><b>Parent's contact : </b>{{class.student_email}}</p>
+                <p><b>Payable amount : </b> $ {{class.bookedService.class_fees}}</p>
+                <p><b>Payment Mode : </b>{{class.payment_type}}</p>
+                <p><b>Class Date : </b>{{class.bookedService.strat_date | date:'mediumDate'}}</p>
+                <p class="price-txt textstyle" *ngIf="class.booking_status=='accept'">Confirm</p>
+                <p class="price-txt textstyle" *ngIf="class.booking_status=='pending'">Processing...</p>
+            </div>
+            
+            <button class="btn details-btn" (click)="gotoClassDetails(class)" ><img src="assets/images/view-icon-md.png"/></button>
+        </div>
+       
+    </div> -->
+
+    <div class="sbl-item-row">
+        <div class="sbl-item" *ngFor="let class of classBookingList">
+            <h3 (click)=showbooking(class._id)>{{class.class_title}}</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr *ngIf="class.studentdetails.length>0">
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Class Date</th>
+                            <th scope="col">Class Fees</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="class.studentdetails.length>0">
+                        <tr *ngFor="let item of class.studentdetails">
+                            <td>{{item.user_id.UserFullName}}</td>
+                            <td>{{class.strat_date | date:'mediumDate': '+0000': 'en-ZA'}}</td>
+                            <td>@${{class.class_fees}}</td>
+                            <td *ngIf="item.booking_status =='accept'">Confirm</td>
+                            <td *ngIf="item.booking_status =='pending'">Processing</td>
+                            <td><a href="javascript:void(0);" (click)="gotoClassDetails(class)" class="view-more-btn">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <ul class="head-line" *ngIf="class.studentdetails.length>0">
+                <li>Student Name</li>  
+                <li>Class Date</li> 
+                <li>Class Fess</li> 
+                <li>Status</li> 
+                <li>Details</li>
+            </ul>
+            <ul class="head-line1" *ngIf="class.studentdetails.length>0">
+                <li *ngFor="let item of class.studentdetails">
+                    <p>{{item.user_id.UserFullName}}</p>
+                    <p>{{class.strat_date | date:'mediumDate': '+0000': 'en-ZA'}}</p>
+                    <p>${{class.class_fees}}</p>
+                    <p *ngIf="item.booking_status =='accept'">Confirm</p>
+                    <p *ngIf="item.booking_status =='pending'">Processing</p>
+                    <p (click)="gotoClassDetails(class)" class="pointer">View</p>
+                    
+                </li>
+            </ul> -->
+            <p *ngIf="class.studentdetails.length==0">No booking found</p>
         </div>
     </div>
+    <mat-paginator  #paginator (page)="paginationChange($event)" [length]="count" [pageSize]="25" [pageSizeOptions]="[25, 50]"></mat-paginator>
 </section>
 <!-- Body content end -->

@@ -6,7 +6,7 @@
 <mat-dialog-content class="login-modal-bx">
     <div class="modal-content">
         <h1>Add service</h1>
-        <form>
+        <!-- <form>
             <div class="row">
                 <div class="col-md-12 form-group custom-input-field">
                     <input type="text" class="form-control" placeholder="Product Name" required="required">
@@ -23,6 +23,39 @@
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-submit">Submit</button>
             </div>
-        </form>
+        </form> -->
+        <div class="row">
+            <!-- <div class="col-md-12 form-group custom-input-field">
+                <div *ngFor="let item of categoryList let i=index">
+                    
+                    <input (change)="fieldsChange($event,item._id,i)" value={{item._id}} type="checkbox" *ngIf="check(item._id, services)" checked="checked"/>
+                    <input (change)="fieldsChange($event,item._id,i)" value={{item._id}} type="checkbox" *ngIf="!check(item._id, services)" /> {{item.name}}
+                </div>
+                <div class="form-group text-center" (click)="addService()">
+                    <button type="submit" class="btn btn-submit">Add</button>
+                </div>
+            </div> -->
+            <div class="col-md-4 form-group custom-input-field juct-centr">
+                Add General Service
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-submit" (click)="gotoservice()">Add</button>
+                </div>
+            </div>
+            <div class="col-md-4 form-group custom-input-field juct-centr">
+                Add Class Service
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-submit" (click)="gotoclass()">Add</button>
+                </div>
+            </div>
+
+            <div class="col-md-4 form-group custom-input-field juct-centr">
+                Service Planner
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-submit" (click)="gotoserviceplanner()">Add</button>
+                </div>
+            </div>
+            
+        </div>
+        
     </div>
 </mat-dialog-content>

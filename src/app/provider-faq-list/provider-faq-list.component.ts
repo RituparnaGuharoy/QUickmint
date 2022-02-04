@@ -54,10 +54,6 @@ export class ProviderFaqListComponent implements OnInit {
   this.showFAQ = true;
   }
 
-  editFAQ(id:any){
-
-  }
-
   deleteFAQ(id:any){
     this.service.deleteFaq(id).subscribe((resp:any)=>{
      // this.FAQlist=resp.data;
@@ -86,20 +82,4 @@ export class ProviderFaqListComponent implements OnInit {
       }
     );
   }
-
-  editService(ServiceId:any){
-    this.router.navigate(['/service-edit-view'])
-    this.router.navigate(['/service-list/provider-edit'+'/'+ServiceId]);
-  }
-
-  // deleteService(ServiceId:any){
-  //   this.service.deleteService(ServiceId).subscribe((data:any)=>{
-  //     console.log('deleted',data);
-  //   },
-  //   (err)=>{
-  //     console.log('error',err);
-  //   });
-  //  this.ngOnInit();
-  // }
-
 }

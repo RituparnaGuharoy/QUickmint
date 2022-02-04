@@ -31,8 +31,8 @@ export class ProviderEditComponent implements OnInit {
   job_end:any;
   Price:any;
   Id:string;
-  
-
+  servicedetails:any;
+  baseurl:any;
   subcatone = false;
   subcattwo = false;
   constructor(
@@ -47,7 +47,7 @@ export class ProviderEditComponent implements OnInit {
       // edit-ad/:adId
        this.Id = param.serviceId;
      });
-     
+     this.baseurl = 'https://nodeserver.mydevfactory.com:4290/'
   }
 
   ngOnInit(): void {
@@ -124,6 +124,7 @@ export class ProviderEditComponent implements OnInit {
 this.service.getServiceDetails(this.Id).subscribe(
   (data: any) => {
     console.log('getdetails: ', data);
+    this.servicedetails = data.data;
     this.title = data.data.title;
     this.description = data.data.description;
     this.job_start = data.data.job_start;
@@ -178,7 +179,7 @@ this.service.getServiceDetails(this.Id).subscribe(
         console.log('publicjob: ', data);
         this.toastr.success((<any>data)['message']);
         this.newServiceFormSubmitted = false;
-       //this.router.navigate(['/service-booking-list']);
+        this.router.navigate(['/service-list']);
       },
       (err) => {
         console.log(err);

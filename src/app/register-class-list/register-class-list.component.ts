@@ -7,18 +7,22 @@ import { JitsiComponent } from '../jitsi/jitsi.component';
 import { WebserviceService } from '../services/webservice.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment.prod';
 
+var url = environment.api;
 @Component({
   selector: 'app-register-class-list',
   templateUrl: './register-class-list.component.html',
   styleUrls: ['./register-class-list.component.css'],
 })
 export class RegisterClassListComponent implements OnInit {
+  
   @ViewChild('meeting') mapElement: ElementRef;
   userType = localStorage.getItem('userType');
   id = localStorage.getItem('userId');
   userData = JSON.parse(localStorage.getItem('userData')!);
-  photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  // photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  photoUrl:string = url;
 
   classesList: any;
   providersList: any;
@@ -45,22 +49,28 @@ export class RegisterClassListComponent implements OnInit {
   difference1:any;
   difference2:any;
 
-
+  //Ridtuparna//
+  allClasslist:any
+  offset:number;
+  page = 1;
+  limit = 25;
+  params: any;
+  count: Number = 0;
   constructor(
     public service: WebserviceService,
     public dialog: MatDialog,
     public toast: ToastrService,
     private router: Router,
   ) {
-    
+    this.offset = (new Date().getTimezoneOffset());
   }
 
   ngOnInit(): void {
    this.userType == '1' ? this.getMyClasses() : this.getAllClassesList();
-   // this.getAllClassesList();
+   this.getclasslist();
    this.invokeScript();
-
-   this.checkPayment();
+   
+  // this.checkPayment();
    this.GetUserBookedList();
    //console.log('booked list',this.bookedArray);
   //this.currentTime = new Date().toISOString();
@@ -89,6 +99,7 @@ export class RegisterClassListComponent implements OnInit {
   // console.log('time compenent1',this.currenttimeComponent);
   if(this.currentdateComponent === this.startdateComponent)
   {
+    
     var starttime  = `${this.starttimeComponent}`;
     var currenttime = `${this.currenttimeComponent}`;
     var endtime = `${this.endtimeComponent}`;
@@ -129,16 +140,21 @@ convertHourstoMinute(str:any) {
 }
 
 
-  checkPayment(){
-    let _id = '60f0bc3e0de8ca794683cc68';
-    this.service.getbookedTraining(_id).subscribe((resp: any) => {
-      console.log('getbookedTraining: ', resp);
-    });
-  }
+  // checkPayment(){
+  //   let _id = '60f0bc3e0de8ca794683cc68';
+  //   this.service.getbookedTraining(_id).subscribe((resp: any) => {
+      
+  //     console.log('getbookedTraining: ', resp);
+  //   });
+  // }
 
   async GetUserBookedList(){
     var that = this;
-    this.service.getUserBookedList().subscribe((resp: any) => {
+    let data={
+      'page':this.page,
+        'limit':this.limit,
+    }
+    this.service.getUserBookedList(data).subscribe((resp: any) => {
       console.log('get User booked list ', resp);
       this.bookedArray = resp.data;
       //this.bookedArray.push(...resp.data);
@@ -152,7 +168,7 @@ convertHourstoMinute(str:any) {
         return data1.bookedService._id
       })
       console.log('checked list',this.bookinglist);
-
+      window.scrollTo(0, 0);
     });
     //this.bookedArray = that.bookedArray;
     console.log('booked array',this.bookedArray);
@@ -272,8 +288,17 @@ convertHourstoMinute(str:any) {
   }
 
   gotoDetails(c:any){
-    console.log('details',c);
-    this.router.navigate(['/view-details'])
+    //console.log('details',c);
+    //this.router.navigate(['/view-details/'])
+    this.router.navigate(['/view-details/'],{queryParams : {classId: c._id}})
+  }
+
+  editclass(c:any){
+    this.router.navigate(['/edit-details/'],{queryParams : {classId: c._id}})
+  }
+
+  duplicate(c:any){
+    this.router.navigate(['/duplicate-class/'],{queryParams : {classId: c._id}})
   }
 
  BookService(c:any){
@@ -300,7 +325,7 @@ convertHourstoMinute(str:any) {
 
   getAllClassesList() {
     let value = this.service.classType;
-    this.service.getClassesList(value).subscribe((resp: any) => {
+    this.service.getClasList().subscribe((resp: any) => {
       console.log('getAllClassesList: ', resp);
       this.service.classesList = resp.data;
     });
@@ -379,6 +404,7 @@ convertHourstoMinute(str:any) {
   }
 
   getProviders(data: any) {
+    
     let latlng = localStorage.getItem('userData')!;
 
     let d = JSON.parse(latlng).UserLocation;
@@ -408,5 +434,41 @@ convertHourstoMinute(str:any) {
         job,
       },
     });
+  }
+
+
+
+  getclasslist(){
+    this.service.getClasList().subscribe((resp: any) => {
+      console.log('getAllClassesList: ', resp);
+      //this.service.classesList = resp.data;
+      if(resp.success){
+        if(resp.count==0){
+          this.toast.success('No class added');
+        }else{
+          this.allClasslist = resp.data
+        }
+      }
+    });
+  }
+
+  delete(c:any){
+    if (confirm('Are you sure you want to delete this class?')) {
+      // Save it!
+      console.log('Thing was saved to the database.');
+      this.service.delete_class(c._id).subscribe((response:any)=>{
+        console.log()
+        if(response.success){
+          this.getclasslist();
+        }
+      })
+    } else {
+      // Do nothing!
+      console.log('Thing was not saved to the database.');
+    }
+  }
+
+  noaccess(){
+    this.toast.info("General Services is under construction. Please check back later.");
   }
 }

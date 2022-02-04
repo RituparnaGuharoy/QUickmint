@@ -1,23 +1,21 @@
-
 <!-- Banner start -->
 <section class="inner-banner">
     <div class="container">
-        <h1>Service  <strong>Details</strong></h1>
+        <h1>Provider
+            <strong>Details</strong>
+        </h1>
     </div>
-  </section>
-  <!-- Banner end -->
-  <!-- Body content start -->
-<section class="common-inner-bg-wrap">
+</section>
+<!-- Banner end -->
+<!-- Body content start -->
+<!-- <section class="common-inner-bg-wrap">
     <div class="container">
-        <!-- Tab panes -->
         <div class="row services-detailstop">
             <div class="col-md-12">
                 <div class="profile-img">
-                    <!-- <img src="../../assets/images/trainer-img-2.png" alt=""> -->
+                    <img src="../../assets/images/trainer-img-2.png" alt="">
                     <img src="{{photoUrl}}/{{providerData.providerdetails.UserPhoto}}">
                 </div>
-                <!-- <div class="trainer-img" [ngStyle]="{'background-image':'url('+ photoUrl + providerData.providerdetails.UserPhoto + ')'}">
-                </div> -->
 
                 <div class="ser-det-right">
                     <div class="ser-det-right-com-btn">
@@ -44,36 +42,9 @@
                                 
                                 <img src="{{photoUrl}}/{{item}}" alt="">
                                
-                                <!-- <div class="title">
-                                    Photos title
-                                </div> -->
                             </div>
                             <a class="viewAll1" href="javascript:void(0);" (click)="ViewImage()">View all</a>
                             
-                            <!-- <div class="imd-video-list">
-                                <video id="banner-video" width="100%" poster="assets/images/video-poster.png" controls>
-                                    <source src="assets/video/banner.mp4" type="video/mp4">
-                                    <source src="assets/video/banner.mp4" type="video/ogg">
-                                  </video>
-                                  <div class="title">
-                                    Video title
-                                </div>
-                            </div>
-                            <div class="imd-video-list">
-                                <video id="banner-video" width="100%" poster="assets/images/video-poster.png" controls>
-                                    <source src="assets/video/banner.mp4" type="video/mp4">
-                                    <source src="assets/video/banner.mp4" type="video/ogg">
-                                  </video>
-                                  <div class="title">
-                                    Video title
-                                  </div>
-                            </div>
-                            <div class="imd-video-list">
-                                <img src="../../assets/images/banner.png" alt="">
-                                <div class="title">
-                                    Photos title
-                                </div>
-                            </div> -->
                         </div>
                     </div>
 
@@ -101,9 +72,6 @@
                 <h4 class="mb-3 service-title">
                     Credentials
                 </h4>
-                <!-- <p>
-                    {{providerData.providerdetails.credentials}}
-                </p> -->
                 <div [innerHTML] = "page"></div>
             </div>
             <div class="col-md-12 my-4">
@@ -187,7 +155,6 @@
                 <div class="sud-btm-det d-flex mt-4">
                     <div class="sud-btm-det-cont" *ngFor='let item of otherClass | slice:0:3;' >
                         <div>
-                        <!-- <div *ngIf="i<3" class="classes-btn"> -->
                         <h3>
                             {{item.title}}
                         </h3>
@@ -207,45 +174,6 @@
                     </div>
                 </div>
                 <a class="viewAll2" href="javascript:void(0);" (click)="ViewClasses()">View all</a>
-                
-                <!-- <div class="sud-btm-det d-flex mt-4">
-                    <div class="sud-btm-det-cont">
-                        <h3>
-                            Individual Tax package
-                        </h3>
-                        <p>
-                            5hrs
-                        </p>
-                        <p>
-                            $30
-                        </p>
-                        <button class="btn">BooK</button>
-                    </div>
-                    <div class="sud-btm-det-cont">
-                        <h3>
-                           Audit package
-                        </h3>
-                        <p>
-                            10hrs
-                        </p>
-                        <p>
-                            $30
-                        </p>
-                        <button class="btn">BooK</button>
-                    </div>
-                    <div class="sud-btm-det-cont">
-                        <h3>
-                            Individual package
-                        </h3>
-                        <p>
-                            5hrs
-                        </p>
-                        <p>
-                            $30
-                        </p>
-                        <button class="btn">BooK</button>
-                    </div>
-                </div> -->
 
             </div>
 
@@ -253,23 +181,13 @@
                 <h4 class="mb-2 service-title">
                     Reviews
                 </h4>
-                <!-- <p>Customers rated this pro highly for <strong>value, punctuality,</strong> and <strong>work quality</strong> </p> -->
                 <p>Customer's rating for this provider:</p>
                 <div class="row mt-3">
                     <div class="col-md-3">
                         <h4 class="rating">
                             {{averageRating}}.0
                         </h4>
-                        <!-- <div class="d-block star">
-                            <i class="fa fa-star f3" aria-hidden="true"></i>
-                            <i class="fa fa-star f3" aria-hidden="true"></i>
-                            <i class="fa fa-star f3" aria-hidden="true"></i>
-                            <i class="fa fa-star f3" aria-hidden="true"></i>
-                            <i class="fa fa-star f3" aria-hidden="true"></i>
-                        </div> -->
-                        <!-- <p>
-                            4 reviews
-                        </p> -->
+                       
                         <div class="propular_rate">
                                 
                             <div class="cont">
@@ -424,4 +342,207 @@
             </div>
         </div>
     </div>
+</section> -->
+<!-- Body content start -->
+<section class="common-inner-bg-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-7">
+                <div class="pd-profile-details">
+                    <div class="pd-profile-img" *ngIf="providerData.providerdetails.UserPhoto !=null">
+                        <img src="{{photoUrl}}/{{providerData.providerdetails.UserPhoto}}">
+                    </div>
+                    <div class="pd-profile-img" *ngIf="providerData.providerdetails.UserPhoto ==null">
+                        <img src="assets/images/no_profile_pic.png">
+                    </div>
+                    <div class="pd-profile-info">
+                        <h3>{{providerData.providerdetails.UserFullName}}</h3>
+                        <div class="pd-profile-rating">
+                            <div class="stars popularStarRating">
+                                <ngx-star-rating [(ngModel)]="averageRating" [disabled]="true"></ngx-star-rating>
+                            </div>
+                            <span>{{providerData.providerdetails.averageRating}}</span>
+                        </div>
+                        <ul class="pd-profile-social-share">
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> Follow</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Like</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="pd-p-share-btn">
+                                    <i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+                            </li>
+                        </ul>
+                        <ul class="pd-profile-social-share">
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="fa fa-users" aria-hidden="true"></i> {{follow1}} Followers</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{like1}} Likes</a>
+                            </li>
+                        </ul>
+                        <!-- <ul class="pd-profile-service">
+                            <li *ngFor="let item of providerData.providerdetails.ProvidedService">
+                                {{item.name}}
+                            </li>
+
+                        </ul> -->
+                    </div>
+                </div>
+                <div class="pd-btn-btm">
+                    <a href="javascript:void(0);">Chat</a>
+                    <a (click)="callback()">Request call back</a>
+                    <a (click)="goToPostANeed()">Book</a>
+                </div>
+                <div class="pd-profile-info-content">
+                    <p>{{providerData.providerdetails.about_me}}</p>
+                </div>
+                <div class="pd-profile-slider">
+                    <h3>Photos</h3>
+                    <owl-carousel [options]="SlideOptions" [carouselClasses]="['owl-theme', 'sliding', 'pdp-slider']">
+                        <div class="item pdp-photo-item" *ngFor="let item of providerData.providerdetails.gallery">
+                            <!-- <img src="../../assets/images/trainer-img-2.png" alt=""> -->
+                            <!-- <img src="{{photoUrl}}/{{item}}"> -->
+                            <a href="{{photoUrl+item}}" data-lightbox="pdpPhotoImage" [ngStyle]="{'background-image':'url('+ photoUrl+item + ')'}" class="galleryImage"></a>
+                        </div>
+
+                    </owl-carousel>
+                </div>
+                <div class="pd-profile-slider">
+                    <h3>Videos</h3>
+                    <owl-carousel [options]="SlideOptions" [carouselClasses]="['owl-theme', 'sliding', 'pdp-slider']">
+                        <div class="item pdp-video-item" *ngFor="let item of providerData.providerdetails.video">
+
+                            <video width="100%" height="160" loop="true" class="videocont" [muted]="false" playsinline controls>
+                                <source src="{{photoUrl+item+'?#t=0.8'}}" type="video/mp4" />
+
+                                <canvas id="canvas"></canvas>
+                            </video>
+                        </div>
+                        <!-- <div class="item pdp-video-item">  
+                            <video width="100%" height="160" disablePictureInPicture controlsList="nodownload" controls>
+                                <source src="assets/video/movie.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="item pdp-video-item">  
+                            <video width="100%" height="160" disablePictureInPicture controlsList="nodownload" controls>
+                                <source src="assets/video/movie.mp4" type="video/mp4">
+                            </video>
+                        </div>  
+                        <div class="item pdp-video-item">  
+                            <video width="100%" height="160" disablePictureInPicture controlsList="nodownload" controls>
+                                <source src="assets/video/movie.mp4" type="video/mp4">
+                            </video>
+                        </div>  -->
+                    </owl-carousel>
+                </div>
+                <div class="pd-profile-slider">
+                    <h3>User Reviews</h3>
+                    <div *ngIf="rating_list_length>0">
+                        <div class="user-reviews-results" *ngFor="let item of rating_list">
+                            <a class="result-title" href="#">{{item.created.UserFullName}}</a>
+                            <div class="ratings">
+                                <div>
+                                    <ngx-star-rating [(ngModel)]="item.rating" [disabled]="true"></ngx-star-rating>
+    
+                                </div>
+                                <span class="ratings-date">
+                                    {{item.createdAt | date:'mediumDate'}}
+                                </span>
+                                
+                            </div>
+                            
+                            <p>{{item.review}}</p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="rating_list_length==0">
+                        <div class="user-reviews-results">
+                            
+                        <h4>No ratings or reviews currently.</h4>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+
+                <div class="pd-profile-slider">
+                    <h3>User Questions</h3>
+                    <div *ngIf="question_list_length > 0">
+                        <div class="user-reviews-results" *ngFor="let item of question_list">
+                            <a class="result-title" href="#">{{item.question.name}}</a>
+                            
+                            <p>{{item.question.question_title}}</p>
+                        </div>
+                    </div>
+                    
+
+                    <div *ngIf="question_list_length==0">
+                        <div class="user-reviews-results">
+                            
+                        <h4>No questions available currently.</h4>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-5">
+                <div class="pd-profle-address">
+                    <h4>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> Address</h4>
+                    <p>{{providerData.providerdetails.UserLocation.Address}}</p>
+                </div>
+                <div class="pd-profle-address social-media-icon">
+                    <h4>Social Media</h4>
+                    <ul>
+                        <li>
+                            <a href="{{providerData.providerdetails.facebookUrl}}" target="_blank" rel="noopener noreferrer">
+                                <img src="../../assets/images/icon/fb.png" alt="">
+                            </a>
+                        </li>
+                        <!-- <li><a href="#" target="_blank" rel="noopener noreferrer"><img src="../../assets/images/icon/gp.png" alt=""></a></li> -->
+                        <li>
+                            <a href="{{providerData.providerdetails.instagramUrl}}" target="_blank" rel="noopener noreferrer">
+                                <img src="../../assets/images/icon/ins.png" alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{providerData.providerdetails.twitterUrl}}" target="_blank" rel="noopener noreferrer">
+                                <img src="../../assets/images/icon/tw.png" alt="">
+                            </a>
+                        </li>
+                        <!-- <li><a href="#" target="_blank" rel="noopener noreferrer"><img src="../../assets/images/icon/wh.png" alt=""></a></li> -->
+                    </ul>
+                </div>
+                <div class="pd-profle-address upcoming-classes-bx">
+                    <h4>Upcoming Classes</h4>
+                    <div class="upcoming-classes-row">
+                        <div class="upcoming-classes-item" *ngFor="let item of class_list">
+                            <div class="upcoming-classes-img" [ngStyle]="{'background-image':'url('+ photoUrl + item.class_image + ')'}"></div>
+                            <div class="upcoming-classes-item-info">
+                                <h5>{{item.class_title}}</h5>
+                                <p>{{item.class_description}}</p>
+                                <p>
+                                <span><strong>Class size -</strong> {{item.total_strenght}}</span>,
+                                <span><strong>Available Slots -</strong> {{item.available_set}}</span>,
+                                <span><strong>Cost - </strong> ${{item.class_fees}}</span>
+                                </p>
+                                <a  class="uc-book-btn" *ngIf="token !=null" (click)="bookclss(item)">Book now</a>
+                                <a  class="uc-book-btn" *ngIf="token ==null" (click)="openLoginDialog()">Book now</a>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <mat-paginator  #paginator (page)="paginationChange($event)" [length]="count" [pageSize]="5" [pageSizeOptions]="[5,10,25,50]"></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<!-- Body content end -->

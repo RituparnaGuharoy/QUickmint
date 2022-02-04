@@ -8,18 +8,28 @@
 <!-- Body content start -->
 <section class="container">
     <div class="trainer-item-row">
-        <div class="trainer-item">
-            <div class="trainer-img" style="background-image:url('assets/images/trainer-img-1.png')">
+        <div class="trainer-item" *ngFor="let class of classBookingList">
+            <!-- <div class="trainer-img" style="background-image:url('assets/images/trainer-img-1.png')">
+            </div> -->
+            <div class="trainer-img" *ngIf="class.provider_id.UserPhoto ==null" style="background-image:url('assets/images/no_profile_pic.png')">
+            </div>
+            <div class="trainer-img" *ngIf="class.provider_id.UserPhoto !=null" [ngStyle]="{'background-image': 'url(' +photoUrl+ class.provider_id.UserPhoto + ')'}">
             </div>
             <div class="trainer-item-info">
-                <h4>Netnapa Seesai</h4>
-                <p class="star-bx"><img src="assets/images/star-icon.png"> <span>(1920)</span></p>
-                <p class="pin-txt">7292 Dictum Av. San Antonio MI 47096</p>
-                <p class="price-txt">$10</p>
+                <h4>{{class.provider_id.UserFullName}}</h4>
+                <!-- <p class="star-bx"><img src="assets/images/star-icon.png"> <span>(1920)</span></p> -->
+                <!-- <p class="pin-txt">{{class.address}}</p> -->
+                <p >Class Name: {{class.bookedService.class_title}}</p>
+                <p >Start Date: {{class.bookedService.strat_date | date:'mediumDate': '+0000': 'en-ZA'}}</p>
+                <p >Start Time: {{class.bookedService.start_tiem | date:'mediumDate': '+0000': 'en-ZA'}} PST</p>
+                <p >Class Fees : ${{class.bookedService.class_fees}}</p>
+                <p >Paid Amount : ${{class.able_to_fees}}</p>
+                <p class="price-txt textstyle" *ngIf="class.booking_status=='accept'">Confirm</p>
+                <p class="price-txt textstyle" *ngIf="class.booking_status=='pending'">Processing...</p>
             </div>
-            <a href="javascript:void(0);" [routerLink]="['/trainer-profile']" class="btn details-btn">Details</a>
+            <a (click)="gotoClassDetails(class)" class="btn details-btn">Details</a>
         </div>
-        <div class="trainer-item">
+        <!-- <div class="trainer-item">
             <div class="trainer-img" style="background-image:url('assets/images/trainer-img-2.png')">
             </div>
             <div class="trainer-item-info">
@@ -40,7 +50,8 @@
                 <p class="price-txt">$22</p>
             </div>
             <a href="javascript:void(0);" [routerLink]="['/trainer-profile']" class="btn details-btn">Details</a>
-        </div>
+        </div> -->
     </div>
+    <mat-paginator  #paginator (page)="paginationChange($event)" [length]="count" [pageSize]="25" [pageSizeOptions]="[25, 50]"></mat-paginator>
 </section>
 <!-- Body content end -->

@@ -14,6 +14,7 @@ export class PrivacyPolicyComponent implements OnInit {
   constructor(private service: WebserviceService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
     console.log('in privacy-policy page');
     this.service.GetCms('privacy_policy').subscribe(
       (data) => {

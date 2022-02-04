@@ -1,0 +1,176 @@
+.slot-div{
+    padding: 10px;
+}
+
+.slot-div h5{
+    float: left;
+    width: 65px;
+    text-align: left;
+}
+
+.slot-div ul{
+    padding-left: 0;
+    text-align: left;
+    width: 100%;
+}
+.slot-div ul li{
+    display: inline-block;
+    padding: 10px;
+     width: 14%;
+     text-align: center;
+     border: 1px solid #ddd;
+}
+
+.slot-div ul p{
+    background: #22A6DE;
+    padding: 20px 20px;
+    color: #fff;
+}
+.service_dummy{
+    padding-left: 0;
+}
+.service_dummy li{
+    list-style: auto;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+.slots{
+font-size: 18px;
+}
+.slots p{
+/* display: inline-block; */
+font-size: 18px;
+}
+.slots li{
+    display: block;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.slots li span{
+    margin: 0px 10px;
+}
+.indicatot{
+    padding-left: 0;
+    margin-top: 10px;
+}
+.indicatot li{
+    list-style: none;
+    text-align: left;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.indicatot li span{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+}
+.nB{
+    
+    background: rgba(141 204 147)!important;
+    color: #fff;
+    opacity: 1;
+}
+
+.pB{
+    
+    background: #fff!important;
+    color: #4670e2!important
+}
+
+.fB{
+    background: #fff!important;
+    color: #4670e2!important
+}
+.nA{
+    background: rgb(206, 206, 206)!important;
+}
+
+.transaction-table{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.transaction-table .table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.transaction-table .table thead th {
+    vertical-align: bottom;
+    border-bottom: 0;
+    border-top: 0;
+    background: #22a6de;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+}
+.transaction-table .table tr:first-child td{
+    border-top: 0;
+}
+.transaction-table .table td{
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #777777;
+    border-top: 1px solid #E0E0E0;
+    vertical-align: middle;
+    text-align: center;
+}
+.transaction-table .table td.price{
+    font-weight: 700;
+    color: #2257DE;
+}
+.slot_display{
+    padding-left: 0px;
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+}
+.select-slot li{
+   
+}
+.slot_display li{
+    display: inline-block;
+    width: 150px;
+    border: 2px solid #4670e2;
+    text-align: center;
+    margin: 0px 10px;
+    height: 35px;
+    border-radius: 7px;
+    padding-top: 5px;
+    font-size: 16px;
+    color: #4670e2;
+}
+
+.select-slot li{
+    color: #fff;
+    border: 2px solid #4670e2;
+    background-color:#4670e2;;
+}
+.call-acpt{
+    width: 100%;
+    text-align: center;
+}
+
+.bookingbutton{
+    background: linear-gradient(
+180deg, #22A6DE 0%, #2257DE 75.52%);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    border-radius: 30px;
+    line-height: 50px;
+    min-width: 164px;
+    display: inline-block;
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

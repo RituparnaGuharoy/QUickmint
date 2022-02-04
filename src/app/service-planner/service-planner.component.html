@@ -1,0 +1,101 @@
+<section class="inner-banner">
+    <div class="container">
+      <h1>Service<strong>Planner</strong></h1>
+    </div>
+  </section>
+  <!-- Banner end -->
+  <!-- Body content start -->
+  <section class="container">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-7 text-center pr-md-3">
+                <div class="Select-Date px-5 py-3">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 class="service-title text-left">Select Date</h4>
+                        </div>
+                        <div class="form-group custom-input-field col-md-6">
+                            <input type="date" class="form-control" placeholder="Form Date" [(ngModel)]="sformdate">
+                        </div>
+                        <div class="form-group custom-input-field col-md-6">
+                            <input type="date" class="form-control" placeholder="To Date" [(ngModel)]="eformdate" (change)="scheduleDate()">
+                            
+                        </div>            
+                    </div>
+                    <div class="row schedule_slot">
+                        <h6>Set your weekly hours</h6>
+                        <div *ngFor="let item of dateArray; let j = index;" class="select_schedule ">
+                           <input type="checkbox" value={{item.day_index}} (change)="schedule_slot($event)">{{item.day}}
+                           <div>
+                            <span (click)="addNew(j,item.day_index)" class="addOn"><img src="./assets/images/plus-icon.png" alt="" ></span>
+                            <div  *ngFor="let input of item.day_time; let i = index;" class="slot_sec">
+                              
+                                <input type="time" [(ngModel)]="input.start_times" id="start_times" (change)="getslot_d(input.start_times,j,i)" >
+                                <input type="time" [(ngModel)]="input.end_times"  (change)="getslot(input.end_times,j,i)">
+                                <input type="number" [(ngModel)]="input.available_seat" style="width: 60px; text-align: center;">
+                                <span><img class="cl-delit" src="./assets/images/delete.png" (click)="remove(j,i)" alt=""></span>
+                            </div>
+                           </div>
+                            
+                        </div>
+                    </div>
+                    <div class="custom-input-field text-center col-md-12">
+                        <button (click)="onSubmit()" class="btn btn-submit">Submit</button>
+                      </div>
+                </div>
+                
+            </div>
+            <div class="col-md-5 text-center pl-md-3">
+                <div class="Select-Date px-4 py-3">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h4 class="service-title text-left">Override Date</h4>
+                        </div>
+                        <div class="form-group custom-input-field col-md-12">
+                            <input type="date" class="form-control" placeholder="Additonal date" [(ngModel)]="Aformdate" (change)="additional()">
+                        </div>
+    
+                        <div class="row schedule_slot">
+                            <div class="col-md-12">
+                                <h6>Set your additional slot</h6>
+                            </div>
+                            
+                            <div *ngFor="let item of additionalArray; let j = index;" class="select_schedule col-md-12">
+                               <!-- <input type="checkbox" value={{item.weekly_day}} (change)="schedule_slot($event)">{{item.day}} -->
+                               <p>{{item.day}}</p>
+                               <div>
+                                <span (click)="addNew_additional(j)" class="addOn"><img src="./assets/images/plus-icon.png" alt="" ></span>
+                                <div  *ngFor="let input of item.day_time; let i = index;" class="Addi_slot_sec">
+                                  
+                                    <input type="time" [(ngModel)]="input.start_times" id="start_times" (change)="getslot_addi(input.start_times,j,i)" >
+                                    <input type="time" [(ngModel)]="input.end_times"  (change)="getslot_end_additional(input.end_times,j,i)">
+                                    <input type="number" [(ngModel)]="input.available_seat" style="width: 60px; text-align: center;">
+                                    <span><img class="cl-delit" src="./assets/images/delete.png" (click)="remove_add(j,i)" alt=""></span>
+                                </div>
+                               </div>
+                                
+                            </div>
+                        </div>
+                        <div class="custom-input-field text-center col-md-12">
+                            <button (click)="onSubmit_additional()" class="btn btn-submit">Add Additional</button>
+                          </div>
+                                 
+                    </div>
+                </div>
+                
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+                
+    </div>
+
+</section>

@@ -1,22 +1,16 @@
 <h2 class="mb-4">Rate this Provider<h2>
 
-    <div class="propular_rate">
+    <form [formGroup]="form">
         <div class="cont">
-            <label>Rate:</label>
-            <div class="stars popularStarRating">
-                <ngx-star-rating [(ngModel)]="rating" [disabled] ="false"></ngx-star-rating>
-            </div>
+          <div class="stars">
+            <ngx-star-rating formControlName="rating1" [id]="'rating'"></ngx-star-rating>
+          </div>
+          <!-- <div class="rating-color">Rating: {{form.value.rating1}}</div> -->
+          <div>
+            <input class="mb-3 mt-3" placeholder="Enter your review" formControlName="review1">
+          </div>
+         
         </div>
-    </div>
-    <div>
-    <input class="mb-3 mt-3" placeholder="Enter your review" [(ngModel)]="review">
-    </div>
-   
-    <!-- <div class="d-block vi-li-f-aq">
-        <button class="btn mb-3" >Provide Feedback</button>
-     </div> -->
-     <div>
-     <button class="btn mb-3 mr-1 mybtn" (click)="provideFeedback()">Provide Feedback</button>
-     <button class="btn mb-3 mybtn" (click)="closeDialog()">Cancel</button>
-    </div>
-    
+        <button  type="submit" class="btn mb-3 mr-1 mybtn" (click)="onSubmit()">Provide Feedback</button>
+        <button class="btn mb-3 mybtn" (click)="closeDialog()">Cancel</button>
+    </form>

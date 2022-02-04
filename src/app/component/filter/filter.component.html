@@ -5,22 +5,8 @@
             
             <div class="card-body ">
                <div>
-                
-                <!-- <h5 class="mb-0">User Type</h5>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Radios0" id="exampleRadios1" value="kids" (change)="onTypeChange($event.target.value)" checked>
-                  <label class="form-check-label" for="exampleRadios1">
-                   Kids Classes & Tutoring
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Radios0" id="exampleRadios2" value="adults" (change)="onTypeChange($event.target.value)">
-                  <label class="form-check-label" for="exampleRadios2">
-                    Classes for Adults
-                  </label>
-                </div> -->
 
-                  <h5 class="mb-0 mt-2"> Price</h5>
+                  <!-- <h5 class="mb-0 mt-2"> Price</h5>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="Radios1" id="exampleRadios1" value="1" (change)="onItemChange1($event.target.value)" checked>
                     <label class="form-check-label" for="exampleRadios1">
@@ -32,19 +18,19 @@
                     <label class="form-check-label" for="exampleRadios2">
                       Higher price
                     </label>
-                  </div>
+                  </div> -->
                   <hr class="border-0">
                   </div>
 
                   <div>
                   <h5 class="mb-0">DISTANCE</h5>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" [(ngModel)]="distance" name="Radios2" id="option1" (change)="onDisChange($event.target.value)" value="100">
+                  <div class="form-check" *ngFor="let item of distanceList">
+                    <input class="form-check-input" type="radio" [(ngModel)]="distance" name="Radios2" id="option1" (change)="onDisChange($event)" [value]="item.distance">
                     <label class="form-check-label" for="exampleRadios1">
-                     Within 100 miles
+                     Within {{item.distance}} Miles
                     </label>
                   </div>
-                  <div class="form-check">
+                  <!-- <div class="form-check">
                     <input class="form-check-input" type="radio" [(ngModel)]="distance" name="Radios2" id="option2" (change)="onDisChange($event.target.value)" value="200">
                     <label class="form-check-label" for="exampleRadios2">
                       Within 200 miles
@@ -55,7 +41,7 @@
                     <label class="form-check-label" for="exampleRadios3">
                       Within 300 miles
                     </label>
-                  </div>
+                  </div> -->
                   <hr class="border-0">
                   </div>
 
@@ -64,7 +50,13 @@
                     <div class="all_category" data-toggle="dropdown" style="color: black;font-size: 1.1rem;">
                         Category
                     </div>
-                    <div class="all_category_data">
+
+                    <div class="">
+                      <a  (click)="clear_serach()" class="dropdown-item">Clear Search</a>
+                      <a  (click)="serachbyid(data._id)" class="dropdown-item"
+                          *ngFor="let data of categorylisting">{{data.name}}</a>
+                  </div>
+                    <!-- <div class="all_category_data">
                         <form action="onSearch()">
                             <div (focus)="openDropdown()" autocomplete="off" (blur)="closeDropdown()" type="text"
                                 placeholder="What you are looking for" [(ngModel)]="searchQuery" name="searchQuery"
@@ -72,32 +64,13 @@
                         </form>
                     </div>
 
-                    <!-- <div class="search-dropdown categorie-dropdown"
-                        *ngIf="categorySubcategory && searchQuery !='' && open == true">
-                        <a (click)="listingDetails(item._id)" class="dropdown-item"
-                            *ngFor="let item of categorySubcategory">{{item.name}}</a>
-                    </div> -->
-
-                     <!-- <div class="search-dropdown categorie-dropdown"
-                        *ngIf="categorylisting && searchQuery !='' && open == true">
-                        <a [routerLink]="['/sub-category/'+item._id]" class="dropdown-item"
-                            *ngFor="let item of categorySubcategory | searchFilter: {title: searchQuery}">{{item.name}}</a>
-                    </div> -->
-
 
                     <div class="dropdown-menu categorie-dropdown">
                         <a [routerLink]="['/sub-category/'+data._id]" class="dropdown-item"
                             *ngFor="let data of categorylisting">{{data.name}}</a>
-                    </div>
+                    </div> -->
                 </div>
 
-                  <!-- <h5 class="mb-0"> AGES</h5>
-                  <input placeholder="Min" type="number" #a1 [(ngModel)]="minAge" value="minAge" >
-                  <input placeholder="Max" type="number" #a2 [(ngModel)]="maxAge" value="maxAge" >
-
-                  <button (click)="filter()" class="fil-sb-bt">Submit</button>-->
-
-                  <!-- <button (click)="serviceList()" class="fil-sb-bt">Submit</button> -->
             </div>
       </div>
     </div>

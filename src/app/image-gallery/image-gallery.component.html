@@ -1,0 +1,62 @@
+<section class="inner-banner">
+    <div class="container">
+        <h1>My <strong style="text-transform: capitalize;">{{type}}</strong> Gallery</h1>
+    </div>
+</section>
+<!-- Banner end -->
+<!-- Body content start -->
+<section class="container">
+    <div class="row">
+                <div class="col-sm-12 min-height-50" *ngIf="type=='photo'">
+                <div class="pg-add-img-box" (click)=" fileInput2.click()">
+                </div>
+                <input #fileInput2 type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" />
+                <ul class="pg-ul-list galleryImages-overview">
+                <li *ngFor="let img of galleryImages" class="galleryImages-list">
+                    <a class="example-image-link" href="{{baseurl}}{{img}}" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard.">
+                <!-- <div class="pg-item-img-hold"
+                [ngStyle]="{'background-image' : img ? 'url(' +img + ')' : 'url(assets/images/trainer-img-3.png' + ')'}">
+                
+            </div> -->
+            <img [src]="baseurl+img" onerror="this.src='assets/images/trainer-img-3.png';" alt="">
+            
+            </a>
+            <span class="delete" (click)="deleteicon(img)">X</span>
+                </li>
+                </ul>
+                </div>
+
+                <div class="col-sm-12 min-height-50" *ngIf="type=='video'">
+                    <!-- <div class="row">
+                        <div class="col-sm-8 min-height-50">
+                            <input type="url" class="form-control" [(ngModel)]="video_link" placeholder="Video Link"
+                        required="required">
+                        <div class="imageUpload" (click)="add_link()">
+                        </div>
+                        </div>
+                    </div> -->
+                    
+                    <div class="pg-add-img-box" (click)=" fileInput2.click()">
+                        <span class="tooltiptext">Add video</span>
+                    </div>
+                    
+                    <input #fileInput2 type="file" accept="video/mp4" (change)="onFileSelected_vedio($event)" style="display:none;" />
+                    <ul class="pg-ul-list galleryVideoslist-over">
+                    <li *ngFor="let img of galleryVideos" class="galleryVideoslist">
+                    <div class="galleryVideos-details">
+    
+                        <video width="100%"  loop="true" class="videocont" [muted]="false"  playsinline controls>
+                            <source src="{{baseurl+img+'?#t=0.8'}}" type="video/mp4"/>
+                            
+                                <canvas id="canvas"></canvas>
+                          </video>
+                    </div>
+    
+    
+                    </li>
+                    </ul>
+                    </div>
+
+    </div>
+
+</section>

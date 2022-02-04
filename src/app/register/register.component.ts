@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormsModule } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { WebserviceService } from '../services/webservice.service';
-
+import { LoginComponent } from '../login/login.component';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -53,13 +53,14 @@ export class RegisterComponent implements OnInit {
         "",
         [Validators.required, Validators.pattern("^[A-Za-z ]+$")],
       ],
-      UserName: [
-        "",
-        [Validators.required, Validators.pattern("^[A-Za-z]+$")],
-      ],
+      // UserName: [
+      //   "",
+      //   [Validators.required, Validators.pattern("^[A-Za-z]+$")],
+      // ],
       UserPhone: [
         "",
-        [Validators.required, Validators.pattern('^[0-9]{10}$')],
+        //[Validators.required, Validators.pattern(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)],
+        [Validators.required, Validators.pattern(/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/im)],
       ],
       UserEmail: ["", [Validators.required, Validators.email]],
       UserPassword: ["", [Validators.required]],
@@ -94,7 +95,7 @@ export class RegisterComponent implements OnInit {
       console.log("User")
       let register = {
         UserFullName : this.userForm.controls.UserFullName.value,
-        UserName : this.userForm.controls.UserName.value,
+       // UserName : this.userForm.controls.UserName.value,
         UserType : this.userForm.controls.UserType.value,
         UserEmail : this.userForm.controls.UserEmail.value,
         UserPhone : this.userForm.controls.UserPhone.value,
@@ -112,7 +113,7 @@ export class RegisterComponent implements OnInit {
           if (data.success) {
             this.dialog.closeAll();
             this.userForm.reset();
-            this.router.navigate(['/login'])
+            this.openLoginDialog()
           }
         },
         (err) => {
@@ -126,7 +127,7 @@ export class RegisterComponent implements OnInit {
 
       let register = {
         UserFullName : this.userForm.controls.UserFullName.value,
-        UserName : this.userForm.controls.UserName.value,
+       // UserName : this.userForm.controls.UserName.value,
         UserType : this.userForm.controls.UserType.value,
         UserEmail : this.userForm.controls.UserEmail.value,
         UserPhone : this.userForm.controls.UserPhone.value,
@@ -144,7 +145,8 @@ export class RegisterComponent implements OnInit {
           if (data.success) {
             this.dialog.closeAll();
             this.userForm.reset();
-            this.router.navigate(['/login'])
+            //this.router.navigate(['/login'])
+            this.openLoginDialog()
           }
         },
         (err) => {
@@ -153,6 +155,14 @@ export class RegisterComponent implements OnInit {
       );
     }
 
+  }
+
+
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(LoginComponent, { width: '620px' });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result`);
+    });
   }
 
   onAutocompleteSelected(result: PlaceResult) {

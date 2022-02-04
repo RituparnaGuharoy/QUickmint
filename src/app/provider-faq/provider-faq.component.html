@@ -1,16 +1,22 @@
 <!-- Banner start -->
-<section class="inner-banner">
+ <!-- <section class="inner-banner">
     <div class="container">
-      <h1>Edit a<strong> Service</strong></h1>
+      <h1>Edit a<strong> Service 222</strong></h1>
+    </div>
+  </section> -->
+  <section class="inner-banner">
+    <div class="container">
+      <h1><strong> Frequently Asked Questions</strong></h1>
     </div>
   </section>
+   
   <!-- Banner end -->
  
   <!-- Body content start -->
-  <section class="container">
+ <section class="container">
     <div class="text-center width754">
-
-        <div class="row">
+      
+       <!-- <div class="row">
 
           <div class="form-group custom-input-field col-md-12">
             <input type="text" [(ngModel)]="title" value="{{title}}" name="" class="form-control" placeholder="Job title"
@@ -19,7 +25,7 @@
         <div class="form-group custom-input-field col-md-12">
           <textarea rows="5" [(ngModel)]="description" value="{{description}}" name="" class="form-control"
             placeholder="Job description"></textarea>
-        </div>
+        </div> -->
         <!-- <div class="form-group custom-input-field col-md-12">
           <label style="text-align: left!important;" class="col-md-12 pl-0">Category :</label>
           <select [(ngModel)]="category_id" placeholder="Category" class="form-control" id="sel1" (change)="getSubcategory()">
@@ -61,7 +67,7 @@
            
           </div> -->
 
-          <div class="form-group custom-input-field col-md-6 text-left time-field">
+          <!-- <div class="form-group custom-input-field col-md-6 text-left time-field">
             <label>  From :</label>
             <ngx-timepicker-field [defaultTime]="'10:11 am'" [(ngModel)]="job_start" timeChanged="consolee()"></ngx-timepicker-field>
           </div>
@@ -69,16 +75,16 @@
           <div class="form-group custom-input-field col-md-6 text-left time-field">
             <label>To :</label>
             <ngx-timepicker-field [defaultTime]="'11:11 am'" [(ngModel)]="job_end" timeChanged="consolee()"></ngx-timepicker-field>
-          </div>
+          </div> -->
           <!-- <div class="form-group custom-input-field col-md-6">
             <input type="time"  class="form-control" placeholder="End Time"
               required="required">
           </div>  -->
-          <div class="form-group custom-input-field col-md-12">
+          <!-- <div class="form-group custom-input-field col-md-12">
             <label style="text-align: left!important;" class="col-md-12 pl-0">Price :</label>
             <input type="text" [(ngModel)]="Price" class="form-control" value="{{Price}}" placeholder="Price"
               required="required">
-          </div>
+          </div> -->
 
           <!-- <label for="">Upload an image: </label>
             <input [(ngModel)]="image" class="form-control" (change)="readUrl($event)" type="file" accept="image/*"> -->
@@ -100,11 +106,67 @@
               <mat-datepicker #picker></mat-datepicker>
             </div>
           </div> -->
-          <div class="custom-input-field text-center col-md-12">
+          <!-- <div class="custom-input-field text-center col-md-12">
             <button (click)="onSubmit()" class="btn btn-submit">Submit</button>
-          </div>
+          </div> 
           
-        </div>
+          
+        </div>-->
+
+        
     </div>
   </section>
   <!-- Body content end -->
+
+
+
+  <section class="container">
+    <div class="container">
+      <div id="accordion">
+        <div class="card faq-crd" *ngFor="let item of FaqList">
+          <div class="card-header" id="headingOne">
+            <h5 class="m-0">
+              <button class="btn btn-link d-block w-100 text-left" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                 {{item.question}}
+              </button>
+            </h5>
+          </div>
+      
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              {{item.answer}}
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card faq-crd">
+          <div class="card-header" id="headingTwo">
+            <h5 class="m-0">
+              <button class="btn btn-link d-block w-100 text-left collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                 FAQ title 2
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+          </div>
+        </div>
+        <div class="card faq-crd">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link d-block w-100 text-left collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                 FAQ title 3
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <mat-paginator  #paginator (page)="paginationChange($event)" [length]="count" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </section>

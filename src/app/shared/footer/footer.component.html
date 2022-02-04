@@ -3,121 +3,63 @@
 
     <div class="container">
         <div class="footer_inner">
-        <!-- <div class="newsletter_section">
-            <div class="newsletter_text">Sign Up For Newsletter</div>
-            <div class="newsletter_field">
-                <input type="text" placeholder="Enter your email" class="newsletter_input">
-                <button class="submit">Submit</button>
-            </div>
-        </div> -->
         <div class="footer_main_box_main">
         <div class="footer_main_box">
-            <h2>Information</h2>
-            <ul *ngFor="let data of informationList">
+            <h2>QuickMints </h2>
+            <!-- <ul *ngFor="let data of informationList">
                 <li><a href="javascript:void(0);" (click)="onClick(data.pageSlug)">{{data.pageTitle}}</a></li>
+            </ul> -->
+            <ul >
+                <!-- <li><a href="javascript:void(0);" [routerLink]="['/about-new']">About Us(2)</a></li> -->
+                <li><a href="javascript:void(0);" [routerLink]="['/how-work']">How It works</a></li>
+                <li><a href="javascript:void(0);" [routerLink]="['/term-conditions']">Terms & Conditions</a></li>
+                <li><a href="javascript:void(0);" [routerLink]="['/Privacy-policy']">Privacy Policy</a></li>
             </ul>
         </div>
             <div class="footer_main_box">
-            <h2>Other Links</h2>
-            <ul *ngFor="let data of otherLinks">
+            <h2>Partners </h2>
+            <!-- <ul *ngFor="let data of otherLinks">
                 <li><a href="javascript:void(0);" (click)="onClick(data.pageSlug)">{{data.pageTitle}}</a></li>
+            </ul> -->
+            <ul >
+                <li><a href="javascript:void(0);" [routerLink]="['/provider-faq']">Partners FAQS</a></li>
+                <li><a class="nav-link"  routerLinkActive="active" href="https://quickmints.freshdesk.com/support/solutions/73000231075" target="_blank">Support</a></li>
+                <!-- <li><a href="javascript:void(0);" [routerLink]="['/pricing']">Pricing</a></li> -->
             </ul>
         </div>
             <div class="footer_main_box">
-            <h2>Your Account</h2>
-            <ul *ngFor="let data of yourAccounts">
+            <h2>Customers </h2>
+            <!-- <ul *ngFor="let data of yourAccounts">
                 <li><a href="javascript:void(0);" (click)="onClick(data.pageSlug)">{{data.pageTitle}}</a></li>
+            </ul> -->
+            <ul >
+                <li><a href="javascript:void(0);" [routerLink]="['/customer-faq']">Customer FAQS</a></li>
+                <li><a class="nav-link"  routerLinkActive="active" href="https://quickmints.freshdesk.com/support/solutions/73000231074" target="_blank">Support</a></li>
             </ul>
         </div>
-            <div class="footer_main_box">
+            <!-- <div class="footer_main_box">
             <h2>Help Links</h2>
             <ul *ngFor="let data of helpLinks">
                 <li><a href="javascript:void(0);" (click)="onClick(data.pageSlug)">{{data.pageTitle}}</a></li>
             </ul>
-        </div>
+        </div> -->
             <div class="footer_main_box contact_footer_box">
             <h2>Contact Us</h2>
-            <p class="address">{{address}}</p>
+            <!-- <p class="address">{{address}}</p>
             <p class="phone">{{phone}}</p>
-            <p class="message">{{email}}</p>
+            <p class="message">{{email}}</p> -->
+            <p *ngFor="let item of contactList" [ngClass]="{'address': item.pageSlug === 'Address', 'message' : item.pageSlug === 'Email'}">
+                {{item.content}}
+            </p>
             <div class="social_icons">
-                <a href="{{fbUrl}}"><img src="assets/images/fb.png" alt=""/></a>
+                <!-- <a href="{{fbUrl}}"><img src="assets/images/fb.png" alt=""/></a>
                 <a href="{{twitter}}"><img src="assets/images/tw.png" alt=""/></a>
-                <a href="{{insta}}"><img src="assets/images/ins.png" alt=""/></a>
+                <a href="{{insta}}"><img src="assets/images/ins.png" alt=""/></a> -->
             </div>
         </div>
         </div>
         </div>
     </div>
-
-<!-------------------------------------------------------------------------------------------------------------------------------------->
-
-
-
-    <!-- <div class="container">
-        <div class="footer_inner">
-        
-        <div class="footer_main_box_main">
-        <div class="footer_main_box">
-            <h2>Information</h2>
-            <ul>
-                <li><a href="javascript:void(0);"  [routerLink]="['/about-us']">About Us</a></li>
-                <li><a href="#">Book a Service</a></li>
-                <li><a href="#">Category</a></li>
-                <li><a href="#">Brand</a></li>
-                <li><a href="#">Ready to Ship</a></li>
-            </ul>
-        </div>
-            <div class="footer_main_box">
-            <h2>Other Links</h2>
-            <ul>
-                <li><a href="#">Delivery</a></li>
-                <li><a href="#">Legal Notice</a></li>
-                <li><a [routerLink]="['/terms-condition']">Terms & Conditions</a></li>
-                <li><a [routerLink]="['/privacy-policy']">Privacy Policy</a></li>
-                <li><a href="#">Secure Payment</a></li>
-            </ul>
-        </div>
-            <div class="footer_main_box">
-            <h2>Your Account</h2>
-            <ul>
-                <li><a href="#">Personal Info</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Credit Slips</a></li>
-                <li><a href="#">Addresses</a></li>
-                <li><a href="#">My Wishlists</a></li>
-            </ul>
-        </div>
-            <div class="footer_main_box">
-            <h2>Help Links</h2>
-            <ul>
-                <li><a href="javascript:void(0);"  [routerLink]="['/contact-us']">Contact Us</a></li>
-                <li><a href="#">Customer FAQs</a></li>
-                <li><a href="#">Provider's FAQs</a></li>
-                <li><a href="#">Order Lookup</a></li>
-                <li><a href="#">Complaint Handling</a></li>
-            </ul>
-        </div>
-            <div class="footer_main_box contact_footer_box">
-            <h2>Contact Us</h2>
-            <p class="address">7292 Dictum Av. San Antonio MI 47096</p>
-            <p class="phone">0123-456-789</p>
-            <p class="message">Info@neelimaq.com</p>
-            <div class="social_icons">
-                <a href="#"><img src="assets/images/fb.png" alt=""/></a>
-                <a href="#"><img src="assets/images/tw.png" alt=""/></a>
-                <a href="#"><img src="assets/images/ins.png" alt=""/></a>
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>
-
- -->
-
-
-
-<!---------------------------------------------------------------------------------------------------------------------------------->
 
     <div class="copy_right">
         <div class="container">

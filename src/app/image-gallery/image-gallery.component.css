@@ -1,0 +1,105 @@
+.pg-add-img-box {
+    
+    background: url('../../assets/images/plus-big-icon.png') center no-repeat;
+    cursor: pointer;
+    width: 90px;
+    height: 90px;
+    border-radius: 3px;
+    display: block;
+    float: right;
+    position: relative;
+}
+.tooltiptext{
+    visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+   right: 72px;
+  /* Porsition the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+.galleryImages-list{
+    position: relative;
+}
+
+.galleryImages-list .delete{
+    position: absolute;
+    right: 10px;
+    z-index: 999;
+    color: #fff;
+}
+
+.pg-add-img-box:hover .tooltiptext {
+    visibility: visible;
+  }
+
+.imageUpload {
+    
+    background: url('../../assets/images/plus-big-icon.png') center no-repeat;
+    cursor: pointer;
+    width: 90px;
+    height: 90px;
+    border-radius: 3px;
+    display: block;
+    float: right;
+}
+.pg-ul-list{
+    clear: both;
+}
+ul.pg-ul-list.galleryImages-overview{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+ul.pg-ul-list.galleryImages-overview li{
+    width: 20%;
+    margin: 16px;
+    box-shadow: 0px 0px 8px #ccc;
+    border-radius: 16px;
+    background: #000;
+    overflow: hidden;
+}
+ul.pg-ul-list.galleryImages-overview li img{
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+ul.pg-ul-list.galleryVideoslist-over {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+ul.pg-ul-list.galleryVideoslist-over li{
+    width: 30%;
+    margin: 16px;
+    box-shadow: 0px 0px 8px #ccc;
+    border-radius: 16px;
+    overflow: hidden;
+}
+ul.pg-ul-list.galleryVideoslist-over li video{
+    height: 250px;
+    
+
+}
+
+@media(max-width:767px){
+    ul.pg-ul-list.galleryImages-overview li img {
+        height: 120px;
+    }
+    ul.pg-ul-list.galleryImages-overview li{
+       width: 40%;
+    }
+    ul.pg-ul-list.galleryVideoslist-over li video {
+        height: 200px;
+    }
+    ul.pg-ul-list.galleryVideoslist-over li{
+       width: 80%;
+    }
+    
+}

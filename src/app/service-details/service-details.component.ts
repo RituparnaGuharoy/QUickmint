@@ -10,7 +10,10 @@ import { CommonService } from 'src/app/common.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { ViewImageComponent } from '../view-Image/view-Image.component';
 import { ViewClassComponent } from '../view-Class/view-Class.component';
-
+import { CallPopupComponent } from '../call-popup/call-popup.component'
+import { LoginComponent } from '../login/login.component';
+import { environment } from 'src/environments/environment.prod';
+var url = environment.api;
 @Component({
   selector: 'app-service-details',
   templateUrl: './service-details.component.html',
@@ -18,7 +21,8 @@ import { ViewClassComponent } from '../view-Class/view-Class.component';
 })
 export class ServiceDetailsComponent implements OnInit {
 
-  photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  photoUrl:string = url;
+  //photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
   ProviderId:string;
   providerData:any;
   providerGallery:any;
@@ -27,9 +31,16 @@ export class ServiceDetailsComponent implements OnInit {
   like1:any;
   follow1:any;
   averageRating:number;
-  page:string;
+  page =1;
+  limit=5;
   otherClass:any;
-
+  class_list:any;
+  token: any = localStorage.getItem('access-token-quickmint');
+  question_list:any;
+  rating_list:any;
+  rating_list_length:any;
+  question_list_length:any;
+  count=0;
   constructor(
     public dialog: MatDialog,
     public service: WebserviceService,
@@ -39,19 +50,18 @@ export class ServiceDetailsComponent implements OnInit {
     private toastr : ToastrService
   ) { 
     this.route.queryParams.subscribe((params) => { 
-        this.ProviderId= this.router.getCurrentNavigation()!.extras.state!.data;
-        console.log('this.providerId: ', this.ProviderId);
+        this.ProviderId = params.id;
     });
   }
 
   ngOnInit(): void {
-   // this.ProviderId='60914600c1bef37b92308879';
-    this.service.provider_Id = this.ProviderId;
-    
+    this.service.provider_Id = this.ProviderId;  
     this.viewDetails();
-    this.checkFollowing();
-    this.checkLiking();
+    // this.checkFollowing();
+    // this.checkLiking();
   }
+
+  SlideOptions = { items: 3, dots: false, nav: true, margin:15 };  
 
   checkFollowing(){
     this.service.checkFollowing(this.ProviderId).subscribe((data:any)=>{
@@ -61,6 +71,13 @@ export class ServiceDetailsComponent implements OnInit {
       }
     })
   }
+  goToPostANeed() {
+
+    // this.router.navigate(['/provider-service-list'],{ queryParams: {id: this.ProviderId} })
+    
+    this.router.navigate(['/provider_class_list'],{ queryParams: {id: this.ProviderId} })
+  }
+  
 
   checkLiking(){
     this.service.checkLiking(this.ProviderId).subscribe((data:any)=>{
@@ -80,10 +97,13 @@ export class ServiceDetailsComponent implements OnInit {
       this.follow1 = this.providerData.follow;
       this.averageRating = this.providerData.providerdetails.averageRating;
       this.service.galleryPhoto = this.providerGallery;
-      this.page = this.providerData.providerdetails.credentials;
+      //this.page = this.providerData.providerdetails.credentials;
       this.otherClass = this.providerData.otheclass;
       this.service.serviceList = this.otherClass;
       console.log('average rating',this.averageRating);
+      this.get_classlist();
+      this.allquestionlist();
+      this.allrevies();
     })
   }
 
@@ -172,6 +192,83 @@ export class ServiceDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewClassComponent, {
       // width: '250px',
       data: this.otherClass
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
+  get_classlist(){
+    this.service.get_prover_classlist(this.ProviderId,this.page,this.limit).subscribe((data:any)=>{
+      console.log('details data', data);
+      this.class_list = data['data'];
+      this.count = data['count'];
+    })
+  }
+  paginationChange(event:any) {
+    this.page = event.pageIndex + 1;
+    this.limit = event.pageSize;
+    this.get_classlist()
+   // this.router.navigate(['/service-list'], { queryParams: { page: this.page, limit: this.limit } });
+  }
+
+  bookclss(c: any){
+    if(c.crash_course=='SEMESTER'){
+      this.router.navigate(['/user-select-class/'],{queryParams : {classId: c._id,Price: c.class_fees}})
+
+    }else{
+      this.router.navigate(['/user-select-class/'],{queryParams : {classId: c._id,Price: c.class_fees}})
+    }
+    
+  }
+
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(LoginComponent, { width: '620px' });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result`);
+    });
+  }
+
+
+  allquestionlist(){
+    console.log(this.page)
+    this.service.all_askquestion(this.ProviderId,this.page,this.limit).subscribe((response:any)=>{
+      console.log(response)
+      if(response['success']){
+        //this.question_list = response.data;
+        this.question_list_length = response.data.length;
+        for(var i= 0; response.data.length>i;i++){
+          this.question_list = response.data[i].question_answer;
+        // this.question_list_length = response.data.length;
+        }
+        
+      }
+
+    })
+  }
+
+
+  allrevies(){
+    console.log(this.page)
+    this.service.rating_list_user(this.ProviderId,this.page,this.limit).subscribe((response:any)=>{
+      console.log(response)
+      if(response['success']){
+        this.rating_list = response.data;
+        this.rating_list_length = response.data.length;
+      }
+
+    })
+  }
+
+
+  callback(): void {
+    const dialogRef = this.dialog.open(CallPopupComponent, {
+      width: '620px',
+      data: {
+        providerid: this.ProviderId
+      }
     });
 
     dialogRef.afterClosed().subscribe((result) => {

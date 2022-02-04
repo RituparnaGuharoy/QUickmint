@@ -1,0 +1,171 @@
+<section class="inner-banner">
+    <div class="container">
+        <h1>Transaction  <strong>Details</strong></h1>
+    </div>
+  </section>
+
+
+  <section class="common-inner-bg-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 sd-left-panel">
+                <h3 class="ssc-title">Class Details</h3>
+                <div class="ssc-item-box">
+                    
+                    <div class="ssc-img" [ngStyle]="{'background-image': 'url(' +photourl+ Transaction_details.bookedService.class_image + ')'}"></div>
+                    <div class="ssc-item-info">
+                        <h4>{{Transaction_details.bookedService.class_title}}</h4>
+                        <!-- <p>
+                            <span class="lab">Class By: </span>
+                            <span class="cont">{{Transaction_details.provider_id.UserFullName}}</span>
+                        </p> -->
+                        <p>
+                            <span class="lab">Class Type: </span>
+                            <span class="cont">{{Transaction_details.bookedService.class_type}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Size: </span>
+                            <span class="cont">{{Transaction_details.bookedService.total_strenght}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Availabe Seat: </span>
+                            <span class="cont">{{Transaction_details.bookedService.available_set}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Start Date: </span>
+                            <span class="cont">{{Transaction_details.bookedService.strat_date |  date:'EEEE, MMMM d'}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Time: </span>
+                            <span class="cont">{{Transaction_details.bookedService.start_tiem | date:'shortTime' }} To {{Transaction_details.bookedService.end_time |  date:'shortTime'}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Cost: </span>
+                            <span class="cont">${{Transaction_details.bookedService.class_fees}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Description: </span>
+                        </p>
+                        <p>{{Transaction_details.bookedService.class_description}}</p>
+                        <!-- <p class="ssc-address-info"><i class="fa fa-map-marker" aria-hidden="true"></i>{{Transaction_details.provider_id.UserLocation.Address}}</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 sd-right-panel" *ngIf="user_type =='1'">
+                <h3 class="ssc-title">Student Details</h3>
+                <div class="ssc-item-info">
+                    <!-- <h4>{{Transaction_details.bookedService.class_title}}</h4> -->
+                    <!-- <p>
+                        <span class="lab">Class By: </span>
+                        <span class="cont">{{Transaction_details.provider_id.UserFullName}}</span>
+                    </p> -->
+                    <p>
+                        <span class="lab">Student Full Name: </span>
+                        <span class="cont">{{Transaction_details.student_name}}</span>
+                    </p>
+                    <p>
+                        <span class="lab">Student Email id: </span>
+                        <span class="cont">{{Transaction_details.student_email}}</span>
+                    </p>
+                    <p>
+                        <span class="lab">Student Contact Number: </span>
+                        <span class="cont">{{Transaction_details.student_ph_number}}</span>
+                    </p>
+                    
+                    <p *ngIf="Transaction_details.bookedService.overview =='KIDS'">
+                        <span class="lab">Parent's Name: </span>
+                        <span class="cont">{{Transaction_details.parent_name}}</span>
+                    </p>
+                    <p *ngIf="Transaction_details.bookedService.overview =='KIDS'">
+                        <span class="lab">Parent's Contact Number: </span>
+                        <span class="cont">${{Transaction_details.parent_ph_number}}</span>
+                    </p>
+
+                    
+                    
+                </div>
+
+                <h3 class="ssc-title">Payment Details</h3>
+
+                <div class="ssc-item-info">
+                   
+                    <p>
+                        <span class="lab">Payment Type: </span>
+                        <span class="cont">{{Transaction_details.payment_type}}</span>
+                    </p>
+                    <p *ngIf="Transaction_details.payment_type == 'online'">
+                        <span class="lab">Transaction Id: </span>
+                        <span class="cont">{{Transaction_details.transactionId}}</span>
+                    </p>
+                    <p *ngIf="Transaction_details.payment_type == 'cash'">
+                        <span class="lab">Transaction Id: </span>
+                        <span class="cont">NA</span>
+                    </p>
+
+                    <p>
+                        <span class="lab">Payment date: </span>
+                        <span class="cont">{{Transaction_details.createdAt |  date:'EEEE, MMMM d'}}</span>
+                    </p>
+                    
+
+                    
+                    
+                </div>
+                
+            </div>
+
+
+            <div class="col-lg-6 sd-right-panel" *ngIf="user_type =='2'">
+                <h3 class="ssc-title">Instructor Details</h3>
+                <div class="ssc-item-info">
+                    <!-- <h4>{{Transaction_details.bookedService.class_title}}</h4> -->
+                    <!-- <p>
+                        <span class="lab">Class By: </span>
+                        <span class="cont">{{Transaction_details.provider_id.UserFullName}}</span>
+                    </p> -->
+                    <p>
+                        <span class="lab">Instructor Full Name: </span>
+                        <span class="cont">{{Transaction_details.provider_id.UserFullName}}</span>
+                    </p>
+                    <p>
+                        <span class="lab">Instructor Email id: </span>
+                        <span class="cont">{{Transaction_details.provider_id.UserEmail}}</span>
+                    </p>
+                   
+
+                    
+                    
+                </div>
+
+                <h3 class="ssc-title">Payment Details</h3>
+
+                <div class="ssc-item-info">
+                   
+                    <p>
+                        <span class="lab">Payment Type: </span>
+                        <span class="cont">{{Transaction_details.payment_type}}</span>
+                    </p>
+                    <p *ngIf="Transaction_details.payment_type == 'online'">
+                        <span class="lab">Transaction Id: </span>
+                        <span class="cont">{{Transaction_details.transactionId}}</span>
+                    </p>
+                    <p *ngIf="Transaction_details.payment_type == 'cash'">
+                        <span class="lab">Transaction Id: </span>
+                        <span class="cont">NA</span>
+                    </p>
+
+                    <p>
+                        <span class="lab">Payment date: </span>
+                        <span class="cont">{{Transaction_details.createdAt |  date:'EEEE, MMMM d'}}</span>
+                    </p>
+                    
+
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Body content end -->

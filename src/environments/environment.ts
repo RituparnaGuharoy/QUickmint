@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   // api: "http://localhost:5005/"
-  api: "https://nodeserver.mydevfactory.com:4290/"
+  //api: "https://nodeserver.mydevfactory.com:4290/"
+  api : "https://staging.quickmints.com:3030/"
+  //api : "https://www.quickmints.com:3000/"
 };
 
 /*

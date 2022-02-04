@@ -1,0 +1,66 @@
+<!-- Banner start -->
+<section class="inner-banner">
+    <div class="container">
+        <h1>Callback <strong>Request List</strong></h1>
+    </div>
+</section>
+<!-- Banner end -->
+<!-- Body content start -->
+
+<section class="common-inner-bg-wrap">
+    
+    <div class="container">
+
+          <!-- <ul class="topTab">
+              <li>
+                  <span class="active text-center">General Services</span>
+                <span class="text-center">Class Services</span>
+                
+            </li>
+            <button [routerLink]="['/provider-add']" class="text-center Add-Genral ">
+                Add General Service <img src="../../assets/images/plus-big-icon.png" alt="">
+            </button>
+              
+          </ul> -->
+        <div class="">
+            <div class="table-responsive-md transaction-table">
+                <table class="table Service-lit-tab-det">
+                    <thead>
+                        <tr>
+                        <!-- <th scope="col"></th> -->
+                        <th scope="col">Request By</th>
+                        <th scope="col">Email</th>
+                       
+
+                        <th scope="col">Contact No.</th>
+                        
+                        
+                        
+                        <th scope="col">Request Date</th>
+                        <!-- <th scope="col" style="text-align: center;">Action</th> -->
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of call_backlist;let i=index">
+                            <!-- <td><img class="pro" src="{{photourl}}{{item.bookedService.class_image}}" alt=""></td> -->
+                            <td>{{item.call_back_name}}</td>
+                            <td>{{item.call_back_email}}</td>
+                            <td>{{item.call_back_phone}}</td>
+                            <td>{{item.createdAt | date:'mediumDate': '+0000': 'en-ZA'}}</td>
+                            <!-- <td class="act-td" style="text-align: center;">
+                                
+                               <span (click)="transactionDetails(item)"><img src="assets/images/view-icon-md.png"  alt=""></span>
+                               
+                            </td> -->
+                            
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- <mat-paginator  #paginator (page)="paginationChange($event)" [length]="count" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
+    </div>
+    
+</section>

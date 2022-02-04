@@ -1,0 +1,68 @@
+<section class="inner-banner">
+
+    <div class="container">
+        <h1><strong>Classes</strong></h1>
+    </div>
+
+</section>
+<!-- Banner end -->
+<!-- Body content start -->
+
+<section class="common-inner-bg-wrap">
+    
+    <div class="container">
+
+          <!-- <ul class="topTab">
+              <li>
+                  <span class="active text-center">General Services</span>
+                <span class="text-center">Class Services</span>
+                
+            </li>
+            <button [routerLink]="['/provider-add']" class="text-center Add-Genral ">
+                Add General Service <img src="../../assets/images/plus-big-icon.png" alt="">
+            </button>
+              
+          </ul> -->
+        <div class="">
+            <div class="table-responsive-md transaction-table">
+                <table class="table Service-lit-tab-det">
+                    <thead>
+                        <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Class Type</th>
+
+                        <th scope="col">Class For</th>
+                        <th scope="col">Coures Type </th>
+                        
+                        <th scope="col">Price ($)</th>
+                       
+                        <th scope="col" style="text-align: center;">Action</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of classList;let i=index">
+                            <td><img class="pro" src="{{photourl}}{{item.class_image}}" alt=""></td>
+                            <td (click)="gotoClassDetails(item)">{{item.class_title}}</td>
+                            <td>{{item.class_category.name}}</td>
+                            <td>{{item.overview}}</td>
+                            <td>{{item.class_type}}</td>
+                           
+                            <td>{{item.class_fees}}</td>
+                          
+                            <td class="act-td" style="text-align: center;">
+                                
+                               <span><img src="assets/images/online-booking-icon.png" (click)="bookclss(item)" alt=""></span>
+                                <!--<span><img src="./assets/images/delete.png" (click)="deleteService(item._id)" alt=""></span> -->
+                            </td>
+                            
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Body content end -->

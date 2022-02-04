@@ -9,97 +9,303 @@
 <section class="container">
 
     <div class="my-profile-wrap">
-        <div class="profile-img-block"
-            [ngStyle]="{'background-image': profileImage ? 'url(' +  profileImage + ')'  : 'url(assets/images/trainer-img-4.png' + ')'}">
-            <i class="edit-icon" (click)="fileInput.click()"></i>
-        </div>
-        <input #fileInput type="file" accept="image/*" (change)="onProfileImageSelected($event)"
-            style="display:none;" />
+       
         <div class="row">
-            <form [formGroup]="profileDetailsForm" style="width:100%">
+            <div class="col-md-4">
+                <div class="profile-img-block"
+                [ngStyle]="{'background-image': profileImage ? 'url(' +  baseurl+profileImage + ')'  : 'url(assets/images/no_profile_pic.png' + ')'}">
+                <i class="edit-icon" (click)="fileInput.click()"></i>
+
+                
+            </div>
+            <input #fileInput type="file" accept="image/*" (change)="onProfileImageSelected($event)"
+                style="display:none;" />
+                <div class="d-block w-100 text-center form-group custom-input-field">
+                    <form [formGroup]="profileDetailsForm" style="width:100%">
+                        <div class="profile-link-edit-bx">
+                            <p class="p-0 link">{{providerlink}} </p>
+                            <button type="button" (click)="editname()" class="edit_icon"><img src="./assets/images/edit-icon.png"  alt=""></button>
+                        </div>
+                    <input type="text" class="form-control" formControlName="ProfileName" placeholder="ProfileName" (change)='hit()' *ngIf="showedit"
+                    >
+                </form>
+                    <!-- <input type="text" class="form-control" formControlName="Address" placeholder="User Phone"
+                        required="required"> -->
+                        <!-- <input id="pac-input" type="text" class="form-control" placeholder="Your Location" formControlName="Address" (focus)="autocompleteFocus()" autofocus > -->
+                </div>
+            </div>
+            <form [formGroup]="profileDetailsForm" style="width:100%" class="col-md-8">
                 <div class="row">
-                    <div class="col-md-6 form-group custom-input-field">
+                    <div class="col-md-12 form-group custom-input-field">
                         <input type="text" class="form-control" formControlName="email" placeholder="Email"
                             required="required" [readonly]="true">
-                    </div>
-                    <div class="col-md-6 form-group custom-input-field">
-                        <input type="text" class="form-control" formControlName="UserName" placeholder="User Name"
+                      </div>
+                    <div class="col-md-12 form-group custom-input-field">
+                        <input type="text" class="form-control" formControlName="ProfileName" placeholder="Business Name"
                             required="required">
                     </div>
-                    <div class="col-md-6 form-group custom-input-field">
+                    <div class="col-md-12 form-group custom-input-field">
                         <input type="text" class="form-control" formControlName="UserFullName"
-                            placeholder="User Full Name" required="required">
+                            placeholder="Full Name" required="required">
                     </div>
-                    <div class="col-md-6 form-group custom-input-field">
-                        <input type="text" class="form-control" formControlName="UserPhone" placeholder="User Phone"
+                    <div class="col-md-12 form-group custom-input-field">
+                        <input type="text" class="form-control" formControlName="UserPhone" placeholder="Phone Number"
                             required="required">
                     </div>
+                    <!-- <div class="col-md-12 form-group custom-input-field">
+                        <input type="text" class="form-control paypal" formControlName="paypal_account" placeholder="Input your Paypal Account info"
+                            required="required">
+                    </div> -->
+                    <div class="col-md-12 form-group custom-input-field">
+                        <div class="pmp-input-add">
+                            <input id="pac-input" type="text" class="form-control" placeholder="Your Location" [(ngModel)]="address_feild"  (focus)="autocompleteFocus()" autofocus [ngModelOptions]="{standalone: true}">
+                            <button type="button" (click)=add_address() class="pg-add-img-box"></button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group custom-input-field" *ngFor="let item of addreslist">
+                        <div class="pmp-input-add">
+                            <input type="text" class="form-control address" [(ngModel)]="item.Address" placeholder="Location" [ngModelOptions]="{standalone: true}" readonly>
+                            <button type="button" class="pg-delete-l-btn" (click)="deleteAddress(item._id)"><img src="./assets/images/delete.png"  alt=""></button>
+                        </div>
+                    </div>  
+
+                    <!-- <div class="col-md-12 form-group custom-input-field">
+                    <input id="pac-input" type="text" class="form-control" placeholder="Your Location"  (focus)="autocompleteFocus()" autofocus >
+                    </div> -->
+                    <div class="col-md-12 form-group custom-input-field">
+                        <select  placeholder="Time Zone" class="form-control" formControlName="user_time_zon" >
+                            
+                            <option *ngFor="let data of timeZone; let i=index" value="{{data}}">{{data}}
+                            </option>
+                          </select>
+                    </div>
+
+                    <div class="col-md-12 form-group custom-input-field">
+                        <!-- <select  placeholder="Industry" class="form-control" id="sel1" (change)="getSubcategory($event)" multiple>
+                            <option *ngFor="let data of categorylisting; let i=index"  [value]="data._id">{{data.name}}
+                            </option>
+                          </select> -->
+                          <div *ngFor="let item of categorylisting let i=index">
+                    
+                            <input (change)="fieldsChange($event,item._id,i)" value={{item._id}} type="checkbox" *ngIf="check(item._id, services)" checked="checked"/>
+                            <input (change)="fieldsChange($event,item._id,i)" value={{item._id}} type="checkbox" *ngIf="!check(item._id, services)" /> {{item.name}}
+                        </div>
+                          
+                    </div>
+
                 </div>
 
             </form>
         </div>
         <hr class="border-top-1">
-        <div class="provided-services-bx text-center padd-tp-btm25 ">
-            <h4 class="service-title">Provided Services</h4>
-            <ul class="ps-ul-list">
-                <li><a href="#">Hair Cut</a></li>
-                <li><a href="#">Facial</a></li>
-                <li><a href="#">Oil Massage</a></li>
-                <li><a href="#">Car Wash</a></li>
-                <li><a href="#">Technology</a></li>
-                <li>
-                    <a class="ps-add-btn" [routerLink]="['/provider-add']">
-                        Add
-                    </a>
-                </li>
-            </ul>
-        </div>
+
+        <form [formGroup]="profileDetailsForm" >
+            <div class="provided-services-bx text-center padd-tp-btm25 ">
+                <h4 class="service-title">Social Media Links</h4>
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-8">
+                        <div class="col-md-12 form-group custom-input-field">
+                            <input type="url" class="form-control" formControlName="facebookUrl" placeholder="Facebook"
+                                >
+                        </div>
+
+                        <div class="col-md-12 form-group custom-input-field">
+                            <input type="url" class="form-control" formControlName="instagramUrl" placeholder="Instagram"
+                                >
+                        </div>
+
+                        <div class="col-md-12 form-group custom-input-field">
+                            <input type="url" class="form-control" formControlName="twitterUrl" placeholder="Website"
+                                >
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
         <hr class="border-top-1">
+        <form [formGroup]="profileDetailsForm">
+        <div class="provided-services-bx text-center padd-tp-btm25 ">
+            <h4 class="service-title">About</h4>
+            <textarea class="form-control" maxlength="1000" formControlName="about_me" placeholder="Provide an introduction and description about you or your businesses. Focus on unique skills and what sets you or your business apart from your competition."
+            required="required"></textarea>
+        </div>
+    </form>
+
+    <form [formGroup]="profileDetailsForm">
         <div class="provided-services-bx text-center padd-tp-btm25 ">
             <h4 class="service-title">Status</h4>
             <div class="radio-item-bx">
                 <label class="radio-item">
-                    <input type="radio" checked="checked" name="radio">
+                    <input type="radio"  name="OnlineStatus" formControlName="OnlineStatus" value="true">
                     <span class="checkmark"></span>
                     <span class="radio-label">Online</span>
                 </label>
                 <label class="radio-item">
-                    <input type="radio" name="radio">
+                    <input type="radio" name="OnlineStatus" formControlName="OnlineStatus" value="false">
                     <span class="checkmark"></span>
                     <span class="radio-label">Offline</span>
                 </label>
             </div>
         </div>
-        <hr class="border-top-1">
-        <div class="provided-services-bx text-center padd-tp-btm25 ">
-            <h4 class="service-title">Photo Gallery</h4>
+    </form>
+        <div class="custom-input-field share-with-btnGroup text-center">
+            <button class="btn btn-submit" (click)="onSubmit()">Update</button>
+        </div>
+    <hr class="border-top-1">
+        <div class="provided-services-bx  padd-tp-btm25 padd-tp-btm100">
+            <h4 class="service-title">List Your Availability Here</h4>
+            <ul class="ps-ul-list">
+                <li class="services">
+                    <a href="javascript:void(0);" [routerLink]="['/register-class-list']">
+                        List Availability 
+                    </a>
+                </li>
+                <!-- <li class="services">
+                    <a href="javascript:void(0);" [routerLink]="['/register-class-list']">
+                        Add Class Service
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+        <!-- <div class="provided-services-bx  padd-tp-btm25 padd-tp-btm50">
+            <h4 class="service-title ">Manage Service Planner</h4>
+            <ul class="ps-ul-list">
+                <li class="services">
+                    <a href="javascript:void(0);" [routerLink]="['/service-planner']">
+                        Add  Service planner
+                    </a>
+                </li>
+               
+            </ul>
+        </div> -->
+    <hr class="border-top-1">
+        <!-- <div class="provided-services-bx  padd-tp-btm25 padd-tp-btm50">
+            <h4 class="service-title ">Documents</h4>
+          
             <ul class="pg-ul-list">
-                <li *ngFor="let img of galleryImages">
-                    <div class="pg-item-img-hold"
-                        [ngStyle]="{'background-image' : img ? 'url(' + img + ')' : 'url(assets/images/trainer-img-3.png' + ')'}">
-                    </div>
                 <li>
-                    <div class="pg-add-img-box" (click)=" fileInput2.click()">
+                    <div class="pg-item-img-hold" style="background-image: url(assets/images/documents.jpg);" [routerLink]="['/my-doc']">
+                        <p>Documents {{DocumentImages.length}}</p>
+                    </div>
+                </li>
+   
+            </ul>
+        </div> -->
+
+        <div class="provided-services-bx  padd-tp-btm25 ">
+            <h4 class="service-title ">Gallery</h4>
+            
+            <ul class="pg-ul-list">
+                <li>
+                    <div class="pg-item-img-hold" style="background-image: url(assets/images/photo_gallery.png);" (click)="gotogallery('photo')">
+                        <p>Photos {{imagelength}}</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="pg-item-img-hold" style="background-image: url(assets/images/video_gallery.jpg);" (click)="gotogallery('video')">
+                        <p>Videos {{videolength}}</p>
                     </div>
                 </li>
             </ul>
         </div>
-        <input #fileInput2 type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" />
+        
+
+
+        
+       
+        <!-- <hr class="border-top-1">
+        <div class="provided-services-bx text-center padd-tp-btm25 ">
+            <h4 class="service-title">Gallery</h4>
+            
+            <ul class="pg-ul-list">
+                <li>
+                    <div class="pg-item-img-hold" style="background-image: url(assets/images/photo_gallery.png);" (click)="gotogallery('photo')">
+                        <p>Photos {{galleryImages.length}}</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="pg-item-img-hold" style="background-image: url(assets/images/video_gallery.png);" (click)="gotogallery('video')">
+                        <p>Videos {{videolength.length}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div> -->
+        <!-- <input #fileInput2 type="file" accept="image/*" (change)="onFileSelected($event)" style="display:none;" /> -->
+
+        <hr class="border-top-1">
+        
+        <div class="from-to">
+            <!-- datepicker from --- datepicker to -->
+
+            <div class="row d-flex     justify-content-center">
+                <div class="col-md-12 text-center">
+                    <form [formGroup]="profileDetailsForm" >
+                    <h4 class="service-title">Tax <mat-slide-toggle formControlName="tax_status" (change)="slide($event)" ></mat-slide-toggle>
+                    </h4>
+                </form>
+                </div>
+                <div class="col-md-12 text-center" *ngIf="taxdisplay">
+                <div class="table-responsive-md transaction-table">
+                <table class="table Service-lit-tab-det">
+                    <thead>
+                        <tr>
+                        <th scope="col">Sl No.</th>
+                        <th scope="col">Amount(%)</th>
+                        <th scope="col">Start Date </th>
+                        <th scope="col">End date </th>
+                        <th scope="col">status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of tax_list;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.tax_amount}}</td>
+                            <td>{{item.start_date | date:"MM/dd/yy" }}</td>
+                            <td *ngIf="item.end_date !=null">{{item.end_date | date:"MM/dd/yy" }}</td>
+                            <td *ngIf="item.end_date ==null">Till date</td>
+                            <td>{{item.is_active}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+                <div class="form-group custom-input-field col-md-4 taxinput" *ngIf="taxdisplay">
+                    <input type="number" class="form-control" [(ngModel)]="tax_amount" placeholder="tax amount in percentage"
+                    required="required">
+                </div>
+                <div class="form-group custom-input-field col-md-4" *ngIf="taxdisplay">
+                    <input  class="form-control" placeholder="To Date" [(ngModel)]="taxDate"
+                        type="date" (change)="somethingChanged($event)">
+                </div>
+            </div>
+        </div>
+
+
+
+        
         <hr class="border-top-1">
         <form [formGroup]="profileDetailsForm">
-            <div class="from-to">
-                <!-- datepicker from --- datepicker to -->
+            <!-- <div class="from-to">
+               
 
                 <div class="row d-flex     justify-content-center">
                     <div class="col-md-12 text-center">
                         <h4 class="service-title">Select Date</h4>
                     </div>
                     <div class="form-group custom-input-field col-md-4">
-                        <input formControlName="startDate" value="startDate" class="form-control" placeholder="To Date"
+                        <input formControlName="startDate" value="startDate" class="form-control" placeholder="From Date"
                             type="text" onfocus="(this.type='date')" onblur="(this.type='text')" type="text">
                     </div>
                     <div class="form-group custom-input-field col-md-4">
-                        <input formControlName="endDate" value="endDate" class="form-control" placeholder="From Date"
+                        <input formControlName="endDate" value="endDate" class="form-control" placeholder="To Date"
                             type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                 </div>
@@ -128,23 +334,62 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </form>
 
-        <!-- <div class="slots">
-            <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6]">
-                <input (change)="consol(i, f)" *ngFor="let f of [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
-            </ng-container>
-        </div> -->
+        <!-- <div class="from-to">
+               
 
-        <hr class="border-top-1">
-        <div class="provided-services-bx text-center padd-tp-btm25">
+            <div class="row d-flex     justify-content-center">
+                <div class="col-md-12 text-center">
+                    <h4 class="service-title">Select Date</h4>
+                </div>
+                <div class="form-group custom-input-field col-md-4">
+                    <input type="date" class="form-control" placeholder="Form Date" [(ngModel)]="sformdate">
+                </div>
+                <div class="form-group custom-input-field col-md-4">
+                    <input type="date" class="form-control" placeholder="To Date" [(ngModel)]="eformdate" (change)="scheduleDate()">
+                    
+                </div>
+
+                <div class="form-group custom-input-field col-md-4">
+                   <input type="number" placeholder="slot time in minutes"  class="form-control" [(ngModel)]="slot_time">
+                </div>
+                
+                
+            </div>
+            <div class="row d-flex schedule_slot">
+                <h6>Set your weekly hours</h6>
+                <div *ngFor="let item of dateArray" class="select_schedule">
+                   <input type="checkbox" value={{item.date}} (change)="schedule_slot($event)">{{item.day}}
+                    <div *ngIf="checkslot == item.date">
+                        <input type="time" [(ngModel)]="slot_start" (change)="getslot($event)">
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+
+        <hr class="border-top-1">-->
+        <!-- <div class="provided-services-bx text-center padd-tp-btm25">
             <h4 class="service-title">Opening Time</h4>
             <p class="service-time-item"><span>9:00 am</span>&nbsp; to &nbsp;<span>6:00 pm</span></p>
+        </div> -->
+        <!-- <hr class="border-top-1"> -->
+        <!-- <div class="provided-services-bx text-center padd-tp-btm25 padd-tp-btm50">
+            <h4 class="service-title">Manage Service Planner</h4>
+            <ul class="ps-ul-list">
+                <li class="services">
+                    <a href="javascript:void(0);" [routerLink]="['/service-planner']">
+                        Add  Service planner
+                    </a>
+                </li>
+               
+            </ul>
         </div>
-        <div class="custom-input-field share-with-btnGroup text-center">
-            <button class="btn btn-submit" (click)="onSubmit()">Update</button>
-        </div>
+        <hr class="border-top-1"> -->
+       
     </div>
 </section>
 <!-- Body content end -->

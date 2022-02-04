@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { WebserviceService } from '../services/webservice.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-rate-provider',
@@ -12,42 +13,61 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class RateProviderComponent implements OnInit {
 
-  rating:any;
-  review:any;
+  public form: FormGroup;
 
   constructor(
     public dialog: MatDialog,
     public service:WebserviceService,
     public toast:ToastrService,
-    public dialogRef: MatDialogRef<RateProviderComponent>
-  //  public dialogRef: MatDialogRef<RateProviderComponent>,
-  //  @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<RateProviderComponent>,
+    //public dialogRef: MatDialogRef<RateProviderComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { 
+    console.log(this.data)
+  }
 
   ngOnInit(): void {
     console.log('data in rate');
+    this.form = this.fb.group({
+      rating1: ['', Validators.required],
+      review1: ['', Validators.required],
+    });
   }
 
-  provideFeedback(){
-    let data={
-      rating:this.rating,
-      review:this.review,
-      reviewTo:this.service.provider_Id
+  get f() {
+    return this.form.controls;
+  }
+
+  onSubmit(){
+    if(!this.form.value.rating1){
+      this.toast.warning('please give rating');
     }
-    console.log('feedback data',data);
-    this.service.provideFeedback(data).subscribe((resp:any)=>{
+    else if(!this.form.value.review1){
+      this.toast.warning('please give review');
+    }else{
+    let data={
+      rating:this.form.value.rating1,
+      review:this.form.value.review1,
+      class_id:this.data
+    }
+    console.log('form data',data);
+    this.service.classfeedback(data).subscribe((resp:any)=>{
       console.log('resp',resp);
       if(resp.success == false){
         this.toast.warning(resp.message);
       }
       else{
         this.toast.success(resp.message);
+        this.closeDialog();
       }
     })
   }
+  }
+
 
   closeDialog() {
-    this.dialogRef.close('Pizza!');
+    this.dialogRef.close('closed!');
   }
 
 }

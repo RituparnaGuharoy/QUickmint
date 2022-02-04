@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { WebserviceService } from '../services/webservice.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { environment } from 'src/environments/environment.prod';
+var url = environment.api;
 @Component({
   selector: 'app-view-Image',
   templateUrl: './view-Image.component.html',
@@ -14,7 +15,8 @@ export class ViewImageComponent implements OnInit {
 
   rating:any;
   review:any;
-  photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  //photoUrl:string = 'https://nodeserver.mydevfactory.com:4290/';
+  photoUrl:string =url;
   providerGallery:any;
 
   constructor(
@@ -22,8 +24,6 @@ export class ViewImageComponent implements OnInit {
     public service:WebserviceService,
     public toast:ToastrService,
     public dialogRef: MatDialogRef<ViewImageComponent>
-  //  public dialogRef: MatDialogRef<RateProviderComponent>,
-  //  @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit(): void {

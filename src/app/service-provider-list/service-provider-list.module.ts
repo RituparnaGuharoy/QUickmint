@@ -5,12 +5,15 @@ import { ServiceProviderListRoutingModule } from '../service-provider-list/servi
 import { ServiceProviderListComponent } from '../service-provider-list/service-provider-list.component';
 import { FilterModule } from '../component/filter/filter.module';
 
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import { RatingModule } from 'ng-starrating';
 @NgModule({
   
   declarations: [ServiceProviderListComponent],
   imports: [
-    CommonModule,
+    CommonModule,MatIconModule,
+    RatingModule,MatSelectModule,
     ServiceProviderListRoutingModule,
     FilterModule
   ]

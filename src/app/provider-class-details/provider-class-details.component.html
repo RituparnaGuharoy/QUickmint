@@ -1,0 +1,293 @@
+<section class="inner-banner">
+    <div class="container">
+        <h1>Class
+            <strong> Details</strong>
+        </h1>
+    </div>
+</section>
+<nav class="navbar navbar-light bg-light cd-navbar-top">
+    <div class="container" id="top-nav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" id="s1" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="s2" href="#schedule">Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="s3" href="#reviews">Reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="s4" href="#provider">Provider</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<section class="common-inner-bg-wrap">
+    <div class="container">
+        <div class="activity-header">
+            <h2>{{classDetails.class_title}}: {{classDetails.class_description}}</h2>
+            <h3>{{provider_details.UserFullName}} ({{classDetails.class_type}})</h3>
+            <div class="activity-reviews">
+                <div class="activity-stars">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <span class="ratings-avg-count">
+                    <span>5.0 (4
+                        <span class="word-reviews">&nbsp;Reviews</span>)</span>
+                </span>
+            </div>
+            <div class="activity-attributes">
+                <div class="font-16">
+                    <span class="font-bold">Categories: </span>
+                    <a href="#">{{classDetails.class_category.name}}</a>,
+                   
+                    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <span class="font-bold" *ngIf="classDetails.age_range.age_from>0">Ages: </span>
+                    <span *ngIf="classDetails.age_range.age_from>0">{{classDetails.age_range.age_from}} - {{classDetails.age_range.age_to}} Years</span>
+
+                    <span class="font-bold" *ngIf="classDetails.grade_range.grade_from>0">Grades: </span>
+                    <span *ngIf="classDetails.grade_range.grade_from>0">{{classDetails.grade_range.grade_from}} - {{classDetails.grade_range.grade_from}}</span>
+                    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <span class="font-bold">Format: </span>{{classDetails.class_type}}
+                    <span class="font-bold">Course Type: </span>{{classDetails.crash_course}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 cd-mrt-40">
+                <div class="cd-img-big">
+                 
+                    <img src="{{photoUrl}}{{classDetails.class_image}}"  />
+                </div>
+                <div class="cd-cmn-section page-section about-section" id="about">
+                    <h3>About</h3>
+                    <p>{{classDetails.class_description}}</p>
+                </div>
+                <div class="page-section border-top cd-cmn-section" id="schedule">
+                    <div class="upcoming-title">
+                        <h3>Upcoming Schedule for {{classDetails.class_title}}: {{classDetails.class_description}}
+                        </h3>
+                        
+                    </div>
+                    
+                    <!-- <div class="schedule-ask-question">
+                        <p>Don’t see a time that works for you?</p>
+                        <a class="btn" href="#">Ask A Question</a>
+                    </div> -->
+                </div>
+
+                <div class="page-section border-top cd-cmn-section" >
+                    <h3>User Questions</h3>
+
+                    <div class="user-reviews-results" *ngFor="let item of ask_list">
+                        <a class="result-title" href="#">{{item.question.name}}</a>
+                        <p>{{item.question.question_title}}</p>
+                        <!-- <a class="btn btn-war" href="#">Answer</a> -->
+                    </div>
+                    
+                    <!-- <div class="user-reviews-all-links">
+                        <a href="#">See All Reviews</a>
+                    </div> -->
+                </div>
+                <div class="page-section border-top cd-cmn-section" id="reviews">
+                    <h3>User Reviews</h3>
+                    <div class="user-reviews-box">
+                        <div class="ratings">
+                            <div class="ratings-avg-count">
+                                5.0
+                            </div>
+                            <div>
+                                <div class="user-reviews-ratings">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </div>
+                                <div class="ratings-counts">4 Reviews</div>
+                            </div>
+                        </div>
+                        <!-- <a class="btn btn-war" href="#">Write a Review</a> -->
+                    </div>
+                    <div class="user-reviews-results" *ngFor="let item of ratingList">
+                        <a class="result-title" href="#">{{item.created.UserFullName}}</a>
+                        <div class="ratings">
+                            <!-- <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i> -->
+                            <ngx-star-rating [(ngModel)]="item.rating" [disabled]="true"></ngx-star-rating>
+                            <!-- <span>{{item.rating}}</span> -->
+                            <span class="ratings-date">
+                                {{item.createdAt| date:'mediumDate'}}
+                            </span>
+                        </div>
+                        <p>{{item.review}}</p>
+                    </div>
+                    <!-- <div class="user-reviews-all-links">
+                        <a href="#">See All Reviews</a>
+                    </div> -->
+                </div>
+                <!-- <div class="page-section border-top cd-cmn-section" id="provider">
+                    <h3>Provider</h3>
+                    <div class="provider-result">
+                        <div class="result-left-info">
+                            <a class="result-title">{{provider_details.UserFullName}} ({{classDetails.class_type}})</a>
+                            <div class="ratings">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <span class="ratings-avg-count">
+                                    <span>5.0 (4
+                                        <span class="word-reviews">&nbsp;Reviews</span>)</span>
+                                </span>
+                            </div>
+                            <h5 class="result-heading">About</h5>
+                            <p class="result-descroption">It is a long established fact that a reader will be distracted by the readable content of a page
+                                when looking at its layout.</p>
+                        </div>
+                        <div class="result-photo" *ngIf="provider_details.UserPhoto !=null">
+                            <img src="{{photoUrl}}{{provider_details.UserPhoto}}"  />
+                        </div>
+
+                        <div class="result-photo" *ngIf="provider_details.UserPhoto ==null">
+                            <img src="assets/images/no_profile_pic.png">
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="col-lg-4 cd-mrt-40 cd-sidebar-right">
+                <div class="tabbed-box-container" id="accordionWithRadio_PreChecked">
+                    <div class="tabbed-box-option" *ngIf="classDetails.class_type =='INPERSON'">
+                        <div class="radio">
+                            <label>
+                                <!-- <input type="radio" name="booking-option" value="dropin" class="big-radio" data-toggle="collapse" data-target="#collapsedropin" checked> -->
+                                <span class="radio-text">INPERSON</span>
+                            </label>
+                        </div>
+                        <div class="tabbed-box-option-info">
+                            <div *ngIf="classDetails.crash_course !='SINGELDAY' ">
+                                <p class="radio-text">Dates</p>
+                                <span *ngFor="let item of schedule_date">{{item}},</span>
+                            </div>
+                            <div>{{classDetails.strat_date | date:'mediumDate': '+0000': 'en-ZA'}}</div>
+                            <div class="">
+                                <div class="dropin-time-range">
+                                    <span>{{classDetails.start_tiem | date:'shortTime' : '+0000': 'en-ZA' }}</span>-<span>{{classDetails.end_time |  date:'shortTime' : '+0000': 'en-ZA'}} PST</span>
+                                </div>
+                            </div>
+                            <div class="activity-pricing-callout">
+                                <span>$ {{classDetails.class_fees}}</span>
+                            </div>
+
+                            
+
+
+
+
+
+
+
+                            <!-- <div id="collapsedropin" class="collapse show" data-parent="#accordionWithRadio_PreChecked">
+                                
+                                <div class="tabbed-box-session-info text-left">
+                                    <p class="colorblue" *ngIf="classDetails.overview =='ADULTS'">{{classDetails.total_strenght}} Person attending</p>
+                                    <p class="colorblue" *ngIf="classDetails.overview =='KIDS'">{{classDetails.total_strenght}} Children attending</p>
+                                    
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="tabbed-box-option" *ngIf="classDetails.class_type =='ONLINE'">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="booking-option" value="semester" class="big-radio" data-toggle="collapse" data-target="#collapsesemester" checked>
+                                <span class="radio-text">ONLINE</span>
+                            </label>
+                        </div>
+                        <div class="tabbed-box-option-info">
+                            <div *ngIf="classDetails.crash_course !='SINGELDAY' ">
+                                <p class="radio-text">Dates</p>
+                                <span *ngFor="let item of schedule_date">{{item}},</span>
+                            </div>
+                            <div>{{classDetails.strat_date | date:'mediumDate': '+0000': 'en-ZA'}}</div>
+                            <div class="">
+                                <div class="dropin-time-range">
+                                    <span>{{classDetails.start_tiem | date:'shortTime': '+0000': 'en-ZA' }}</span>-<span>{{classDetails.end_time |  date:'shortTime' : '+0000': 'en-ZA'}} PST</span>
+                                </div>
+                            </div>
+                            <div class="activity-pricing-callout">
+                                <span>$ {{classDetails.class_fees}}</span>
+                            </div>
+
+
+
+
+
+
+
+                            <!-- <div id="collapsedropin" class="collapse show" data-parent="#accordionWithRadio_PreChecked">
+                                <a class="btn btn-subscribe" (click)="bookclss()">Buy for ${{classDetails.class_fees}}</a>
+                                <div class="tabbed-box-session-info text-left">
+                                    <p class="colorblue" *ngIf="classDetails.overview =='ADULTS'">{{classDetails.total_strenght}} Person attending</p>
+                                    <p class="colorblue" *ngIf="classDetails.overview =='KIDS'">{{classDetails.total_strenght}} Children attending</p>
+                                    
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="tabbed-box-container">
+                    <div class="tabbed-box-option">
+                        <div *ngIf="classDetails.crash_course =='SEMESTER' ">
+                            <h6>Booking Options</h6>
+                            <div class="radio" *ngIf="classDetails.able_to_perclass !='' ">
+                                <label>
+                                    <input type="radio" name="booking-option" value={{classDetails.able_to_fees_perclass}} class="big-radio" data-toggle="collapse" data-target="#collapsesemester" (change)="fees_check($event)">
+                                    <span class="radio-text">Drop In</span><span class="radio-text-fees">${{classDetails.able_to_fees_perclass}}</span>
+                                </label>
+                            </div>
+                            <div class="radio" *ngIf="classDetails.able_to_weekly !='' ">
+                                <label>
+                                    <input type="radio" name="booking-option"  class="big-radio" value={{classDetails.able_to_fees_weekly}} data-toggle="collapse" data-target="#collapsesemester" (change)="fees_check($event)">
+                                    <span class="radio-text">Weekly Pricing</span><span class="radio-text-fees">${{classDetails.able_to_fees_weekly}}</span>
+                                </label>
+                            </div>
+                            <div class="radio" *ngIf="classDetails.able_to_monthly !='' ">
+                                <label>
+                                    <input type="radio" name="booking-option"  class="big-radio" value={{classDetails.able_to_fees_monthly}} data-toggle="collapse" data-target="#collapsesemester" (change)="fees_check($event)">
+                                    <span class="radio-text">Monthly Pricing</span><span class="radio-text-fees">${{classDetails.able_to_fees_monthly}}</span>
+                                </label>
+                            </div> 
+                            <a class="btn btn-subscribe">Book Now</a>
+                            <div id="collapsedropin" class="collapse show" data-parent="#accordionWithRadio_PreChecked">
+                                
+                                <div class="tabbed-box-session-info text-left">
+                                    <p class="colorblue" *ngIf="classDetails.overview =='ADULTS'">{{classDetails.total_strenght}} Person attending</p>
+                                    <p class="colorblue" *ngIf="classDetails.overview =='KIDS'">{{classDetails.total_strenght}} Children attending</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+        
+                    </div> 
+                    </div>-->
+            </div>
+
+            <!-- <div class="col-lg-4 cd-mrt-40 cd-sidebar-right">
+           
+            </div> -->
+            
+        </div>
+    </div>
+</section>

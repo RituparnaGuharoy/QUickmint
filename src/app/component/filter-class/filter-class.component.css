@@ -65,6 +65,9 @@ input[type="number"] {
 .price input[type="number"]:nth-last-child(1){
   margin-right: 0px;
 }
+.radio-item{
+  display: block;
+}
 button.fil-sb-bt {
   background: linear-gradient(
     180deg
@@ -96,7 +99,11 @@ h5.mb-0 {
   text-transform: uppercase;
   margin-bottom: 12px !important;
 }
-
+.dropdown{
+  margin-bottom: 20px;
+  /* height: 190px;
+  overflow-y: scroll; */
+}
 .search-dropdown {
   position: absolute;
   will-change: transform;
@@ -117,6 +124,47 @@ h5.mb-0 {
   float: left;
   padding: .5rem 0;
 }
+.sidebar-items{
+  border-bottom: 1px solid #ddd;
+}
+.sidebar-items .panel-body{
+  padding-bottom: 12px;
+}
+.sidebar-items .panel-title {
+  position: relative;
+  color: #260f02;
+  font-size: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  cursor: pointer;
+}
+.sidebar-items .panel-title::after {
+  content: "\f107";
+  color: #333;
+  top: 11px;
+  right: 0px;
+  position: absolute;
+  font-family: "FontAwesome";
+  font-size: 18px;
+}
+.sidebar-items .panel-title[aria-expanded="true"]::after {
+  content: "\f106";
+}
+.sidebar-items .checkbox-label,
+.sidebar-items .radio-label{
+  color: #260f02;
+  font-size: 16px;
+}
+.sidebar-items .checkbox-item,
+.sidebar-items .radio-item{
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.sidebar-items .checkbox-item:last-child,
+.sidebar-items .radio-item:last-child{
+  margin-bottom: 0;
+}
+
 
 
 @media(max-width:1200px) and (min-width:989px){

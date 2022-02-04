@@ -27,7 +27,13 @@
   background: linear-gradient(180deg, #2257DE 0%, #22A6DE 75.52%);
   color:#fff;
 }
-
+.ratings{
+  display: flex;
+  
+}
+.ratings span{
+  padding-top: 5px;
+}
 .flex-right-box{
   width: calc(100% - 190px);
   padding-left: 25px;
@@ -41,6 +47,7 @@
 .trainer-item .trainer-img {
   width: 190px;
   height: 222px;
+  cursor: pointer;
 }
 .trainer-item .trainer-item-info {
   width: calc(100% - 260px);
@@ -49,6 +56,35 @@
 .trainer-item .trainer-item-info p{
   color: #818181;
   font-size: 16px;
+  
+}
+.trainer-item .trainer-item-info h6{
+  color: #12130c;
+  font-size: 20px;
+  cursor: pointer;
+}
+.about_me{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 10px;
+}
+.location{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  padding-left: 16px;
+}
+.location:before{
+  position: absolute;
+  content: '';
+  background-image: url('../../assets/images/location-icon.png');
+  width: 10px;
+  height: 12px;
+  left: 0;
+  background-size: cover;
+  top: 4px;
 }
 .trainer-item .trainer-item-info p span{
   color: #282827;
@@ -129,6 +165,7 @@ color: #7b7b7b;
       height: 160px;
       margin: 0 auto;
       display: block;
+     
   }
   .call-acpt.text-right {
     text-align: left !important

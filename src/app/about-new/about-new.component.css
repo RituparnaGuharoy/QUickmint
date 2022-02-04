@@ -1,0 +1,194 @@
+.abt-title{
+    font-size: 54px;
+    font-weight: 600;
+}
+.abt-title strong{
+    color: #1195ff;
+}
+.text-center p{
+    font-size: 16px;
+    font-weight: 400;
+    color: #777777;
+    margin-bottom: 20px;
+    line-height: 28px;
+
+}
+h3.ab-co-title {
+    font-size: 40px;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+.my-2{
+    font-size: 26px;
+    font-weight: 600;
+    color: #777777;
+    margin-bottom: 20px;
+    line-height: 28px;
+    margin-top: 60px!important;
+}
+p.ab-co-sub{
+    font-size: 16px;
+    font-weight: 400;
+    color: #777777;
+    margin-bottom: 20px;
+    line-height: 28px;
+}
+.Why-Join-details ul{
+    width: 100%;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.Why-Join-details ul li{
+    font-size: 20px;
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    align-items: center;
+}
+span.fr-num {
+    background: linear-gradient( 
+180deg
+ , #22A6DE 0%, #2257DE 75.52%);
+    color: #fff;
+    min-width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 28px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+.How-det {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0px 0px 16px #ccc;
+    padding: 20px;
+    text-align: center;
+}
+.How-det img{
+    width: 80%;
+}
+.How-bottom {
+    min-height: 92px;
+}
+.How-bottom p{
+    font-size: 16px;
+    font-weight: 400;
+    color: #777777;
+    margin-top: 8px;
+    line-height: 28px;
+}
+
+button.btn.details-btn.reg-new {
+    /* background: linear-gradient( 180deg, #22A6DE 0%, #2257DE 75.52%); */
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    line-height: 55px;
+    display: inline-block;
+    border: 0;
+    width: 220px;
+    animation: gradient 2s linear infinite;
+    background-image: linear-gradient(0deg,#22a6de,#2257de,#22a6de,#2257de);
+    background-size: 100% 400%;
+}
+button.btn.details-btn.reg-new:hover{
+    background: linear-gradient( 360deg, #22A6DE 0%, #2257DE 75.52%);
+    color: #fff;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(34,87,222,1);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(34,87,222,1);
+    box-shadow: 0px 0px 20px 0px rgba(34,87,222,1);
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 100%;
+    }
+    50% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: 0% 100%;
+	}
+}
+.an-padding-top-60{
+    padding-top: 60px;
+}
+.an-padding-bottom-60{
+    padding-bottom: 60px;
+}
+.an-margin-top-40{
+    margin-top: 40px;
+}
+.an-video-wrap img{
+    max-width: 1080px;
+}
+@media (max-width: 1100px) {
+    .an-video-wrap img{
+        max-width: 100%;
+    }
+}
+@media (max-width: 991px) {
+    .abt-title{
+        font-size: 34px;
+    }
+    .text-center p{
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 20px;
+    }
+    h3.ab-co-title{
+        font-size: 30px;
+    }
+    .How-bottom h3{
+        font-size: 18px;
+    }
+    .Why-Join-details ul li{
+        font-size: 17px;
+        margin-bottom: 15px;
+    }
+    span.fr-num {
+        min-width: 32px;
+        height: 32px;
+        line-height: 32px;
+        text-align: center;
+        font-size: 17px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .abt-title{
+        font-size: 24px;
+    }
+    .text-center p{
+        font-size: 15px;
+    }
+    h3.ab-co-title{
+        font-size: 22px;
+    }
+    .How-det img{
+        width: 100%;
+    }   
+    .my-2{
+        font-size: 20px;
+        margin-bottom: 15px;
+        margin-top: 20px!important;
+    }
+    .an-padding-top-60{
+        padding-top: 40px;
+    }
+    .an-padding-bottom-60{
+        padding-bottom: 40px;
+    }
+    .an-margin-top-40{
+        margin-top: 30px;
+    }
+    button.btn.details-btn.reg-new{
+        line-height: 48px;
+        width: 180px;
+    }
+}

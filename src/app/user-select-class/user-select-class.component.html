@@ -1,0 +1,103 @@
+<!-- Banner start -->
+<section class="inner-banner">
+    <div class="container">
+        <h1>Select
+            <strong>Class</strong>
+        </h1>
+    </div>
+</section>
+<!-- Banner end -->
+
+<!-- Body content start -->
+<section class="common-inner-bg-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 sd-left-panel">
+                <h3 class="ssc-title">Class Details</h3>
+                <div class="ssc-item-box">
+                    <!-- <div class="ssc-img" style="background-image: url('https://nodeserver.mydevfactory.com:4290/1634416286409pexels-magda-ehlers-1329295.jpg');"></div> -->
+                    <div class="ssc-img" [ngStyle]="{'background-image': 'url(' +photoUrl+ classDetails.class_image + ')'}"></div>
+                    <div class="ssc-item-info">
+                        <h4>{{classDetails.class_title}}</h4>
+                        <p>
+                            <span class="lab">Class By: </span>
+                            <span class="cont">{{classDetails.provider_id.UserFullName}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Type: </span>
+                            <span class="cont">{{classDetails.class_type}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Size: </span>
+                            <span class="cont">{{classDetails.total_strenght}}</span>
+                        </p>
+                        <!-- <p>
+                            <span class="lab">Availabe Seat: </span>
+                            <span class="cont">{{classDetails.available_set}}</span>
+                        </p> -->
+                        <p>
+                            <span class="lab">Start Date: </span>
+                            <span class="cont">{{classDetails.strat_date |  date:'EEEE, MMMM d': '+0000': 'en-ZA'}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Class Time: </span>
+                            <span class="cont">{{classDetails.start_tiem | date:'shortTime' : '+0000': 'en-ZA' }} To {{classDetails.end_time | date:'shortTime' : '+0000': 'en-ZA'}} PST</span>
+                        </p>
+                        <p>
+                            <span class="lab">Cost: </span>
+                            <span class="cont">${{classDetails.class_fees}}</span>
+                        </p>
+                        <p>
+                            <span class="lab">Description: </span>
+                        </p>
+                        <p>{{classDetails.class_description}}</p>
+                        <p class="ssc-address-info"><i class="fa fa-map-marker" aria-hidden="true"></i>{{classDetails.provider_id.UserLocation.Address}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 sd-right-panel">
+                <h3 class="ssc-title">Student Details</h3>
+                <div class="">
+                    <div class="form-group custom-input-field">
+                        <label>Student Full Name</label>
+                        <input type="text" placeholder="" [(ngModel)]="ownDetails.UserFullName" class="form-control"/>
+                    </div>
+                    
+                    <div class="form-group custom-input-field" *ngIf="classDetails.overview=='KIDS'">
+                        <label>Student Age</label>
+                        <input type="number" placeholder="" [(ngModel)]="class_booking.student_age" class="form-control"/>
+                    </div>
+                    <div class="form-group custom-input-field" *ngIf="classDetails.overview=='KIDS'">
+                        <label>Parent's Name</label>
+                        <input type="text" placeholder="" [(ngModel)]="class_booking.parent_name" class="form-control"/>
+                    </div>
+                    <div class="form-group custom-input-field" *ngIf="classDetails.overview=='KIDS'">
+                        <label>Parent's Contact Number</label>
+                        <input type="number" placeholder=""  [(ngModel)]="class_booking.parent_ph_number" class="form-control"/>
+                    </div>
+                    <div class="form-group custom-input-field">
+                        <label>Student Email id</label>
+                        <input type="email" placeholder="" [(ngModel)]="ownDetails.UserEmail" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group custom-input-field" >
+                        <label>Student Contact Number</label>
+                        <input type="number" placeholder="" [(ngModel)]="ownDetails.UserPhone" class="form-control" readonly/>
+                    </div>
+                    
+                    <div class="ssc-buttons-bx custom-input-field" *ngIf="token !=null">
+                        <button type="submit" class="btn btn-submit" (click)="Book_class('cash')" >Pay By Cash</button>
+                        <button type="submit" class="btn btn-submit" (click)="Book_class('online')" >Pay Online</button>
+
+                    </div>
+
+                    <div class="ssc-buttons-bx custom-input-field" *ngIf="token ==null">
+                        <button type="submit" class="btn btn-submit" (click)="openLoginDialog()" >Pay By Cash</button>
+                        <button type="submit" class="btn btn-submit" (click)="openLoginDialog()" >Pay Online</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Body content end -->

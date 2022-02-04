@@ -3,39 +3,70 @@
 <section class="inner-banner">
 
     <div class="container">
-        <h1>Service <strong> List</strong></h1>
+        <h1><strong>Add classes & Services</strong></h1>
     </div>
 
 </section>
 <!-- Banner end -->
 <!-- Body content start -->
+
 <section class="common-inner-bg-wrap">
+    
     <div class="container">
-        <div class="col-md-12">
+        <!-- <mat-tab-group mat-align-tabs="center" (selectedTabChange)="tabClick($event)">
+            <mat-tab label="Genral Class Services">
+
+
+            </mat-tab>
+            <mat-tab label="Genral Class Services">ds</mat-tab>
+            
+          </mat-tab-group> -->
+          <ul class="topTab">
+              <li>
+                  <span class="active text-center">General Services</span>
+                <span class="text-center" [routerLink]="['/register-class-list']">Class Services</span>
+                
+            </li>
+            <button [routerLink]="['/provider-add']" class="text-center Add-Genral ">
+                Add General Service
+            </button>
+              <!-- <li><span [routerLink]="['/provider-add']">Add Genral Services</span></li> -->
+          </ul>
+        <div class="">
             <div class="table-responsive-md transaction-table">
                 <table class="table Service-lit-tab-det">
                     <thead>
                         <tr>
                         <th scope="col"></th>
-                        <th scope="col">Job</th>
-                        <th scope="col">Category </th>
-                        <th scope="col">Subcategory </th>
+                        <th scope="col">Services</th>
+                        <th scope="col">Duration </th>
+                        <!-- <th scope="col">Subcategory </th> -->
                         <th scope="col">Price</th>
-                        <th scope="col">Time </th>
+                        <!-- <th scope="col">Time </th> -->
                         <th scope="col" style="text-align: center;">Action</th>
+                        <th scope="col">Active</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of serviceList;let i=index">
                             <td><img class="pro" src="https://nodeserver.mydevfactory.com:4290/{{item.image}}" alt=""></td>
                             <td>{{item.title}}</td>
-                            <td>{{item.category_id.name}}</td>
-                            <td>{{item.sub_category_id.name}}</td>
+                            <!-- <td>{{item.category_id.name}}</td> -->
+                            <td>30 min</td>
+                            <!-- <td>{{item.sub_category_id.name}}</td> -->
                             <td>{{item.Price}}</td>
-                            <td>{{item.job_start}}-{{item.job_end}}</td>
+                            <!-- <td>{{item.job_start}}-{{item.job_end}}</td> -->
                             <td class="act-td" style="text-align: center;">
                                 <span><img src="./assets/images/edit-icon.png" (click)="editService(item._id)" alt=""></span>
                                 <span><img src="./assets/images/delete.png" (click)="deleteService(item._id)" alt=""></span>
+                            </td>
+                            <td>
+                                <label class="toggleswitch">
+                                    <input type="checkbox">
+                                    <span class="slider round">
+                                        <span class="on">Yes</span>
+                                    </span>
+                                </label>
                             </td>
                         </tr>
                         <!-- <tr>
@@ -83,7 +114,7 @@
                             </td>
                         </tr> -->
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
     </div>

@@ -1,0 +1,75 @@
+<section class="inner-banner">
+
+    <div class="container">
+        <h1><strong>Transaction List</strong></h1>
+    </div>
+
+</section>
+<!-- Banner end -->
+<!-- Body content start -->
+
+<section class="common-inner-bg-wrap">
+    
+    <div class="container">
+
+          <!-- <ul class="topTab">
+              <li>
+                  <span class="active text-center">General Services</span>
+                <span class="text-center">Class Services</span>
+                
+            </li>
+            <button [routerLink]="['/provider-add']" class="text-center Add-Genral ">
+                Add General Service <img src="../../assets/images/plus-big-icon.png" alt="">
+            </button>
+              
+          </ul> -->
+        <div class="">
+            <div class="table-responsive-md transaction-table">
+                <table class="table Service-lit-tab-det">
+                    <thead>
+                        <tr>
+                        <th scope="col">Class Image</th>
+                        <th scope="col">Class Title</th>
+                        <th scope="col">Payment By</th>
+                       
+
+                        <th scope="col">Payment Type</th>
+                        <th scope="col">Price ($)</th>
+                        <th scope="col">Paid Amount ($)</th>
+                        
+                        
+                        <th scope="col">Transcation Id</th>
+                        <th scope="col">Date</th>
+                        <th scope="col" style="text-align: center;">Action</th>
+                       
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of Transactionlist;let i=index">
+                            <td><img class="pro" src="{{photourl}}{{item.bookedService.class_image}}" alt=""></td>
+                            <td>{{item.bookedService.class_title}}</td>
+                            <td>{{item.student_name}}</td>
+                            <td>{{item.payment_type}}</td>
+                            
+                           
+                            <td>{{item.bookedService.class_fees}}</td>
+                            <td>{{item.able_to_fees}}</td>
+                            <td *ngIf="item.payment_type =='online'">{{item.transactionId}}</td>
+                            <td *ngIf="item.payment_type =='cash'">NA</td>
+                            <td>{{item.createdAt |  date:'EEEE, MMMM d'}}</td>
+                            <td class="act-td" style="text-align: center;">
+                                
+                               <span (click)="transactionDetails(item)"><img src="assets/images/view-icon-md.png"  alt=""></span>
+                               
+                            </td>
+                            
+                        </tr>
+                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <mat-paginator  #paginator (page)="paginationChange($event)" [length]="count" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+    
+</section>

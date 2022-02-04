@@ -10,31 +10,55 @@
     <div class="text-center width754">
 
         <div class="row">
+          <div class="form-group custom-input-field col-md-12">
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Industry :</label>
+            <select [(ngModel)]="category_id" placeholder="Industry" class="form-control" id="sel1" (change)="getSubcategory()">
+              <option *ngFor="let data of categorylisting; let i=index" value="{{data._id}}">{{data.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group custom-input-field col-md-12">
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Subcategory:</label>
+            <select  #sc1 (change)='getSubCatOne()' placeholder="Subcategory" [(ngModel)]="sub_category_id" class="form-control" id="sel2" >
+              <option *ngFor="let data of subcategorylisting; let i=index" value="{{data._id}}">{{data.name}}
+              </option>
+            </select>
+          </div>
 
           <div class="form-group custom-input-field col-md-12">
-            <input type="text" [(ngModel)]="title" class="form-control" placeholder="Job title"
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Add Service Category sections:</label>
+            <ul class="service_list" *ngIf="subcatone">
+              <li *ngFor="let item of subcategoryonelisting">
+                {{item.name}}
+              </li>
+            </ul>
+            <div *ngIf="subcatone" class=" form-group custom-input-field col-md-8 serviceadd_div">
+              <input type="text" [(ngModel)]="service_name" class="form-control"><span (click)="addnewservice()" class="addOn"><img src="./assets/images/plus-icon.png" alt="" ></span>
+            </div>
+              
+            
+            
+          </div>
+
+          <div class="form-group custom-input-field col-md-12">
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Service Name:</label>
+            <input type="text" [(ngModel)]="title" class="form-control" placeholder="Service Name"
               required="required">
           </div>
         <div class="form-group custom-input-field col-md-12">
+          <label style="text-align: left!important;" class="col-md-12 pl-0">Description:</label>
           <textarea rows="5" [(ngModel)]="description" class="form-control"
             placeholder="Job description"></textarea>
         </div>
         <div class="form-group custom-input-field col-md-12">
-          <label style="text-align: left!important;" class="col-md-12 pl-0">Category :</label>
-          <select [(ngModel)]="category_id" placeholder="Category" class="form-control" id="sel1" (change)="getSubcategory()">
-            <option *ngFor="let data of categorylisting; let i=index" value="{{data._id}}">{{data.name}}
-            </option>
-          </select>
-        </div>
-        <div class="form-group custom-input-field col-md-12">
-          <label style="text-align: left!important;" class="col-md-12 pl-0">Subcategory:</label>
-          <select  #sc1 (change)='getSubCatOne()' placeholder="Subcategory" [(ngModel)]="sub_category_id" class="form-control" id="sel2">
-            <option *ngFor="let data of subcategorylisting; let i=index" value="{{data._id}}">{{data.name}}
+          <label style="text-align: left!important;" class="col-md-12 pl-0">Service category:</label>
+          <select  #sc1 placeholder="Subcategory" [(ngModel)]="childsub" class="form-control" id="sel2">
+            <option *ngFor="let data of subcategoryonelisting; let i=index" value="{{data._id}}">{{data.name}}
             </option>
           </select>
         </div>
 
-        <div class="form-group custom-input-field col-md-12"  *ngIf="subcatone">
+        <!-- <div class="form-group custom-input-field col-md-12"  *ngIf="subcatone">
           <label style="text-align: left!important;" class="col-md-12 pl-0">Subcategory One:</label>
           <select #sc2 placeholder="Subcategory Two" (change)='getSubCatTwo(sc2)' [(ngModel)]="sub_category_one_id" class="form-control" id="sel3">
             <option *ngFor="let data of subcategoryonelisting; let i=index" value="{{data._id}}">{{data.name}}
@@ -48,17 +72,10 @@
             <option *ngFor="let data of subcategorytwolisting; let i=index" value="{{data._id}}">{{data.name}}
             </option>
           </select>
-        </div>
-          <!-- <div class="form-group custom-input-field col-md-12">
-            <input type="date" formControlName="date" class="form-control" placeholder=""
-              required="required">
-          </div> -->
-          <!-- <div class="form-group custom-input-field col-md-12">
-            <ngx-timepicker-field formControlName="time"></ngx-timepicker-field>
-           
-          </div> -->
+        </div> -->
+          
 
-          <div class="form-group custom-input-field col-md-6 text-left time-field">
+          <!-- <div class="form-group custom-input-field col-md-6 text-left time-field">
             <label>  From :</label>
             <ngx-timepicker-field [defaultTime]="'10:11 am'" [(ngModel)]="job_start" timeChanged="consolee()"></ngx-timepicker-field>
           </div>
@@ -66,14 +83,40 @@
           <div class="form-group custom-input-field col-md-6 text-left time-field">
             <label>To :</label>
             <ngx-timepicker-field [defaultTime]="'11:11 am'" [(ngModel)]="job_end" timeChanged="consolee()"></ngx-timepicker-field>
-          </div>
-          <!-- <div class="form-group custom-input-field col-md-6">
-            <input type="time"  class="form-control" placeholder="End Time"
-              required="required">
-          </div>  -->
+          </div> -->
+          
           <div class="form-group custom-input-field col-md-12">
-            <label style="text-align: left!important;" class="col-md-12 pl-0">Price :</label>
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Price ($) :</label>
             <input type="text" [(ngModel)]="Price" class="form-control" placeholder="Price"
+              required="required">
+          </div>
+          <!-- <div class="form-group custom-input-field col-md-12">
+            <input type="radio" name="withDu" value="withDu" (change)='appointstus($event)'>With Appointment & Duration
+             <input type="radio" name="withOutDu" value="withDu" (change)='appointstus($event)'>With Appointment & no Duration 
+             <br>
+          </div> -->
+
+          <div class="form-group text-center radio-item-bx col-md-12">
+            <label class="radio-item">
+              <input type="radio"  name="UserType" value="true"  (change)="appointstus($event)">
+              <span class="checkmark"></span>
+              <span class="radio-label">With Appointment</span>
+            </label>
+            <label class="radio-item mrlft20">
+              <input type="radio" name="UserType" value="false"  (change)="appointstus($event)">
+              <span class="checkmark"></span>
+              <span class="radio-label">Without Appointment</span>
+            </label>
+          </div>
+          
+          <div class="form-group custom-input-field col-md-12" *ngIf="appoinment_status=='true'">
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Duration :</label>
+            <input type="number" [(ngModel)]="time_duration" class="form-control" placeholder="slot time in minutes"
+              required="required">
+          </div>
+          <div class="form-group custom-input-field col-md-12">
+            <label style="text-align: left!important;" class="col-md-12 pl-0">Cancelation Policy :</label>
+            <input type="text"  class="form-control" placeholder="Cancelation Policy"
               required="required">
           </div>
 
@@ -82,29 +125,50 @@
             <input [(ngModel)]="image" class="form-control" (change)="readUrl($event)" type="file" accept="image/*">
           </div>
 
+          <!-- <div class="from-to"> -->
+               
+</div>
+            <!-- <div class="row">
+                <div class="col-md-12 text-center">
+                    <h4 class="service-title">Select Date</h4>
+                </div>
+                <div class="form-group custom-input-field col-md-6">
+                    <input type="date" class="form-control" placeholder="Form Date" [(ngModel)]="sformdate">
+                </div>
+                <div class="form-group custom-input-field col-md-6">
+                    <input type="date" class="form-control" placeholder="To Date" [(ngModel)]="eformdate" (change)="scheduleDate()">
+                    
+                </div>            
+            </div> -->
+            <!-- <div class="row schedule_slot">
+                <h6>Set your weekly hours</h6>
+                <div *ngFor="let item of dateArray; let j = index;" class="select_schedule">
+                   <input type="checkbox" value={{item.weekly_day}} (change)="schedule_slot($event)">{{item.day}}
+                   <div>
+                    <span (click)="addNew(j)" class="addOn"><img src="./assets/images/plus-icon.png" alt="" ></span>
+                    <div  *ngFor="let input of item.day_time; let i = index;" class="slot_sec">
+                      
+                        <input type="time" [(ngModel)]="input.start_times" (change)="getslot_d(input.start_times,j,i)" >
+                        <input type="time" [(ngModel)]="input.end_times"  (change)="getslot(input.end_times,j,i)">
+                        <input type="number" [(ngModel)]="input.time_duration">
+                        <input type="number" [(ngModel)]="input.available_seat">
+                        <span><img src="./assets/images/delete.png" (click)="remove(j,i)" alt=""></span>
+                    </div>
+                   </div>
+                    
+                </div>
+            </div> -->
 
-          <!-- <div class="form-group">
-            <div class="add-img-for-update">
-                <img class="prof" src="../../assets/images/beauty_service.png" alt="">
-                <input type="file" [(ngModel)]="image1" (change)="readUrl($event)" name="" id="">
-                <img class="edit" src="../../assets/images/edit-icon.png" alt="">
-            </div>
-          </div>
-         -->
+            
+        <!-- </div> -->
 
-          <!-- <div class="form-group custom-input-field col-md-12">
-            <div class="date-field">
-              <input type="text" formControlName="start_date" class="form-control" placeholder="Date"
-                [matDatepicker]="picker" required="required">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </div>
-          </div> -->
+
+          
           <div class="custom-input-field text-center col-md-12">
             <button (click)="onSubmit()" class="btn btn-submit">Submit</button>
           </div>
           
         </div>
-    </div>
+    
   </section>
   <!-- Body content end -->

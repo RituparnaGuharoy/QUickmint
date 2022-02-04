@@ -5,15 +5,17 @@ import { ServiceDetailsRoutingModule } from './service-details-routing.module';
 import { ServiceDetailsComponent } from './service-details.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxStarRatingModule } from 'ngx-star-rating';
-
-
+import { OwlModule } from 'ngx-owl-carousel';
+import { RatingModule } from 'ng-starrating';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [ServiceDetailsComponent],
   imports: [
     CommonModule,
     ServiceDetailsRoutingModule,
-    FormsModule,
-    NgxStarRatingModule
+    FormsModule,MatPaginatorModule,
+    NgxStarRatingModule,
+    OwlModule
   ]
 })
 export class ServiceDetailsModule { }

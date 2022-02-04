@@ -12,8 +12,8 @@
             <i class="edit-icon"></i>
         </div> -->
     <div class="profile-img-block">
-      <img class="profile-img-block" *ngIf="this.imageUrl" onerror="this.src='assets/images/trainer-img-4.png';"
-        src="{{this.imageUrl}}">
+      <img class="profile-img-block" *ngIf="this.imageUrl" 
+        src="{{photoUrl}}{{this.imageUrl}}">
       <img class="profile-img-block" *ngIf="!this.imageUrl" src="assets/images/trainer-img-4.png">
       <i class="edit-icon" (click)="fileInput.click()"></i>
     </div>
@@ -81,6 +81,10 @@
                 Enter valid mobile no.
               </div>
             </div>
+            <!-- <div class="col-md-6 form-group custom-input-field">
+              <input type="date" class="form-control" formControlName="user_date_of_birth" placeholder="Date of Birth"
+                required="required">
+            </div> -->
             <div class="col-md-12 custom-input-field text-center">
               <button type="submit" class="btn btn-submit" (click)="onSubmit()">Update</button>
             </div>

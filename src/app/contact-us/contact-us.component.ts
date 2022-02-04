@@ -12,7 +12,6 @@ import { WebserviceService } from '../services/webservice.service';
 })
 export class ContactUsComponent implements OnInit {
 
-  //contactForm: FormGroup;
   first = new FormControl('');
   contactForm = new FormGroup({
     firstname: new FormControl('', Validators.required ),
@@ -38,17 +37,6 @@ export class ContactUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // this.contactForm = this.formBuilder.group({
-    //   firstname: ['', [Validators.required,Validators.pattern("^[A-Za-z]+$")]],
-    //   lastname: ['', [Validators.required,Validators.pattern("^[A-Za-z]+$")]],
-    //   subject: ['', [Validators.required]],
-    //   email: ['', [Validators.required,Validators.email]],
-    //   phone: ['', [Validators.required]],
-    //   message: ['', [Validators.required]]
-    // })
-    // this.contactUsForm = this.newForm()
-
      this.contactForm.setValue({
         firstname: '',
         lastname: '',
@@ -68,16 +56,14 @@ export class ContactUsComponent implements OnInit {
       subject: this.contactForm.controls.subject.value,
       message: this.contactForm.controls.message.value
     }
-    console.log('contact', contactdata);
+
     this.service.addContact(contactdata).subscribe(
       (data) => {
-        console.log('publicjob: ', data);
         this.toastr.success('Your message has been sent');
         this.contactForm.reset();
       
       },
       (err) => {
-        console.log(err);
         this.toastr.success('Your message has not been sent');
       }
     );

@@ -17,6 +17,7 @@ export class RoutingCheckComponent implements OnInit {
   ngOnInit(): void {
 console.log(this.userType)
 this.route()
+
 }
 
 route() {
@@ -24,10 +25,12 @@ route() {
   if (this.userType == '1') {
   //console.log("if this.userType == 1 result: ", this.userType == "1")
     this.router.navigate(['provider-dashboard'])     }
-  else {
+  else if (this.userType != '1') {
    // console.log("else this.userType == 1 result: ", this.userType == "1")
 
        this.router.navigate(['home'])
      }
 }
+
+
 }

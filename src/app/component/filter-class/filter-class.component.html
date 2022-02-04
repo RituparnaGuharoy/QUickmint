@@ -1,35 +1,283 @@
 
-    <div id="accordion">
-        <div class="card format">
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+  
+        <div class="panel-group">
             
-            <div class="card-body ">
-               <div>
-                
-                <h5 class="mb-0">User Type</h5>
-                <!-- <input type="number" placeholder="Price" #d [(ngModel)]="price" value="price" > -->
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Radios0" id="exampleRadios1" value="kids" (change)="onTypeChange($event.target.value)" checked>
+              <div class="sidebar-items">
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="radio"  value="ONLINE" (change)="onTypeChange_class($event.target.value)" >
                   <label class="form-check-label" for="exampleRadios1">
-                   Kids Classes & Tutoring
+                   Online
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="Radios0" id="exampleRadios2" value="adults" (change)="onTypeChange($event.target.value)">
+                  <input class="form-check-input" type="radio"  value="INPERSON" (change)="onTypeChange_class($event.target.value)">
                   <label class="form-check-label" for="exampleRadios2">
-                    Classes for Adults
+                   Inperson
+                  </label>
+                </div> -->
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse1">
+                      Class Type
+                  </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse show">
+                  <!-- <a  (click)="clear_serach('Class')" class="dropdown-item">Clear Search</a> -->
+                    <div class="panel-body">
+                        <label class="radio-item">
+                        <input type="radio" name="activity_type" [(ngModel)]="activity_type" value="ONLINE"  (change)="onTypeChange_class1($event.target.value)">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Online</span>
+                        </label>
+                        <label class="radio-item">
+                        <input type="radio" name="activity_type" [(ngModel)]="activity_type" value="INPERSON" (change)="onTypeChange_class($event.target.value)">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">In-Person</span>
+                        </label>
+                    </div>
+                </div>
+              </div>
+              <div class="sidebar-items">
+                <!-- <div class="form-check">
+                  <input class="form-check-input" type="radio"  value="KIDS" (change)="onTypeChange($event.target.value)" >
+                  <label class="form-check-label" >
+                   Kids
                   </label>
                 </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio"  value="ADULTS" (change)="onTypeChange($event.target.value)">
+                  <label class="form-check-label" >
+                   Adults
+                  </label>
+                </div> -->
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse2">
+                      User Type
+                  </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse show">
+                  <!-- <a  (click)="clear_serach('UserType')" class="dropdown-item">Clear Search</a> -->
+                    <div class="panel-body">
+                        <label class="radio-item">
+                        <input type="radio" name = "overview" [(ngModel)]="overview" value="KIDS"  (change)="onTypeChange1($event.target.value)">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Kids</span>
+                        </label>
+                        <label class="radio-item">
+                        <input type="radio"  name = "overview" [(ngModel)]="overview" value="ADULTS"  (change)="onTypeChange($event.target.value)">
+                        <span class="checkmark"></span>
+                        <span class="radio-label">Adults</span>
+                        </label>
+                    </div>
+                </div>
+              </div>
 
-                
-                  <!-- <h5 class="mb-0"> AGES</h5>
-                  <input placeholder="Min" type="number" #a1 [(ngModel)]="minAge" value="minAge" >
-                  <input placeholder="Max" type="number" #a2 [(ngModel)]="maxAge" value="maxAge" >
+              <div class="sidebar-items">
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse3">
+                      Category
+                  </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                  <!-- <a  (click)="clear_serach('Category')" class="dropdown-item">Clear Search</a> -->
+                    <div class="panel-body">
+                      
+                      <label class="checkbox-item"  *ngFor="let data of classcategory let i=index">
+                        <input type="checkbox" (change)="serachbyid($event,data._id,i)"  value={{data._id}}>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">{{data.name}}</span>
+                      </label>
+                        <!-- <a  (click)="serachbyid(data._id)" class="dropdown-item"
+                            *ngFor="let data of classcategory">{{data.name}}</a> -->
+                    </div>
+                </div>
+              </div>
 
-                  <button (click)="filter()" class="fil-sb-bt">Submit</button>-->
+              <div class="sidebar-items">
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse4">
+                      Price Range
+                  </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                  <!-- <a  (click)="clear_serach('Price')" class="dropdown-item">Clear Search</a> -->
+                    <div class="panel-body">
+                        <label class="radio-item" *ngFor="let item of priceRangeArr">
+                          <!-- <input type="radio" name = "price_range" value={{item.id}} [(ngModel)]="price_range"  (change)="PriceSearch($event)">
+                          <span class="checkmark"></span>
+                          <span class="radio-label"> $ {{item.name}}</span> -->
+                          <input type="checkbox" (change)="PriceSearch($event)"  value={{item.id}} name = "price_range">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">$ {{item.name}}</span>
+                          </label>
+                          
+                    </div>
+                </div>
+              </div>
 
-                  <!-- <button (click)="serviceList()" class="fil-sb-bt">Submit</button> -->
+              <!-- <div class="sidebar-items" *ngIf="Student_type =='KIDS'">
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse5">
+                      Grade Range
+                  </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse">
+                  
+                    <div class="panel-body">
+                      
+                        <label class="radio-item" *ngFor="let item of gradeRangeArr" >
+                          <input type="radio" name = "create_class.grade" value={{item}}  (change)="GradeSearch($event.target.value)">
+                          <span class="checkmark"></span>
+                          <span class="radio-label">{{item}} </span>
+                          </label>
+                        
+                    </div>
+                </div>
+              </div> -->
+              <div class="sidebar-items" *ngIf="Student_type =='KIDS'">
+                  <div class="panel-heading">
+                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapse6">
+                        Age Range
+                    </h4>
+                  </div>
+                  <div id="collapse6" class="panel-collapse collapse">
+                    <!-- <a  (click)="clear_serach('Category')" class="dropdown-item">Clear Search</a> -->
+                      <div class="panel-body" >
+                        
+                        <!-- <label class="radio-item" *ngFor="let item of ChildageRangeArr" >
+                          <input type="radio" name = "create_class.kids" value={{item}}  (change)="ageSerach($event.target.value)">
+                          <span class="checkmark"></span>
+                          <span class="radio-label">{{item}} </span>
+                          </label> -->
+                          <label class="checkbox-item"  *ngFor="let data of ChildageRangeArr let i=index">
+                            <input type="checkbox" (change)="ageSerach($event)"  value={{data}}>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">{{data}}</span>
+                          </label>
+                      </div> 
+
+                     
+                  </div>
+              </div>
+
+
+              <div class="sidebar-items" *ngIf="Student_type =='ADULTS'">
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse6">
+                      Age Range
+                  </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse ">
+                  <!-- <a  (click)="clear_serach('Category')" class="dropdown-item">Clear Search</a> -->
+
+                    <div class="panel-body">
+                        <!-- <label class="radio-item" *ngFor="let item of AdultageRangeArr" >
+                          <input type="radio" name = "create_class.adultrange" value={{item.id}}  (change)="ageSerach($event.target.value)">
+                          <span class="checkmark"></span>
+                          <span class="radio-label">{{item.age}} </span>
+                          </label> -->
+                          <label class="checkbox-item"  *ngFor="let data of AdultageRangeArr let i=index">
+                            <input type="checkbox" (change)="ageSerach($event)"  value={{data.id}}>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">{{data.age}}</span>
+                          </label>
+                    </div>
+                </div>
             </div>
-      </div>
-    </div>
-</div>
+              <div class="sidebar-items" *ngIf="classType=='INPERSON'">
+                  <div class="panel-heading">
+                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapse7">
+                        Distance
+                    </h4>
+                  </div>
+                  <div id="collapse7" class="panel-collapse collapse">
+                    <!-- <a  (click)="clear_serach('Category')" class="dropdown-item">Clear Search</a> -->
+                      <div class="panel-body">
+                          <!-- <a  (click)="clear_serach()" class="dropdown-item">Clear Search</a> -->
+                
+                            <label class="radio-item" *ngFor="let item of distance">
+                              <input type="radio" name = "create_class.distance" value={{item.distance}}  (change)="distanceSerach($event.target.value)">
+                              <span class="checkmark"></span>
+                              <span class="radio-label">{{item.distance}} Miles</span>
+                              </label>
+                            <!-- <a *ngFor="let item of distance" (click)="distanceSerach(item)" class="dropdown-item">{{item}}</a> -->
+                      </div>
+                  </div>
+              </div>
+
+              <div class="sidebar-items" >
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse7">
+                      Dates
+                  </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse">
+                  <!-- <a  (click)="clear_serach('Category')" class="dropdown-item">Clear Search</a> -->
+                  <div class="panel-body">
+                    <label class="radio-item">
+                    <input type="radio" name = "dates_check" [(ngModel)]="dates_check" value="Today"  (change)="ondates_checkChange($event.target.value)">
+                    <span class="checkmark"></span>
+                    <span class="radio-label">Today</span>
+                    </label>
+                    <label class="radio-item">
+                    <input type="radio"  name = "dates_check" [(ngModel)]="dates_check" value="Tomorrow"  (change)="ondates_checkChange($event.target.value)">
+                    <span class="checkmark"></span>
+                    <span class="radio-label">Tomorrow</span>
+                    </label>
+
+                    <label class="radio-item">
+                      <input type="radio"  name = "dates_check" [(ngModel)]="dates_check" value="Customdate"  (change)="ondates_checkChange($event.target.value)">
+                      <span class="checkmark"></span>
+                      <span class="radio-label">Custom Date</span>
+                      </label>
+
+                      <label *ngIf="custom_date_check">
+                        <input type="date" [(ngModel)]="customdate" (change)="addToKeywords()">
+                        
+                        </label>
+                </div>
+                </div>
+            </div>
+
+              <div class="sidebar-items">
+                <div class="panel-heading">
+                  <h4 class="panel-title" data-toggle="collapse" data-target="#collapse8">
+                      Class Format
+                  </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse">
+                  <!-- <a  (click)="clear_serach('Format')" class="dropdown-item">Clear Search</a> -->
+                    <div class="panel-body">
+                        <!-- <a  (click)="clear_serach()" class="dropdown-item">Clear Search</a> -->
+              
+                          <!-- <label class="radio-item">
+                            <input type="radio" name = "create_class.overview" value="SINGELDAY"  (change)="distanceSerach($event.target.value)">
+                            <span class="checkmark"></span>
+                            <span class="radio-label">{{item.distance}} Miles</span>
+                            </label> -->
+                            <label class="checkbox-item">
+                              <input type="checkbox" value="one-on-one"  (change)="FormatSerach($event)">
+                              <span class="checkmark"></span>
+                              <span class="checkbox-label">One-on-One Class</span>
+                            </label>
+                            <label class="checkbox-item">
+                              <input type="checkbox" value="SINGELDAY"  (change)="FormatSerach($event)">
+                              <span class="checkmark"></span>
+                              <span class="checkbox-label">One-time Class (Single day)</span>
+                            </label>
+                            <label class="checkbox-item">
+                              <input type="checkbox" value="MONTHLY"  (change)="FormatSerach($event)">
+                              <span class="checkmark"></span>
+                              <span class="checkbox-label">Ongoing Class (Monthly)</span>
+                            </label>
+                            <label class="checkbox-item">
+                              <input type="checkbox" value="SEMESTER"  (change)="FormatSerach($event)">
+                              <span class="checkmark"></span>
+                              <span class="checkbox-label">Semester Course</span>
+                            </label>
+
+                          <!-- <a *ngFor="let item of distance" (click)="distanceSerach(item)" class="dropdown-item">{{item}}</a> -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>

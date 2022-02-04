@@ -89,7 +89,62 @@ input[type="file"]{
     pointer-events: none;
 }
 
+.schedule_slot{
+    text-align: left;
+    padding-left: 20px;
+}
+.schedule_slot h6{
+    width: 100%;
+}
+.slot_sec input{
+    width: 15%;
+    margin-right: 20px;
+}
 
+  .select_schedule{
+    width: 100%;
+    margin: 10px 0;
+  }
+  .select_schedule p{
+     
+  }
+  .slot_sec{
+      margin: 10px 0px;
+  }
+  .addOn{
+    /* float: right; */
+  }
+  .service_list{
+      padding-left: 0;
+      text-align: left;
+  }
+  .service_list li{
+    list-style: none;
+    display: inline-block;
+    margin: 10px 0px 10px 5px;
+    border: 1px solid #D7D7D7;
+    width: 165px;
+    height: 40px;
+    text-align: center;
+    padding-top: 8px;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 5px !important;
+
+  }
+  .serviceadd_div{
+    text-align: left;
+    padding-left: 0;
+    margin-top: 15px;
+
+  }
+  .serviceadd_div input{
+    width: 85%;
+    float: left;
+    margin-right: 10px;
+  }
 @media (max-width: 767px) {
     .control-fileupload {
         height: 50px;
